@@ -2,6 +2,7 @@ import chisel3._
 import chisel3.util._
 
 // Max2 finds the largest numbers between two numebrs
+// The max2 module is a combinational logic design
 class Max2[T <: Data](dataType: T) extends Module{
   val io = IO(new Bundle{
     val a = Input(dataType)
