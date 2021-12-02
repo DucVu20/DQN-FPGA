@@ -1,0 +1,8 @@
+[0m2021.11.17 22:32:50 INFO  Started: Metals version 0.10.9 in workspace '/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src' for client Visual Studio Code 1.62.2.[0m
+[0m2021.11.17 22:32:50 INFO  time: initialize in 0.51s[0m
+[0m2021.11.17 22:32:51 WARN  Build server is not auto-connectable.[0m
+[0m2021.11.17 22:32:51 WARN  no build tool detected in workspace '/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. [0m
+[0m2021.11.17 22:32:51 WARN  no build target for: /media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/DNN/NeuronTester.scala[0m
+[0m2021.11.17 22:33:33 INFO  no build target: using presentation compiler with only scala-library: 3.1.0[0m
+[0m2021.11.17 22:36:30 INFO  shutting down Metals[0m
+[0m2021.11.17 22:36:32 INFO  time: code lens generation in 3m39s[0m

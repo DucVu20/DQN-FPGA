@@ -19,7 +19,7 @@ class Timer(frequency: Int, maxSecond: Int) extends Module{
   val ms = RegInit(0.U(10.W))
   val secs = RegInit(0.U(10.W))
 
-  val nsOverflow =
+//  val nsOverflow =
   val overflowCounter = RegInit(0.U(10.W))
   val interrupt = WireInit(false.B)
   val overflow = WireInit(false.B)
