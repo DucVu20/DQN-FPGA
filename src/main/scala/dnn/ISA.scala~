@@ -1,0 +1,12 @@
+import chisel3._
+
+object ISA{
+  val MatrixMulVector  = 0
+  val VectorMulMatrix  = 1
+  val MatrixMulScala   = 2
+  val MatrixAddMatrix  = 3
+  val VectorAddVector  = 4
+  val LoadInputVector  = 5
+  val LoadWeightMatrix = 6
+
+}

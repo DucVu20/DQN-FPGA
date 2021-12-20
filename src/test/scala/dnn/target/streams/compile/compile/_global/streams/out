@@ -1,0 +1,301 @@
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/ActivationFuncTest.scala:2:8: not found: object chisel3[0m
+[0m[[0m[31merror[0m] [0m[0mimport chisel3._[0m
+[0m[[0m[31merror[0m] [0m[0m       ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/ActivationFuncTest.scala:3:8: not found: object chisel3[0m
+[0m[[0m[31merror[0m] [0m[0mimport chisel3.iotesters._[0m
+[0m[[0m[31merror[0m] [0m[0m       ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/ActivationFuncTest.scala:4:12: object scalatest is not a member of package org[0m
+[0m[[0m[31merror[0m] [0m[0mimport org.scalatest._[0m
+[0m[[0m[31merror[0m] [0m[0m           ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/ActivationFuncTest.scala:6:57: not found: type PeekPokeTester[0m
+[0m[[0m[31merror[0m] [0m[0mclass ActivationFuncTester(dut: ActivationFunc) extends PeekPokeTester(dut){[0m
+[0m[[0m[31merror[0m] [0m[0m                                                        ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/ActivationFuncTest.scala:6:33: not found: type ActivationFunc[0m
+[0m[[0m[31merror[0m] [0m[0mclass ActivationFuncTester(dut: ActivationFunc) extends PeekPokeTester(dut){[0m
+[0m[[0m[31merror[0m] [0m[0m                                ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/ActivationFuncTest.scala:6:72: no arguments allowed for nullary constructor Object: ()Object[0m
+[0m[[0m[31merror[0m] [0m[0mclass ActivationFuncTester(dut: ActivationFunc) extends PeekPokeTester(dut){[0m
+[0m[[0m[31merror[0m] [0m[0m                                                                       ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/ActivationFuncTest.scala:9:5: not found: value poke[0m
+[0m[[0m[31merror[0m] [0m[0m    poke(dut.io.activationFunc, activation)[0m
+[0m[[0m[31merror[0m] [0m[0m    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/ActivationFuncTest.scala:10:5: not found: value poke[0m
+[0m[[0m[31merror[0m] [0m[0m    poke(dut.io.in, (15).S)[0m
+[0m[[0m[31merror[0m] [0m[0m    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/ActivationFuncTest.scala:10:26: value S is not a member of Int[0m
+[0m[[0m[31merror[0m] [0m[0m    poke(dut.io.in, (15).S)[0m
+[0m[[0m[31merror[0m] [0m[0m                         ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/ActivationFuncTest.scala:11:54: not found: value peek[0m
+[0m[[0m[31merror[0m] [0m[0m    println("activation: "+activation + " value: " + peek(dut.io.activation).toString)[0m
+[0m[[0m[31merror[0m] [0m[0m                                                     ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/ActivationFuncTest.scala:17:3: not found: value chisel3[0m
+[0m[[0m[31merror[0m] [0m[0m  chisel3.iotesters.Driver (() => new ActivationFunc(16, 8)) { c =>[0m
+[0m[[0m[31merror[0m] [0m[0m  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/ActivationFuncTest.scala:17:39: not found: type ActivationFunc[0m
+[0m[[0m[31merror[0m] [0m[0m  chisel3.iotesters.Driver (() => new ActivationFunc(16, 8)) { c =>[0m
+[0m[[0m[31merror[0m] [0m[0m                                      ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/DualPortedMemTester.scala:3:8: not found: object chisel3[0m
+[0m[[0m[31merror[0m] [0m[0mimport chisel3._[0m
+[0m[[0m[31merror[0m] [0m[0m       ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/DualPortedMemTester.scala:4:8: not found: object chisel3[0m
+[0m[[0m[31merror[0m] [0m[0mimport chisel3.util._[0m
+[0m[[0m[31merror[0m] [0m[0m       ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/DualPortedMemTester.scala:5:8: not found: object chiseltest[0m
+[0m[[0m[31merror[0m] [0m[0mimport chiseltest._[0m
+[0m[[0m[31merror[0m] [0m[0m       ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/DualPortedMemTester.scala:6:12: object scalatest is not a member of package org[0m
+[0m[[0m[31merror[0m] [0m[0mimport org.scalatest._[0m
+[0m[[0m[31merror[0m] [0m[0m           ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/DualPortedMemTester.scala:8:8: not found: object chiseltest[0m
+[0m[[0m[31merror[0m] [0m[0mimport chiseltest.experimental.TestOptionBuilder._[0m
+[0m[[0m[31merror[0m] [0m[0m       ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/DualPortedMemTester.scala:9:8: not found: object chiseltest[0m
+[0m[[0m[31merror[0m] [0m[0mimport chiseltest.internal.WriteVcdAnnotation[0m
+[0m[[0m[31merror[0m] [0m[0m       ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/DualPortedMemTester.scala:10:8: not found: object chisel3[0m
+[0m[[0m[31merror[0m] [0m[0mimport chisel3.internal.firrtl.KnownBinaryPoint[0m
+[0m[[0m[31merror[0m] [0m[0m       ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/DualPortedMemTester.scala:12:35: not found: type FlatSpec[0m
+[0m[[0m[31merror[0m] [0m[0mclass DualPortedMemTester extends FlatSpec with ChiselScalatestTester {[0m
+[0m[[0m[31merror[0m] [0m[0m                                  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/DualPortedMemTester.scala:12:49: not found: type ChiselScalatestTester[0m
+[0m[[0m[31merror[0m] [0m[0mclass DualPortedMemTester extends FlatSpec with ChiselScalatestTester {[0m
+[0m[[0m[31merror[0m] [0m[0m                                                ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/DualPortedMemTester.scala:13:3: not found: value behavior[0m
+[0m[[0m[31merror[0m] [0m[0m  behavior of "Dual Ported Memory"[0m
+[0m[[0m[31merror[0m] [0m[0m  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/DualPortedMemTester.scala:14:32: not found: type DualPortedMem[0m
+[0m[[0m[31merror[0m] [0m[0m  def DualPortedMemTester[T <: DualPortedMem[UInt]](dut: T): Unit = {[0m
+[0m[[0m[31merror[0m] [0m[0m                               ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/DualPortedMemTester.scala:16:55: value io is not a member of type parameter T[0m
+[0m[[0m[31merror[0m] [0m[0m    val randomData = Array.fill(scala.math.pow(2, dut.io.writeAddr.getWidth).toInt){nextInt(scala.math.pow(2, dut.io.wrData.getWidth).toInt)}[0m
+[0m[[0m[31merror[0m] [0m[0m                                                      ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/DualPortedMemTester.scala:16:115: value io is not a member of type parameter T[0m
+[0m[[0m[31merror[0m] [0m[0m    val randomData = Array.fill(scala.math.pow(2, dut.io.writeAddr.getWidth).toInt){nextInt(scala.math.pow(2, dut.io.wrData.getWidth).toInt)}[0m
+[0m[[0m[31merror[0m] [0m[0m                                                                                                                  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/DualPortedMemTester.scala:18:9: value clock is not a member of type parameter T[0m
+[0m[[0m[31merror[0m] [0m[0m    dut.clock.step(5)[0m
+[0m[[0m[31merror[0m] [0m[0m        ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/DualPortedMemTester.scala:19:9: value io is not a member of type parameter T[0m
+[0m[[0m[31merror[0m] [0m[0m    dut.io.wrEna.poke(true.B)[0m
+[0m[[0m[31merror[0m] [0m[0m        ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/DualPortedMemTester.scala:19:28: value B is not a member of Boolean[0m
+[0m[[0m[31merror[0m] [0m[0m    dut.io.wrEna.poke(true.B)[0m
+[0m[[0m[31merror[0m] [0m[0m                           ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/DualPortedMemTester.scala:20:47: value io is not a member of type parameter T[0m
+[0m[[0m[31merror[0m] [0m[0m    for(addr <- 0 until(scala.math.pow(2, dut.io.writeAddr.getWidth)).toInt){[0m
+[0m[[0m[31merror[0m] [0m[0m                                              ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/DualPortedMemTester.scala:21:11: value io is not a member of type parameter T[0m
+[0m[[0m[31merror[0m] [0m[0m      dut.io.writeAddr.poke(addr.U)[0m
+[0m[[0m[31merror[0m] [0m[0m          ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/DualPortedMemTester.scala:22:11: value io is not a member of type parameter T[0m
+[0m[[0m[31merror[0m] [0m[0m      dut.io.wrData.poke(randomData(addr).U)[0m
+[0m[[0m[31merror[0m] [0m[0m          ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/DualPortedMemTester.scala:23:11: value clock is not a member of type parameter T[0m
+[0m[[0m[31merror[0m] [0m[0m      dut.clock.step(1)[0m
+[0m[[0m[31merror[0m] [0m[0m          ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/DualPortedMemTester.scala:25:9: value io is not a member of type parameter T[0m
+[0m[[0m[31merror[0m] [0m[0m    dut.io.wrEna.poke(false.B)[0m
+[0m[[0m[31merror[0m] [0m[0m        ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/DualPortedMemTester.scala:25:29: value B is not a member of Boolean[0m
+[0m[[0m[31merror[0m] [0m[0m    dut.io.wrEna.poke(false.B)[0m
+[0m[[0m[31merror[0m] [0m[0m                            ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/DualPortedMemTester.scala:26:9: value clock is not a member of type parameter T[0m
+[0m[[0m[31merror[0m] [0m[0m    dut.clock.step(10)[0m
+[0m[[0m[31merror[0m] [0m[0m        ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/DualPortedMemTester.scala:29:49: value io is not a member of type parameter T[0m
+[0m[[0m[31merror[0m] [0m[0m    for(rdAddr <- 0 until(scala.math.pow(2, dut.io.writeAddr.getWidth).toInt)){[0m
+[0m[[0m[31merror[0m] [0m[0m                                                ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/DualPortedMemTester.scala:30:11: value io is not a member of type parameter T[0m
+[0m[[0m[31merror[0m] [0m[0m      dut.io.rdEna.poke(true.B)[0m
+[0m[[0m[31merror[0m] [0m[0m          ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/DualPortedMemTester.scala:30:30: value B is not a member of Boolean[0m
+[0m[[0m[31merror[0m] [0m[0m      dut.io.rdEna.poke(true.B)[0m
+[0m[[0m[31merror[0m] [0m[0m                             ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/DualPortedMemTester.scala:31:11: value io is not a member of type parameter T[0m
+[0m[[0m[31merror[0m] [0m[0m      dut.io.readAddr.poke(rdAddr.U)[0m
+[0m[[0m[31merror[0m] [0m[0m          ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/DualPortedMemTester.scala:32:11: value clock is not a member of type parameter T[0m
+[0m[[0m[31merror[0m] [0m[0m      dut.clock.step(1)[0m
+[0m[[0m[31merror[0m] [0m[0m          ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/DualPortedMemTester.scala:34:52: value io is not a member of type parameter T[0m
+[0m[[0m[31merror[0m] [0m[0m      println(s"data address: ${rdAddr} get: ${dut.io.rdData.peek().litValue()} ref:${randomData(rdAddr)}")[0m
+[0m[[0m[31merror[0m] [0m[0m                                                   ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/DualPortedMemTester.scala:38:3: not found: value it[0m
+[0m[[0m[31merror[0m] [0m[0m  it should "test Dual Ported Ram" in {[0m
+[0m[[0m[31merror[0m] [0m[0m  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/DualPortedMemTester.scala:39:5: not found: value test[0m
+[0m[[0m[31merror[0m] [0m[0m    test(new DualPortedMem(UInt(16.W), 255)){dut => DualPortedMemTester(dut)}[0m
+[0m[[0m[31merror[0m] [0m[0m    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/DualPortedMemTester.scala:39:14: not found: type DualPortedMem[0m
+[0m[[0m[31merror[0m] [0m[0m    test(new DualPortedMem(UInt(16.W), 255)){dut => DualPortedMemTester(dut)}[0m
+[0m[[0m[31merror[0m] [0m[0m             ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/DualPortedMemTester.scala:39:28: not found: value UInt[0m
+[0m[[0m[31merror[0m] [0m[0m    test(new DualPortedMem(UInt(16.W), 255)){dut => DualPortedMemTester(dut)}[0m
+[0m[[0m[31merror[0m] [0m[0m                           ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/DualPortedMemTester.scala:39:36: value W is not a member of Int[0m
+[0m[[0m[31merror[0m] [0m[0m    test(new DualPortedMem(UInt(16.W), 255)){dut => DualPortedMemTester(dut)}[0m
+[0m[[0m[31merror[0m] [0m[0m                                   ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/DualPortedMemTester.scala:42:29: value should is not a member of String[0m
+[0m[[0m[31merror[0m] [0m[0m    "Dual Ported Ram Wave " should "pass" in {[0m
+[0m[[0m[31merror[0m] [0m[0m                            ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/DualPortedMemTester.scala:43:7: not found: value test[0m
+[0m[[0m[31merror[0m] [0m[0m      test(new DualPortedMem(UInt(16.W), 255)).withAnnotations(Seq(WriteVcdAnnotation)) {[0m
+[0m[[0m[31merror[0m] [0m[0m      ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/DualPortedMemTester.scala:43:16: not found: type DualPortedMem[0m
+[0m[[0m[31merror[0m] [0m[0m      test(new DualPortedMem(UInt(16.W), 255)).withAnnotations(Seq(WriteVcdAnnotation)) {[0m
+[0m[[0m[31merror[0m] [0m[0m               ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/DualPortedMemTester.scala:43:30: not found: value UInt[0m
+[0m[[0m[31merror[0m] [0m[0m      test(new DualPortedMem(UInt(16.W), 255)).withAnnotations(Seq(WriteVcdAnnotation)) {[0m
+[0m[[0m[31merror[0m] [0m[0m                             ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/DualPortedMemTester.scala:43:38: value W is not a member of Int[0m
+[0m[[0m[31merror[0m] [0m[0m      test(new DualPortedMem(UInt(16.W), 255)).withAnnotations(Seq(WriteVcdAnnotation)) {[0m
+[0m[[0m[31merror[0m] [0m[0m                                     ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/DualPortedMemTester.scala:43:68: not found: value WriteVcdAnnotation[0m
+[0m[[0m[31merror[0m] [0m[0m      test(new DualPortedMem(UInt(16.W), 255)).withAnnotations(Seq(WriteVcdAnnotation)) {[0m
+[0m[[0m[31merror[0m] [0m[0m                                                                   ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/FixedPointSoftware.scala:3:8: not found: object chisel3[0m
+[0m[[0m[31merror[0m] [0m[0mimport chisel3.internal.firrtl.BinaryPoint[0m
+[0m[[0m[31merror[0m] [0m[0m       ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/PEDecoderTester.scala:2:8: not found: object chisel3[0m
+[0m[[0m[31merror[0m] [0m[0mimport chisel3._[0m
+[0m[[0m[31merror[0m] [0m[0m       ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/PEDecoderTester.scala:3:8: not found: object chisel3[0m
+[0m[[0m[31merror[0m] [0m[0mimport chisel3.util._[0m
+[0m[[0m[31merror[0m] [0m[0m       ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/PEDecoderTester.scala:4:8: not found: object chiseltest[0m
+[0m[[0m[31merror[0m] [0m[0mimport chiseltest._[0m
+[0m[[0m[31merror[0m] [0m[0m       ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/PEDecoderTester.scala:5:12: object scalatest is not a member of package org[0m
+[0m[[0m[31merror[0m] [0m[0mimport org.scalatest._[0m
+[0m[[0m[31merror[0m] [0m[0m           ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/PEDecoderTester.scala:8:31: not found: type FlatSpec[0m
+[0m[[0m[31merror[0m] [0m[0mclass PEDecoderTester extends FlatSpec with ChiselScalatestTester with Matchers{[0m
+[0m[[0m[31merror[0m] [0m[0m                              ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/PEDecoderTester.scala:8:45: not found: type ChiselScalatestTester[0m
+[0m[[0m[31merror[0m] [0m[0mclass PEDecoderTester extends FlatSpec with ChiselScalatestTester with Matchers{[0m
+[0m[[0m[31merror[0m] [0m[0m                                            ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/PEDecoderTester.scala:8:72: not found: type Matchers[0m
+[0m[[0m[31merror[0m] [0m[0mclass PEDecoderTester extends FlatSpec with ChiselScalatestTester with Matchers{[0m
+[0m[[0m[31merror[0m] [0m[0m                                                                       ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/PEDecoderTester.scala:9:3: not found: value behavior[0m
+[0m[[0m[31merror[0m] [0m[0m  behavior of "PE_Decoder"[0m
+[0m[[0m[31merror[0m] [0m[0m  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/PEDecoderTester.scala:11:22: not found: type PEDecoder[0m
+[0m[[0m[31merror[0m] [0m[0m  def PEDecoder(dut: PEDecoder): Unit = {[0m
+[0m[[0m[31merror[0m] [0m[0m                     ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/PEDecoderTester.scala:24:3: not found: value it[0m
+[0m[[0m[31merror[0m] [0m[0m  it should "test PEDecoder" in {[0m
+[0m[[0m[31merror[0m] [0m[0m  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/PEDecoderTester.scala:25:5: not found: value test[0m
+[0m[[0m[31merror[0m] [0m[0m    test(new PEDecoder(16)){dut => PEDecoder(dut)}[0m
+[0m[[0m[31merror[0m] [0m[0m    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/PEDecoderTester.scala:25:14: not found: type PEDecoder[0m
+[0m[[0m[31merror[0m] [0m[0m    test(new PEDecoder(16)){dut => PEDecoder(dut)}[0m
+[0m[[0m[31merror[0m] [0m[0m             ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/PETester.scala:2:8: not found: object chisel3[0m
+[0m[[0m[31merror[0m] [0m[0mimport chisel3._[0m
+[0m[[0m[31merror[0m] [0m[0m       ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/PETester.scala:3:8: not found: object chiseltest[0m
+[0m[[0m[31merror[0m] [0m[0mimport chiseltest._[0m
+[0m[[0m[31merror[0m] [0m[0m       ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/PETester.scala:4:12: object scalatest is not a member of package org[0m
+[0m[[0m[31merror[0m] [0m[0mimport org.scalatest._[0m
+[0m[[0m[31merror[0m] [0m[0m           ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/PETester.scala:5:8: not found: object chisel3[0m
+[0m[[0m[31merror[0m] [0m[0mimport chisel3.experimental.FixedPoint._[0m
+[0m[[0m[31merror[0m] [0m[0m       ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/PETester.scala:7:8: not found: object chisel3[0m
+[0m[[0m[31merror[0m] [0m[0mimport chisel3.iotesters._[0m
+[0m[[0m[31merror[0m] [0m[0m       ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/PETester.scala:9:8: not found: object chiseltest[0m
+[0m[[0m[31merror[0m] [0m[0mimport chiseltest.experimental.TestOptionBuilder._[0m
+[0m[[0m[31merror[0m] [0m[0m       ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/PETester.scala:10:8: not found: object chiseltest[0m
+[0m[[0m[31merror[0m] [0m[0mimport chiseltest.internal.WriteVcdAnnotation[0m
+[0m[[0m[31merror[0m] [0m[0m       ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/PETester.scala:12:24: not found: type FlatSpec[0m
+[0m[[0m[31merror[0m] [0m[0mclass PETester extends FlatSpec with ChiselScalatestTester with Matchers{[0m
+[0m[[0m[31merror[0m] [0m[0m                       ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/PETester.scala:12:38: not found: type ChiselScalatestTester[0m
+[0m[[0m[31merror[0m] [0m[0mclass PETester extends FlatSpec with ChiselScalatestTester with Matchers{[0m
+[0m[[0m[31merror[0m] [0m[0m                                     ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/PETester.scala:12:65: not found: type Matchers[0m
+[0m[[0m[31merror[0m] [0m[0mclass PETester extends FlatSpec with ChiselScalatestTester with Matchers{[0m
+[0m[[0m[31merror[0m] [0m[0m                                                                ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/PETester.scala:13:3: not found: value behavior[0m
+[0m[[0m[31merror[0m] [0m[0m  behavior of "PE"[0m
+[0m[[0m[31merror[0m] [0m[0m  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/PETester.scala:14:21: not found: type PE[0m
+[0m[[0m[31merror[0m] [0m[0m  def PETester[T <: PE](dut: T, numberOfNeurons: Int): Unit = {[0m
+[0m[[0m[31merror[0m] [0m[0m                    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/PETester.scala:16:25: value width is not a member of type parameter T[0m
+[0m[[0m[31merror[0m] [0m[0m    val dataWidth = dut.width[0m
+[0m[[0m[31merror[0m] [0m[0m                        ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/PETester.scala:17:27: value BP is not a member of type parameter T[0m
+[0m[[0m[31merror[0m] [0m[0m    val binaryPoint = dut.BP[0m
+[0m[[0m[31merror[0m] [0m[0m                          ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/PETester.scala:23:9: value io is not a member of type parameter T[0m
+[0m[[0m[31merror[0m] [0m[0m    dut.io.PEControl.activate.poke(false.B)[0m
+[0m[[0m[31merror[0m] [0m[0m        ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/PETester.scala:23:42: value B is not a member of Boolean[0m
+[0m[[0m[31merror[0m] [0m[0m    dut.io.PEControl.activate.poke(false.B)[0m
+[0m[[0m[31merror[0m] [0m[0m                                         ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/PETester.scala:24:9: value clock is not a member of type parameter T[0m
+[0m[[0m[31merror[0m] [0m[0m    dut.clock.step(1)[0m
+[0m[[0m[31merror[0m] [0m[0m        ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/PETester.scala:26:11: value io is not a member of type parameter T[0m
+[0m[[0m[31merror[0m] [0m[0m      dut.io.PEControl.opcode.poke(arthimetic.U)[0m
+[0m[[0m[31merror[0m] [0m[0m          ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/PETester.scala:26:47: value U is not a member of Int[0m
+[0m[[0m[31merror[0m] [0m[0m      dut.io.PEControl.opcode.poke(arthimetic.U)[0m
+[0m[[0m[31merror[0m] [0m[0m                                              ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/PETester.scala:28:13: value io is not a member of type parameter T[0m
+[0m[[0m[31merror[0m] [0m[0m        dut.io.weight.poke(weights(idx).S)[0m
+[0m[[0m[31merror[0m] [0m[0m            ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/PETester.scala:28:41: value S is not a member of Int[0m
+[0m[[0m[31merror[0m] [0m[0m        dut.io.weight.poke(weights(idx).S)[0m
+[0m[[0m[31merror[0m] [0m[0m                                        ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/PETester.scala:29:13: value io is not a member of type parameter T[0m
+[0m[[0m[31merror[0m] [0m[0m        dut.io.inputAct.poke(inputActivations(idx).S)[0m
+[0m[[0m[31merror[0m] [0m[0m            ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/PETester.scala:29:52: value S is not a member of Int[0m
+[0m[[0m[31merror[0m] [0m[0m        dut.io.inputAct.poke(inputActivations(idx).S)[0m
+[0m[[0m[31merror[0m] [0m[0m                                                   ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/PETester.scala:43:13: value clock is not a member of type parameter T[0m
+[0m[[0m[31merror[0m] [0m[0m        dut.clock.step(1)[0m
+[0m[[0m[31merror[0m] [0m[0m            ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/PETester.scala:44:67: value io is not a member of type parameter T[0m
+[0m[[0m[31merror[0m] [0m[0m        println(s"PE value when performing ${arthimetic} is ${dut.io.result.peek.litValue()} while reference value: ${ref}")[0m
+[0m[[0m[31merror[0m] [0m[0m                                                                  ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/PETester.scala:48:9: value io is not a member of type parameter T[0m
+[0m[[0m[31merror[0m] [0m[0m    dut.io.PEControl.activate.poke(true.B)[0m
+[0m[[0m[31merror[0m] [0m[0m        ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/PETester.scala:48:41: value B is not a member of Boolean[0m
+[0m[[0m[31merror[0m] [0m[0m    dut.io.PEControl.activate.poke(true.B)[0m
+[0m[[0m[31merror[0m] [0m[0m                                        ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/PETester.scala:49:9: value clock is not a member of type parameter T[0m
+[0m[[0m[31merror[0m] [0m[0m    dut.clock.step(1)[0m
+[0m[[0m[31merror[0m] [0m[0m        ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/PETester.scala:53:13: value io is not a member of type parameter T[0m
+[0m[[0m[31merror[0m] [0m[0m        dut.io.PEControl.clearWeightedSum.poke(true.B)[0m
+[0m[[0m[31merror[0m] [0m[0m            ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/PETester.scala:53:53: value B is not a member of Boolean[0m
+[0m[[0m[31merror[0m] [0m[0m        dut.io.PEControl.clearWeightedSum.poke(true.B)[0m
+[0m[[0m[31merror[0m] [0m[0m                                                    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/PETester.scala:54:13: value clock is not a member of type parameter T[0m
+[0m[[0m[31merror[0m] [0m[0m        dut.clock.step(1)[0m
+[0m[[0m[31merror[0m] [0m[0m            ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/PETester.scala:55:13: value io is not a member of type parameter T[0m
+[0m[[0m[31merror[0m] [0m[0m        dut.io.PEControl.clearWeightedSum.poke(false.B)[0m
+[0m[[0m[31merror[0m] [0m[0m            ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/PETester.scala:55:54: value B is not a member of Boolean[0m
+[0m[[0m[31merror[0m] [0m[0m        dut.io.PEControl.clearWeightedSum.poke(false.B)[0m
+[0m[[0m[31merror[0m] [0m[0m                                                     ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/PETester.scala:56:13: value clock is not a member of type parameter T[0m
+[0m[[0m[31merror[0m] [0m[0m        dut.clock.step(1)[0m
+[0m[[0m[31merror[0m] [0m[0m            ^[0m
+[0m[[0m[31merror[0m] [0m[0m/media/vudle/Working documents/HDL/Chisel/DQN-FPGA/src/test/scala/dnn/PETester.scala:58:11: value io is not a member of type parameter T[0m
+[0m[[0m[31merror[0m] [0m[0m      dut.io.PEControl.opcode.poke(arthimetic.U)[0m
+[0m[[0m[31merror[0m] [0m[0m          ^[0m
+[0m[[0m[31merror[0m] [0m[0m100 errors found[0m
