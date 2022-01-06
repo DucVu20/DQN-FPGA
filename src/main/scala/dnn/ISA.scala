@@ -6,6 +6,7 @@ object mfunc{
   val MREAD = 1.U // read a matrix from the matrix memory
   val MLOAD = 2.U // load matrix
   val VLOAD = 3.U
+  val VREAD = 4.U
 }
 
 object opcode{

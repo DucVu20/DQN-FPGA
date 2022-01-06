@@ -24,16 +24,17 @@ class ProcessingCore(nWeightBanks: Int, sratchPadMemDepth: Int, nRowVector: Int,
   })
   
   val weightBanks    = Array.fill(nWeightBanks){ DualPortedMem(SInt(dataWidth.W), sratchPadMemDepth)}
-  //val inputVectorMem = Array.fill(nWeightBanks){ DualPortedMem(SInt(dataWidth.W), nRowVector)}
+  val inputVectorMem = Array.fill(nWeightBanks){ DualPortedMem(SInt(dataWidth.W), nRowVector)}
 
   //  define the interface for the weight banks
   val weightRdAddrNode = WireInit(0.U(log2Ceil(sratchPadMemDepth).W))
   val weightWrAddrNode = WireInit(0.U(log2Ceil(sratchPadMemDepth).W))
+  val rdDataMatrixValid      = WireInit(false.B)
+  val rdDataVecValid      = WireInit(false.B)
   val weightWrDataBus  = Array.fill(nWeightBanks){WireInit(0.S(dataWidth.W))}
   val weightRdDataBus  = Array.fill(nWeightBanks){WireInit(0.S(dataWidth.W))}
   val writeSignalBus   = Array.fill(nWeightBanks){WireInit(false.B)}
   val readSignalBus    = Array.fill(nWeightBanks){WireInit(false.B)}
-  val rdDataValid = WireInit(false.B)
 
   // define counter for the matrix memory
   val colCounter = RegInit(0.U(log2Ceil(sratchPadMemDepth).W))
@@ -54,8 +55,6 @@ class ProcessingCore(nWeightBanks: Int, sratchPadMemDepth: Int, nRowVector: Int,
   oneHotDecoder.io.memRow := 0.U
   memReadDecoder.io.PEs   := 0.U
 
-//  rdDataValid             := false.B
-
   // Connect the memory bank interface with the memory bank
   for(pe <- 0 until(nWeightBanks)){
     weightBanks(pe).io.wrData    := weightWrDataBus(pe)
@@ -66,8 +65,22 @@ class ProcessingCore(nWeightBanks: Int, sratchPadMemDepth: Int, nRowVector: Int,
     weightRdDataBus(pe)          := weightBanks(pe).io.rdData
     readSignalBus(pe)            := false.B // by default don't read
     io.dataOut(pe)               := weightRdDataBus(pe)
+
+    inputVectorMem(pe).io.writeAddr := 0.U
+    inputVectorMem(pe).io.readAddr := 0.U
+    inputVectorMem(pe).io.rdEna := false.B
+    inputVectorMem(pe).io.wrEna := false.B
+    inputVectorMem(pe).io.wrData := 0.S
+    
     when(oneHotDecoder.io.writeSignal(pe)){
-      io.dataOut(pe) := weightRdDataBus(pe)
+      when(rdDataVecValid){
+        io.dataOut(pe) := inputVectorMem(pe).io.rdData
+      }.elsewhen(rdDataMatrixValid){
+        io.dataOut(pe) := weightRdDataBus(pe)
+      }.otherwise{
+        io.dataOut(pe) := 0.S
+      }
+
     }
   }
   // ******************** DEFAULT VALUES FOR ALL **********************//
@@ -84,21 +97,22 @@ class ProcessingCore(nWeightBanks: Int, sratchPadMemDepth: Int, nRowVector: Int,
              //////////////////////////////////////////////////
   val instructionRegister = RegInit(0.U((io.instruction.getWidth).W))
 
-  val op          = instructionRegister(31, 30)
-  val func        = instructionRegister(29, 28)
-  val cond        = instructionRegister(27, 25)
+  val op          = instructionRegister(31, 30).asUInt()
+  val func        = instructionRegister(29, 27).asUInt()
+  val cond        = instructionRegister(26, 24).asUInt()
   // Data Processing: MMV
-  val MinAddr     = instructionRegister(24, 13)
-  val VinAddr     = instructionRegister(12, 8)
-  val VoutAddr    = instructionRegister(7, 0) // VoutAddr specifies the row address of the vector mem
+  val MinAddr     = instructionRegister(23, 12).asUInt()
+  val VinAddr     = instructionRegister(11, 7).asUInt()
+  val VoutAddr    = instructionRegister(6, 0).asUInt() // VoutAddr specifies the row address of the vector mem
 
   // Memory Instruction: MLOAD.
-  val matrixRow   = instructionRegister(27, 23)
-  val matrixCol   = instructionRegister(22, 13)
-  val weightValue = instructionRegister(12, 0) // 13 bit weights
+  val matrixRow   = instructionRegister(26, 22).asUInt()
+  val matrixCol   = instructionRegister(21, 12).asUInt()
+  val weightValue = instructionRegister(11, 0).asSInt() // 13 bit weights
   // VLOAD
-  val colVector   = instructionRegister(27, 23)
-  val rowVector   = instructionRegister(22,13)
+  val colVector   = instructionRegister(26, 22).asUInt()
+  val rowVector   = instructionRegister(21, 12).asUInt()
+  val activation = instructionRegister(11, 0).asSInt()
   // CMP
 
   //======================= PEArray Controller =========================//
@@ -139,42 +153,66 @@ class ProcessingCore(nWeightBanks: Int, sratchPadMemDepth: Int, nRowVector: Int,
   when(Controller === decode){
     // ===== update the information of a matrix into these registers =====//
     when(op === 0.U){ // data processing
-      when(func === MMVC){
-        VinSizeReg  := instructionRegister(27, 14).asUInt()
-        VoutSizeReg := instructionRegister(13, 0).asUInt()
-      }
+//      when(func === MMVC){
+//        VinSizeReg  := instructionRegister(26, 13).asUInt()
+//        VoutSizeReg := instructionRegister(12, 0).asUInt()
+//      }
     }
   }
 
   //========================= Data Path ==================================//
   when(Controller === executing){
-    // ================ LOAD A MATRIX INTO THE MEMORY ===================//
+
     when(op === memoryInstruction){
-      when(func === MLOAD){ // load a matrix into the matrix memory
-        oneHotDecoder.io.enable := true.B
-        oneHotDecoder.io.memRow := matrixRow.asUInt()
-        weightWrAddrNode        := matrixCol.asUInt()
-        instructionDone         := true.B
-        for(pe <- 0 until(nWeightBanks)){
-          weightWrDataBus(pe) := weightValue.asSInt()
-          writeSignalBus(pe)  := oneHotDecoder.io.writeSignal(pe)
+      switch(func){
+        // ================ LOAD A MATRIX INTO THE MEMORY ===================//
+        is(MLOAD){
+          oneHotDecoder.io.enable := true.B
+          oneHotDecoder.io.memRow := matrixRow.asUInt()
+          weightWrAddrNode        := matrixCol.asUInt()
+          instructionDone         := true.B
+          for(pe <- 0 until(nWeightBanks)){
+            weightWrDataBus(pe) := weightValue.asSInt()
+            writeSignalBus(pe)  := oneHotDecoder.io.writeSignal(pe)
+          }
         }
-      }
-      // ======================READ WEIGHTS FROM THE MATRIX MEMORY =====================//
-      when(func === MREAD){
-        memReadDecoder.io.PEs := matrixRow.asUInt()
-        weightRdAddrNode := matrixCol.asUInt()
-        memReadDecoder.io.enable := true.B
-        instructionDone  := true.B
-        for(pe <- 0 until(nWeightBanks)){
-          readSignalBus(pe) := memReadDecoder.io.activatedSignals(pe)
+        // ======================READ WEIGHTS FROM THE MATRIX MEMORY =====================//
+        is(MREAD){
+          memReadDecoder.io.PEs := matrixRow.asUInt()
+          weightRdAddrNode := matrixCol.asUInt()
+          memReadDecoder.io.enable := true.B
+          instructionDone  := true.B
+          for(pe <- 0 until(nWeightBanks)){
+            readSignalBus(pe) := memReadDecoder.io.activatedSignals(pe)
+          }
+          rdDataMatrixValid := RegNext(RegNext(true.B))
         }
-        rdDataValid := RegNext(RegNext(true.B))
+        // ======================LOAD INPUT ACTIVATION INTO THE VECTOR =====================//
+        is(VLOAD){
+          oneHotDecoder.io.enable := true.B
+          oneHotDecoder.io.memRow := colVector.asUInt()
+          instructionDone := true.B
+          for(colVector <- 0 until(nWeightBanks)){
+            inputVectorMem(colVector).io.wrEna := oneHotDecoder.io.writeSignal(colVector)
+            inputVectorMem(colVector).io.writeAddr := rowVector.asUInt()
+            inputVectorMem(colVector).io.wrData := activation.asSInt()
+          }
+        }
+        is(VREAD){
+          memReadDecoder.io.enable := true.B
+          memReadDecoder.io.PEs := colVector.asUInt()
+          for(colVector <- 0 until(nWeightBanks)){
+            inputVectorMem(colVector).io.rdEna := oneHotDecoder.io.writeSignal(colVector)
+            inputVectorMem(colVector).io.readAddr := rowVector.asUInt()
+          }
+          instructionDone := true.B
+          rdDataVecValid := RegNext(RegNext(true.B))
+        }
       }
     }
     // ======================READ WEIGHTS FROM THE MATRIX MEMORY =====================//
   }
   // ============================= Connect IO ===============================//
   io.ready := instructionDone
-  io.dataValid := rdDataValid
+  io.dataValid := (rdDataMatrixValid || rdDataVecValid)
 }
