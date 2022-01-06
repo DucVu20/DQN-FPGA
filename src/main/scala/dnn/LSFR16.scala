@@ -36,6 +36,11 @@ class ControllableLFSR10 extends Module{
   io.rand := rand.asUInt()
 }
 
+     //////////////////////////////////////////////////////////////////
+     // Linear Feedback Shift Register 16 bit version for generating //
+     //     pseudorandom number generator. Chisel Implementation     //
+     //////////////////////////////////////////////////////////////////
+
 class ControllableLFSR16 extends Module{
   val io      = IO(new Bundle{
     val shift = Input(Bool())

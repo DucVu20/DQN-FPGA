@@ -46,21 +46,51 @@ class EnableSignalDecoder(nPEs: Int) extends Module{
   val numberOfPE = nPEs
   val io = IO(new Bundle{
     val activatedSignals = Output(Vec(nPEs, Bool()))
-    val PEs = Input(UInt((log2Ceil(nPEs) + 1).W))
+    val PEs = Input(UInt(log2Ceil(nPEs) .W)) //
+    val enable = Input(Bool())
   })
-
   val activatedSignals = WireInit(0.U(nPEs.W))
-  for(pe <- 0 to(nPEs)){
-    when(io.PEs === pe.U){
-      activatedSignals := (pow(2, pe) - 1).toInt.U
+  for(pe <- 1 to(nPEs)){
+    when(io.PEs  === (pe - 1).U){
+      activatedSignals := (pow(2, pe) - 1).toLong.U
     }
   }
 
   for(idx <- 0 until(nPEs)){
-    io.activatedSignals(idx) := activatedSignals(idx).asBool()
+    when(io.enable){
+      io.activatedSignals(idx) := activatedSignals(idx).asBool()
+    }.otherwise{
+      io.activatedSignals(idx) := false.B
+    }
+
   }
 }
 
-object EnableSignalDecoder{
+object EnableSignalDecoder{ 
   def apply(nPEs: Int): EnableSignalDecoder = Module(new EnableSignalDecoder(nPEs))
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// The MemWriteSignalDecoder is basically a one hot decoder. It output the write signal //
+// for a particular memory row. This is necessary for random weights initialization.    //
+//////////////////////////////////////////////////////////////////////////////////////////
+
+class OneHotEncoder(nMemRows: Int) extends Module{
+  val io = IO(new Bundle{
+    val memRow = Input(UInt(log2Ceil(nMemRows).W))
+    val enable = Input(Bool())
+    val writeSignal = Output(Vec(nMemRows, Bool()))
+  })
+
+  val writeSignal = (1.U << io.memRow)
+  for(row <- 0 until(nMemRows)){
+    when(io.enable){
+      io.writeSignal(row) := writeSignal(row).asBool()
+    }.otherwise{
+      io.writeSignal(row) := false.B
+    }
+  }
+}
+object OneHotEncoder{
+  def apply(nMemRows: Int): OneHotEncoder = Module(new OneHotEncoder(nMemRows))
 }
