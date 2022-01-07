@@ -94,3 +94,19 @@ class OneHotEncoder(nMemRows: Int) extends Module{
 object OneHotEncoder{
   def apply(nMemRows: Int): OneHotEncoder = Module(new OneHotEncoder(nMemRows))
 }
+
+class DelayBoolNCycles(nCycles: Int) extends Module{
+  val io = IO(new Bundle{
+    val signal2delay = Input(Bool())
+    val delayedSignal = Output(Bool())
+  })
+  var temp = RegNext(io.signal2delay)
+  for(cycle <- 0 until(nCycles - 1)){
+    temp = RegNext(temp)
+  }
+  io.delayedSignal := temp
+}
+
+object DelayBoolNCycles{
+  def apply(nCycles: Int): DelayBoolNCycles = Module(new DelayBoolNCycles(nCycles))
+}

@@ -28,5 +28,6 @@ class Timer(frequency: Int, maxSecond: Int) extends Module{
     counter := counter - 1.U
     overflow := Mux(!(counter.orR), true.B, false.B)
   }
+      
 
 }
