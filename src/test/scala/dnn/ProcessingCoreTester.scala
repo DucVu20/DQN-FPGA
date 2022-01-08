@@ -14,17 +14,17 @@ import chiseltest.internal.WriteVcdAnnotation
 
 class ProcessingCoreTester extends FlatSpec with ChiselScalatestTester with Matchers{
   behavior of "PE"
-  def PEArrayTester[T <: ProcessingCore](dut: T, nPEs: Int, scrathPadMemDepth: Int,
+  def ProcessingCoreTester[T <: ProcessingCore](dut: T, nPEs: Int, scrathPadMemDepth: Int,
                                          nRowVector: Int, dataWidth: Int,
                                          binaryPoint: Int): Unit = {
     println("------------------------------------------------------------------")
-    val matrixRow = 64
-    val matrixColum = 32
+    val matrixRow = 32
+    val matrixColum = 128
     val nVectorElem = 32
     var row = 2 // the row of the vector matrix
     val vinAddr = 2
     val voutAddr = 4
-    val vinSize = matrixRow
+    val vinSize = matrixColum
     val voutSize = matrixColum
     val randomWeightMatrix = Array.ofDim[Int](matrixRow, matrixColum) // create a ref random matrix
     var activation = Array.fill(nVectorElem){nextInt(10)}
@@ -62,7 +62,7 @@ class ProcessingCoreTester extends FlatSpec with ChiselScalatestTester with Matc
       dut.clock.step(1)
     }
     for(row<- 0 until(matrixRow)){
-      var instruction = ((1.toLong<<30)|(MREAD<<27)|(row)<<22|(matrixColum - 1)<<12|0)
+      var instruction = ((1.toLong<<30)|(MREAD<<27)|((matrixColum - 1))<<22|row<<12|0)
       dut.io.instruction.poke(instruction.U)
       dut.io.valid.poke(true.B)
       dut.clock.step(1)
@@ -146,14 +146,14 @@ class ProcessingCoreTester extends FlatSpec with ChiselScalatestTester with Matc
   }
 
 
-  it should " an PEArray of 32 PEs should pass" in {
-    test(new ProcessingCore(32, 1024, 32, 16, 0))
-    {dut => PEArrayTester(dut, 32, 1024,32, 16, 0)}
-  }
+//  it should " an PEArray of 32 PEs should pass" in {
+//    test(new ProcessingCore(32, 1024, 32, 16, 0))
+//    {dut => ProcessingCoreTester(dut, 32, 1024,32, 16, 0)}
+//  }
 
   "ProcessingCoreWaveform" should "pass" in{
     test(new ProcessingCore(32, 1024, 32, 16, 0)).withAnnotations(Seq(WriteVcdAnnotation)){
-      dut => PEArrayTester(dut,32, 1024, 32, 16, 0)
+      dut => ProcessingCoreTester(dut,32, 1024, 32, 16, 0)
     }
   }
 }

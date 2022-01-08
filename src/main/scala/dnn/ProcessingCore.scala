@@ -96,14 +96,14 @@ class ProcessingCore(nWeightBanks: Int, sratchPadMemDepth: Int, nRowVector: Int,
 
                    //**** Memory Instruction ****//
   // MLOAD
-  val matrixRow   = instructionRegister(26, 22).asUInt()
-  val matrixCol   = instructionRegister(21, 12).asUInt()
+  val matrixCol   = instructionRegister(26, 22).asUInt()
+  val matrixRow   = instructionRegister(21, 12).asUInt()
   val weightValue = instructionRegister(11, 0).asSInt() // 13 bit weights
   // MREAD
-  val matrixColSize   = instructionRegister(21, 12).asUInt()
+  val matrixColSize   = instructionRegister(26, 22).asUInt()
   // VLOAD
-  val colVector   = instructionRegister(26, 22).asUInt()
-  val rowVector   = instructionRegister(21, 12).asUInt()
+  val rowVector   = instructionRegister(26, 22).asUInt()
+  val colVector   = instructionRegister(21, 12).asUInt()
   val activation  = instructionRegister(11, 0).asSInt()
   // MMVC
   val VinSize     = instructionRegister(26, 13) // col of a matrix
@@ -171,8 +171,8 @@ class ProcessingCore(nWeightBanks: Int, sratchPadMemDepth: Int, nRowVector: Int,
         // ======================READ WEIGHTS FROM THE MATRIX MEMORY =====================//
         is(MLOAD.U){
           oneHotDecoder.io.enable := true.B
-          oneHotDecoder.io.memRow := matrixCol.asUInt()
-          weightWrAddrNode        := matrixRow.asUInt()
+          oneHotDecoder.io.memRow := matrixRow.asUInt()
+          weightWrAddrNode        := matrixCol.asUInt()
           instructionDone         := true.B
           for(pe <- 0 until(nWeightBanks)){
             weightWrDataBus(pe) := weightValue.asSInt()
@@ -193,21 +193,21 @@ class ProcessingCore(nWeightBanks: Int, sratchPadMemDepth: Int, nRowVector: Int,
         // ======================LOAD INPUT ACTIVATION INTO THE VECTOR =====================//
         is(VLOAD.U){
           oneHotDecoder.io.enable := true.B
-          oneHotDecoder.io.memRow := colVector.asUInt()
+          oneHotDecoder.io.memRow := rowVector.asUInt()
           instructionDone := true.B
-          for(colVector <- 0 until(nWeightBanks)){
-            inputVectorMem(colVector).io.wrEna     := oneHotDecoder.io.writeSignal(colVector)
-            inputVectorMem(colVector).io.writeAddr := rowVector.asUInt()
-            inputVectorMem(colVector).io.wrData    := activation.asSInt()
+          for(col <- 0 until(nWeightBanks)){
+            inputVectorMem(col).io.wrEna     := oneHotDecoder.io.writeSignal(col)
+            inputVectorMem(col).io.writeAddr := colVector.asUInt()
+            inputVectorMem(col).io.wrData    := activation.asSInt()
           }
         }
         // ======================READ INPUT ACTIVATION INTO THE VECTOR =====================//
         is(VREAD.U){
           memReadDecoder.io.enable := true.B
-          memReadDecoder.io.PEs    := colVector.asUInt()
-          for(colVector <- 0 until(nWeightBanks)){
-            inputVectorMem(colVector).io.rdEna    := memReadDecoder.io.activatedSignals(colVector)
-            inputVectorMem(colVector).io.readAddr := rowVector.asUInt()
+          memReadDecoder.io.PEs    := rowVector.asUInt()
+          for(col <- 0 until(nWeightBanks)){
+            inputVectorMem(col).io.rdEna    := memReadDecoder.io.activatedSignals(col)
+            inputVectorMem(col).io.readAddr := colVector.asUInt()
           }
           rdDataVecValid.io.signal2delay := true.B
           instructionDone                := true.B
