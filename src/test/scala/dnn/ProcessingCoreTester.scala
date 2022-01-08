@@ -18,9 +18,9 @@ class ProcessingCoreTester extends FlatSpec with ChiselScalatestTester with Matc
                                          nRowVector: Int, dataWidth: Int,
                                          binaryPoint: Int): Unit = {
     println("------------------------------------------------------------------")
-    val matrixRow = 64
-    val matrixColum = 32
-    val nVectorElem = 32
+    val matrixRow = 32
+    val matrixColum = 64
+    val nVectorElem = 64
     var row = 2 // the row of the vector matrix
     val vinAddr = 2
     val voutAddr = 4
