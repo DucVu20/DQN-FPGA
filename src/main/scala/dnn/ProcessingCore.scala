@@ -99,8 +99,6 @@ class ProcessingCore(nWeightBanks: Int, sratchPadMemDepth: Int, nRowVector: Int,
   val matrixCol   = instructionRegister(26, 22).asUInt()
   val matrixRow   = instructionRegister(21, 12).asUInt()
   val weightValue = instructionRegister(11, 0).asSInt() // 13 bit weights
-  // MREAD
-  val matrixColSize   = instructionRegister(26, 22).asUInt()
   // VLOAD
   val rowVector   = instructionRegister(26, 22).asUInt()
   val colVector   = instructionRegister(21, 12).asUInt()
@@ -171,8 +169,8 @@ class ProcessingCore(nWeightBanks: Int, sratchPadMemDepth: Int, nRowVector: Int,
         // ======================READ WEIGHTS FROM THE MATRIX MEMORY =====================//
         is(MLOAD.U){
           oneHotDecoder.io.enable := true.B
-          oneHotDecoder.io.memRow := matrixRow.asUInt()
-          weightWrAddrNode        := matrixCol.asUInt()
+          oneHotDecoder.io.memRow := matrixCol.asUInt()
+          weightWrAddrNode        := matrixRow.asUInt()
           instructionDone         := true.B
           for(pe <- 0 until(nWeightBanks)){
             weightWrDataBus(pe) := weightValue.asSInt()
@@ -180,7 +178,7 @@ class ProcessingCore(nWeightBanks: Int, sratchPadMemDepth: Int, nRowVector: Int,
           }
         }
         is(MREAD.U){
-          memReadDecoder.io.PEs    := matrixColSize.asUInt()
+          memReadDecoder.io.PEs    := matrixCol.asUInt()
           weightRdAddrNode         := matrixRow.asUInt()
           memReadDecoder.io.enable := true.B
           instructionDone          := true.B
