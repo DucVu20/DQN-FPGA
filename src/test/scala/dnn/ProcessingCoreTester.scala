@@ -18,9 +18,9 @@ class ProcessingCoreTester extends FlatSpec with ChiselScalatestTester with Matc
                                          nRowVector: Int, dataWidth: Int,
                                          binaryPoint: Int): Unit = {
     println("------------------------------------------------------------------")
-    val matrixRow = 4
-    val matrixColum = 4
-    val nVectorElem = 4
+    val matrixRow = 64
+    val matrixColum = 32
+    val nVectorElem = 32
     var row = 2 // the row of the vector matrix
     val vinAddr = 2
     val voutAddr = 4
@@ -146,17 +146,17 @@ class ProcessingCoreTester extends FlatSpec with ChiselScalatestTester with Matc
   }
 
 
-//  it should " an PEArray of 32 PEs should pass" in {
-//    test(new ProcessingCore(32, 1024, 32, 16, 8))
-//    {dut => PEArrayTester(dut, 4, 1024,
-//      128, 16, 8)}
-//  }
-
-  "ProcessingCoreWaveform" should "pass" in{
-    test(new ProcessingCore(32, 1024, 32, 16, 0)).withAnnotations(Seq(WriteVcdAnnotation)){
-      dut => PEArrayTester(dut,32, 1024, 32, 16, 0)
-    }
+  it should " an PEArray of 32 PEs should pass" in {
+    test(new ProcessingCore(32, 1024, 32, 16, 0))
+    {dut => PEArrayTester(dut, 4, 1024,
+      128, 16, 0)}
   }
+
+//  "ProcessingCoreWaveform" should "pass" in{
+//    test(new ProcessingCore(32, 1024, 32, 16, 0)).withAnnotations(Seq(WriteVcdAnnotation)){
+//      dut => PEArrayTester(dut,32, 1024, 32, 16, 0)
+//    }
+//  }
 }
 
  // syntax for test only one main: sbt "test:testOnly package.class"
