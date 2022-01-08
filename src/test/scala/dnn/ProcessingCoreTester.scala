@@ -20,7 +20,7 @@ class ProcessingCoreTester extends FlatSpec with ChiselScalatestTester with Matc
     println("------------------------------------------------------------------")
     val matrixRow = 32
     val matrixColum = 64
-    val nVectorElem = 64
+    val nVectorElem = 32
     var row = 2 // the row of the vector matrix
     val vinAddr = 2
     val voutAddr = 4
