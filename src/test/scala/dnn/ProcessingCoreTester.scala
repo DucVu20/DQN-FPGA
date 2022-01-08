@@ -18,9 +18,9 @@ class ProcessingCoreTester extends FlatSpec with ChiselScalatestTester with Matc
                                          nRowVector: Int, dataWidth: Int,
                                          binaryPoint: Int): Unit = {
     println("------------------------------------------------------------------")
-    val matrixRow = 4
-    val matrixColum = 20
-    val nVectorElem = 20
+    val matrixRow = 32
+    val matrixColum = 128
+    val nVectorElem = matrixRow
     var col = 2 // the row of the vector matrix
     val vinAddr = col
     val voutAddr = 4
@@ -140,7 +140,7 @@ class ProcessingCoreTester extends FlatSpec with ChiselScalatestTester with Matc
     var idx = 0
     while(dut.io.weightedSumValid.peek().litToBoolean){
       println(s"MMV result=${dut.io.weightedSum.peek().litValue()} ref=${MMVRefVal(idx)} idx=${idx}")
-      //dut.io.weightedSum.expect(MMVRefVal(idx).S)
+      dut.io.weightedSum.expect(MMVRefVal(idx).S)
       dut.clock.step(1)
       idx = idx + 1
     }
