@@ -148,15 +148,14 @@ class ProcessingCoreTester extends FlatSpec with ChiselScalatestTester with Matc
 
   it should " an PEArray of 32 PEs should pass" in {
     test(new ProcessingCore(32, 1024, 32, 16, 0))
-    {dut => PEArrayTester(dut, 4, 1024,
-      128, 16, 0)}
+    {dut => PEArrayTester(dut, 32, 1024,32, 16, 0)}
   }
 
-//  "ProcessingCoreWaveform" should "pass" in{
-//    test(new ProcessingCore(32, 1024, 32, 16, 0)).withAnnotations(Seq(WriteVcdAnnotation)){
-//      dut => PEArrayTester(dut,32, 1024, 32, 16, 0)
-//    }
-//  }
+  "ProcessingCoreWaveform" should "pass" in{
+    test(new ProcessingCore(32, 1024, 32, 16, 0)).withAnnotations(Seq(WriteVcdAnnotation)){
+      dut => PEArrayTester(dut,32, 1024, 32, 16, 0)
+    }
+  }
 }
 
  // syntax for test only one main: sbt "test:testOnly package.class"
