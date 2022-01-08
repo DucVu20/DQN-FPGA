@@ -16,8 +16,8 @@ class PETester extends FlatSpec with ChiselScalatestTester with Matchers{
     val dataWidth = dut.width
     val binaryPoint = dut.BP
 
-    val weights = Array.fill(numberOfNeurons)(nextFloat())
-    val inputActivations = Array.fill(numberOfNeurons)(nextFloat())
+    val weights = Array.fill(numberOfNeurons)(nextInt(5))
+    val inputActivations = Array.fill(numberOfNeurons)(nextInt(5))
     var ref = 0.toFloat
     println("================Disable the PE======================")
     dut.io.PEControl.activate.poke(false.B)
@@ -82,13 +82,13 @@ class PETester extends FlatSpec with ChiselScalatestTester with Matchers{
     }
   }
 
-   it should " pass 1 PE with 32 neurons" in {
-     test(new PE(16, 8)){dut => PETester(dut, 4)}
+   it should " pass1 PE with 32 neurons" in {
+     test(new PE(16, 0)){dut => PETester(dut, 4)}
    }
 
 
-  "PE waveform " should "pass" in{
-    test(new PE(16, 8)).withAnnotations(Seq(WriteVcdAnnotation)){
+  "PEwaveform " should "pass" in{
+    test(new PE(16, 0)).withAnnotations(Seq(WriteVcdAnnotation)){
       dut => PETester(dut, 4)
     }
   }

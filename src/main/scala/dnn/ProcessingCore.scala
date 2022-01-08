@@ -4,9 +4,9 @@ import chisel3.util._
 import mfunc._
 import dfunc._
 import opcode._
+
 //////////////////////////////////////////////////////////////////////////////////////////////////
 // The PEArray contains multiple processing elements (PEs) to perform various operations needed //
-// for DNN processing, including MMV, VMM, MMS, MAM, MSB, VLOAD, VSTORE.                        //
 //             Designed and written in ChiselHDL by Vu D. Le                                    //
 //                               at ITI-VNU                                                     //
 //                             date: Dec 2021                                                   //
@@ -17,10 +17,11 @@ class ProcessingCore(nWeightBanks: Int, sratchPadMemDepth: Int, nRowVector: Int,
   val io = IO(new Bundle{
     val instruction = Input(UInt(32.W))
     val valid       = Input(Bool()) // start instruction
-    val ready        = Output(Bool()) // instruction done
-    val dataValid = Output(Bool())
-    val dataOut     = Vec(nWeightBanks, Output(SInt(dataWidth.W)))
-    val dataIn      = Input(SInt(dataWidth.W)) // data bus for random number, write into the matrix buffer
+    val ready       = Output(Bool()) // instruction done
+    val dataValid   = Output(Bool())
+    val dataOut     = Vec(nWeightBanks, Output(SInt(dataWidth.W))) // this should be optional
+    val weightedSum = Output(SInt(dataWidth.W))
+    val weightedSumValid = Output(Bool())
   })
 
   val weightBanks    = Array.fill(nWeightBanks){ DualPortedMem(SInt(dataWidth.W), sratchPadMemDepth)}
@@ -28,34 +29,36 @@ class ProcessingCore(nWeightBanks: Int, sratchPadMemDepth: Int, nRowVector: Int,
 
   //  define the interface for the weight banks
   val rdDataMatrixValid = DelayBoolNCycles(0)
-  val rdDataVecValid = DelayBoolNCycles(0)
-  val weightRdAddrNode = WireInit(0.U(log2Ceil(sratchPadMemDepth).W))
-  val weightWrAddrNode = WireInit(0.U(log2Ceil(sratchPadMemDepth).W))
-  val weightWrDataBus  = Array.fill(nWeightBanks){WireInit(0.S(dataWidth.W))}
-  val writeSignalBus   = Array.fill(nWeightBanks){WireInit(false.B)}
-  val readSignalBus    = Array.fill(nWeightBanks){WireInit(false.B)}
+  val rdDataVecValid    = DelayBoolNCycles(0)
+  val weightRdAddrNode  = WireInit(0.U(log2Ceil(sratchPadMemDepth).W))
+  val weightWrAddrNode  = WireInit(0.U(log2Ceil(sratchPadMemDepth).W))
+  val weightWrDataBus   = Array.fill(nWeightBanks){WireInit(0.S(dataWidth.W))}
+  val writeSignalBus    = Array.fill(nWeightBanks){WireInit(false.B)}
+  val readSignalBus     = Array.fill(nWeightBanks){WireInit(false.B)}
 
   // define counter for the matrix memory
-  val colCounter = RegInit(0.U(log2Ceil(sratchPadMemDepth).W))
-  val rowCounter = RegInit(0.U(log2Ceil(nWeightBanks).W))
+  val colBanksCounter = RegInit(0.U(13.W)) // count which row of a matrix is read out
+  val matrixRowCounter = RegInit(0.U(13.W)) // count which row of a matrix has been MACed
+  val VinSizeReg = RegInit(0.U(14.W))
+  val VoutSizeReg = RegInit(0.U(13.W))
 
-  val adderTree      = AdderTree((nWeightBanks).toInt, 2*dataWidth)
   val oneHotDecoder  = OneHotEncoder(nWeightBanks)
   val memReadDecoder = EnableSignalDecoder(nWeightBanks)
 
-  val quantizedSum = adderTree.io.sum(dataWidth, 0).asSInt()
-  val VinSizeReg   = RegInit(0.U(log2Ceil(sratchPadMemDepth).W)) // row of the matrix
-  val VoutSizeReg  = RegInit(0.U(log2Ceil(nWeightBanks).W)) // column of the matrix
+  val adderTree      = AdderTree((nWeightBanks).toInt, 2*dataWidth)
+  val mulResults = Reg(Vec(nWeightBanks, SInt((dataWidth*2).W)))
+  val quantizedSum = adderTree.io.sum(dataWidth + binaryPoint, binaryPoint).asSInt()
 
   // ******************** DEFAULT VALUES FOR ALL **********************//
-  oneHotDecoder.io.enable := false.B
-  memReadDecoder.io.enable := false.B
-  adderTree.io.cal        := false.B
-  oneHotDecoder.io.memRow := 0.U
-  memReadDecoder.io.PEs   := 0.U
-  rdDataVecValid.io.signal2delay := false.B
+  rdDataVecValid.io.signal2delay    := false.B
   rdDataMatrixValid.io.signal2delay := false.B
-
+  oneHotDecoder.io.enable           := false.B
+  memReadDecoder.io.enable          := false.B
+  oneHotDecoder.io.memRow           := 0.U
+  memReadDecoder.io.PEs             := 0.U
+  // default connections
+  adderTree.io.cal := RegNext(rdDataMatrixValid.io.delayedSignal) // delay by 1 cycle because
+                                                                  // of 1 cycle delay in the multiplier
   // Connect the memory bank interface with the memory bank
   for(pe <- 0 until(nWeightBanks)){
     weightBanks(pe).io.wrData    := weightWrDataBus(pe)
@@ -64,13 +67,16 @@ class ProcessingCore(nWeightBanks: Int, sratchPadMemDepth: Int, nRowVector: Int,
     weightBanks(pe).io.rdEna     := readSignalBus(pe)
     weightBanks(pe).io.wrEna     := writeSignalBus(pe)
     readSignalBus(pe)            := false.B // by default don't read
-//    io.dataOut(pe)               := weightRdDataBus(pe)
 
     inputVectorMem(pe).io.writeAddr := 0.U
-    inputVectorMem(pe).io.readAddr := 0.U
-    inputVectorMem(pe).io.rdEna := false.B
-    inputVectorMem(pe).io.wrEna := false.B
-    inputVectorMem(pe).io.wrData := 0.S
+    inputVectorMem(pe).io.readAddr  := 0.U
+    inputVectorMem(pe).io.rdEna     := false.B
+    inputVectorMem(pe).io.wrEna     := false.B
+    inputVectorMem(pe).io.wrData    := 0.S
+
+    // Connect multipliers with the matrix and vector memory bank, and adder tree
+    mulResults(pe) := weightBanks(pe).io.rdData * inputVectorMem(pe).io.rdData
+    adderTree.io.in(pe) := mulResults(pe)
 
     when(rdDataVecValid.io.delayedSignal){
       io.dataOut(pe) := inputVectorMem(pe).io.rdData
@@ -82,32 +88,32 @@ class ProcessingCore(nWeightBanks: Int, sratchPadMemDepth: Int, nRowVector: Int,
   }
   // ******************** DEFAULT VALUES FOR ALL **********************//
 
-  //===================Connect Weight Banks and Input Activation Bank to Mul =======================//
-  val mulResults = Reg(Vec(nWeightBanks, SInt((dataWidth*2).W)))
-  for(pe <- 0 until(nWeightBanks)){
-    //mulResults(pe) := weightBanks(pe).io.rdData * inputVectorMem(pe).io.rdData
-    adderTree.io.in(pe) := mulResults(pe)
-  }
-
-  // ========== Extract fields from the instruction register ========//
+  // Extract fields from the instruction register
   val instructionRegister = RegInit(0.U((io.instruction.getWidth).W))
   val op          = instructionRegister(31, 30).asUInt()
   val func        = instructionRegister(29, 27).asUInt()
   val cond        = instructionRegister(26, 24).asUInt()
-  // Data Processing: MMV
-  val MinAddr     = instructionRegister(23, 12).asUInt()
-  val VinAddr     = instructionRegister(11, 7).asUInt()
-  val VoutAddr    = instructionRegister(6, 0).asUInt() // VoutAddr specifies the row address of the vector mem
 
-  // Memory Instruction: MLOAD.
+                   //**** Memory Instruction ****//
+  // MLOAD
   val matrixRow   = instructionRegister(26, 22).asUInt()
   val matrixCol   = instructionRegister(21, 12).asUInt()
   val weightValue = instructionRegister(11, 0).asSInt() // 13 bit weights
+  // MREAD
+  val matrixColSize   = instructionRegister(21, 12).asUInt()
   // VLOAD
   val colVector   = instructionRegister(26, 22).asUInt()
   val rowVector   = instructionRegister(21, 12).asUInt()
-  val activation = instructionRegister(11, 0).asSInt()
-  // CMP
+  val activation  = instructionRegister(11, 0).asSInt()
+  // MMVC
+  val VinSize     = instructionRegister(26, 13) // col of a matrix
+  val VoutSize    = instructionRegister(12, 0) // row of a matrix
+
+              //**** Data Processing Instruction ****//
+  //  MMV
+  val MinAddr  = instructionRegister(23, 12).asUInt()
+  val VinAddr  = instructionRegister(11, 7).asUInt()
+  val VoutAddr = instructionRegister(6, 0).asUInt() // VoutAddr specifies the row address of the vector mem
 
   //======================= PEArray Controller =========================//
   val idle::fetch::decode::executing::Nil = Enum(4)
@@ -145,67 +151,109 @@ class ProcessingCore(nWeightBanks: Int, sratchPadMemDepth: Int, nRowVector: Int,
     instructionRegister := io.instruction
   }
   when(Controller === decode){
-    // ===== update the information of a matrix into these registers =====//
-    when(op === 0.U){ // data processing
-//      when(func === MMVC){
-//        VinSizeReg  := instructionRegister(26, 13).asUInt()
-//        VoutSizeReg := instructionRegister(12, 0).asUInt()
-//      }
+    when(func === MMV.U){
+      colBanksCounter := 0.U
+      matrixRowCounter := 0.U
     }
   }
 
   //========================= Data Path ==================================//
   when(Controller === executing){
-    when(op === memoryInstruction){
+    // ***** Memory Instruction ***** //
+    when(op === memoryInstruction.asUInt()){
       switch(func){
         // ================ LOAD A MATRIX INTO THE MEMORY ===================//
-        is(MLOAD){
+        is(MMVC.U){
+          VinSizeReg  := VinSize.asUInt()
+          VoutSizeReg := VoutSize.asUInt()
+          instructionDone := true.B
+        }
+        // ======================READ WEIGHTS FROM THE MATRIX MEMORY =====================//
+        is(MLOAD.U){
           oneHotDecoder.io.enable := true.B
-          oneHotDecoder.io.memRow := matrixRow.asUInt()
-          weightWrAddrNode        := matrixCol.asUInt()
+          oneHotDecoder.io.memRow := matrixCol.asUInt()
+          weightWrAddrNode        := matrixRow.asUInt()
           instructionDone         := true.B
           for(pe <- 0 until(nWeightBanks)){
             weightWrDataBus(pe) := weightValue.asSInt()
             writeSignalBus(pe)  := oneHotDecoder.io.writeSignal(pe)
           }
         }
-        // ======================READ WEIGHTS FROM THE MATRIX MEMORY =====================//
-        is(MREAD){
-          memReadDecoder.io.PEs := matrixRow.asUInt()
-          weightRdAddrNode := matrixCol.asUInt()
+        is(MREAD.U){
+          memReadDecoder.io.PEs    := matrixColSize.asUInt()
+          weightRdAddrNode         := matrixRow.asUInt()
           memReadDecoder.io.enable := true.B
-          instructionDone  := true.B
+          instructionDone          := true.B
+          rdDataMatrixValid.io.signal2delay := true.B
           for(pe <- 0 until(nWeightBanks)){
             readSignalBus(pe) := memReadDecoder.io.activatedSignals(pe)
           }
-          rdDataMatrixValid.io.signal2delay := true.B
         }
+
         // ======================LOAD INPUT ACTIVATION INTO THE VECTOR =====================//
-        is(VLOAD){
+        is(VLOAD.U){
           oneHotDecoder.io.enable := true.B
           oneHotDecoder.io.memRow := colVector.asUInt()
           instructionDone := true.B
           for(colVector <- 0 until(nWeightBanks)){
-            inputVectorMem(colVector).io.wrEna := oneHotDecoder.io.writeSignal(colVector)
+            inputVectorMem(colVector).io.wrEna     := oneHotDecoder.io.writeSignal(colVector)
             inputVectorMem(colVector).io.writeAddr := rowVector.asUInt()
-            inputVectorMem(colVector).io.wrData := activation.asSInt()
+            inputVectorMem(colVector).io.wrData    := activation.asSInt()
           }
         }
-        is(VREAD){
+        // ======================READ INPUT ACTIVATION INTO THE VECTOR =====================//
+        is(VREAD.U){
           memReadDecoder.io.enable := true.B
-          memReadDecoder.io.PEs := colVector.asUInt()
+          memReadDecoder.io.PEs    := colVector.asUInt()
           for(colVector <- 0 until(nWeightBanks)){
-            inputVectorMem(colVector).io.rdEna := memReadDecoder.io.activatedSignals(colVector)
+            inputVectorMem(colVector).io.rdEna    := memReadDecoder.io.activatedSignals(colVector)
             inputVectorMem(colVector).io.readAddr := rowVector.asUInt()
           }
-          instructionDone := true.B
           rdDataVecValid.io.signal2delay := true.B
+          instructionDone                := true.B
+        }
+      }
+      // ***** Data Processing Instruction ***** //
+    }.elsewhen(op === dataProcessing.U){
+      switch(func){
+        // Matrix multiply vector and write the result back to the vector memory
+        // For a matrix that fits perfectly into the matrix memory bank, VinSize is connected
+        // to the memReadDecoder to read multiple elements in a column of a matrix, or multiple
+        // bank rows.
+        is(MMV.U){
+          memReadDecoder.io.PEs := VinSizeReg // the column size of a matrix
+          oneHotDecoder.io.memRow := matrixRowCounter
+          when(adderTree.io.sumValid){
+            matrixRowCounter := matrixRowCounter + 1.U
+            oneHotDecoder.io.enable := true.B
+          }
+          when((colBanksCounter === VoutSizeReg)){
+            when(matrixRowCounter === VoutSizeReg){
+              instructionDone := true.B
+            }
+          }.otherwise{
+            rdDataMatrixValid.io.signal2delay := true.B
+            memReadDecoder.io.enable := true.B
+            colBanksCounter := colBanksCounter + 1.U
+          }
+          for(idx <- 0 until(nWeightBanks)){
+            weightBanks(idx).io.readAddr := (MinAddr + colBanksCounter)
+            weightBanks(idx).io.rdEna := memReadDecoder.io.activatedSignals(idx)
+            inputVectorMem(idx).io.rdEna := memReadDecoder.io.activatedSignals(idx)
+            inputVectorMem(idx).io.readAddr := VinAddr
+            inputVectorMem(idx).io.wrData := quantizedSum.asSInt()
+            inputVectorMem(idx).io.writeAddr := VoutAddr // the row of the vector mem
+            inputVectorMem(idx).io.wrEna := oneHotDecoder.io.writeSignal(idx)
+          }
         }
       }
     }
     // ======================READ WEIGHTS FROM THE MATRIX MEMORY =====================//
   }
   // ============================= Connect IO ===============================//
+  // testing
+  io.weightedSumValid := adderTree.io.sumValid
+  io.weightedSum := quantizedSum
   io.ready := instructionDone
   io.dataValid := (rdDataMatrixValid.io.delayedSignal || rdDataVecValid.io.delayedSignal)
 }

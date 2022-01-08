@@ -81,11 +81,36 @@ object FPConverter{
     return binaryNumWithDot
   }
 }
-
+object MatrixTools{
+  def MMVRef(matrix: Array[Array[Int]], vector: Array[Int]): Array[Int] ={
+    val row = matrix.length
+    val col = matrix(0).length
+    var result = Array.fill(row){0}
+    var idx = 0
+    for(r <- 0 until(row)){
+      for(c <- 0 until(col)){
+        result(idx) = matrix(r)(c)*vector(c) + result(idx)
+      }
+      idx = idx + 1
+    }
+    return  result
+  }
+}
 
 object Hello extends App{
   import FPConverter._
-  for (a<- 0 until(1)){
-    println("value of a is", a.toString)
+  val randomWeightMatrix = Array.ofDim[Int](2, 3) // create a ref random matrix
+  randomWeightMatrix(0)(0) = 1
+  randomWeightMatrix(0)(1) = 2
+  randomWeightMatrix(0)(2) = 3
+  randomWeightMatrix(1)(0) = 4
+  randomWeightMatrix(1)(1) = 5
+  randomWeightMatrix(1)(2) = 6
+  var activation = Array.fill(3){2}
+  val result = MatrixTools.MMVRef(randomWeightMatrix, activation)
+  for(a<- 0 until(2)){
+    println(s"result is ${result(a)}")
   }
+
+
 }

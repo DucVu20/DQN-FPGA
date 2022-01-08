@@ -2,22 +2,22 @@ package dnn
 import chisel3._
 
 object mfunc{
-  val MMVC = 0.U // matrix multiply vector configuration
-  val MREAD = 1.U // read a matrix from the matrix memory
-  val MLOAD = 2.U // load matrix
-  val VLOAD = 3.U
-  val VREAD = 4.U
+  val MMVC = 0 // matrix multiply vector configuration
+  val MLOAD = 1 // load matrix
+  val MREAD = 2 // read a matrix from the matrix memory
+  val VLOAD = 3
+  val VREAD = 4
 }
 
 object opcode{
-  val dataProcessing = 0.U
-  val memoryInstruction = 1.U
-  val branching = 2.U
+  val dataProcessing = 0
+  val memoryInstruction = 1
+  val branching = 2
 }
 
 object dfunc{
-  val MMV = 0.U // matrix multiply vector
-  val CMP = 1.U
-  val RELU = 2.U
-  val LINEAR = 3.U
+  val MMV = 0 // matrix multiply vector
+  val CMP = 1
+  val RELU = 2
+  val LINEAR = 3
 }

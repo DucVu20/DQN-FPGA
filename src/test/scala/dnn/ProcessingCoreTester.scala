@@ -4,6 +4,10 @@ import chiseltest._
 import org.scalatest._
 import scala.util.Random._
 import utils._
+import mfunc._
+import dfunc._
+import opcode._
+import MatrixTools._
 import scala.math._
 import chiseltest.experimental.TestOptionBuilder._
 import chiseltest.internal.WriteVcdAnnotation
@@ -14,35 +18,42 @@ class ProcessingCoreTester extends FlatSpec with ChiselScalatestTester with Matc
                                          nRowVector: Int, dataWidth: Int,
                                          binaryPoint: Int): Unit = {
     println("------------------------------------------------------------------")
-    val matrixRow = 32
-    val matrixColum = 32
-    val nVectorElem = 32
+    val matrixRow = 4
+    val matrixColum = 4
+    val nVectorElem = 4
     var row = 2 // the row of the vector matrix
+    val vinAddr = 2
+    val voutAddr = 4
+    val vinSize = matrixRow
+    val voutSize = matrixColum
     val randomWeightMatrix = Array.ofDim[Int](matrixRow, matrixColum) // create a ref random matrix
+    var activation = Array.fill(nVectorElem){nextInt(10)}
 
     for(row <- 0 until(matrixRow)){
       for(col <- 0 until(matrixColum)){
-        randomWeightMatrix(row)(col) = nextInt(scala.math.pow(2, 10).toInt)
+        randomWeightMatrix(row)(col) = nextInt(10).toInt
       }
     }
+    println("to map the matrix into the matrix memory, the matrix is written to the memory bank" +
+      "in the transpose order")
     dut.io.valid.poke(false.B)
-    dut.clock.step(700)
+    dut.clock.step(400)
     var instruction = 0.toLong
     for(row <- 0 until(matrixRow)){
       for(col <- 0 until(matrixColum)){
-        instruction = ((1.toLong<<30)|(2<<27)|row<<22|col<<12|randomWeightMatrix(row)(col))
+        instruction = ((1.toLong<<30)|(MLOAD<<27)|row<<22|col<<12|randomWeightMatrix(row)(col))
         while(!dut.io.ready.peek().litToBoolean){
           dut.clock.step(1)
         }
         dut.io.instruction.poke(instruction.U)
-        println(s"value of the instruction is ${instruction}")
+//        println(s"value of the instruction is ${instruction}")
         dut.io.valid.poke(true.B)
         dut.clock.step(1)
       }
     }
 
     dut.io.valid.poke(false.B)
-    dut.clock.step(800)
+    dut.clock.step(400)
 
     println("write matrix to the memory successfully")
     println("begin reading all weights from the matrix memory and validate")
@@ -50,30 +61,29 @@ class ProcessingCoreTester extends FlatSpec with ChiselScalatestTester with Matc
     while(!dut.io.ready.peek().litToBoolean){
       dut.clock.step(1)
     }
-    for(col<- 0 until(matrixColum)){
-      var instruction = ((1.toLong<<30)|(1<<27)|(matrixRow-1)<<22|col<<12|0)
+    for(row<- 0 until(matrixRow)){
+      var instruction = ((1.toLong<<30)|(MREAD<<27)|(row)<<22|(matrixColum - 1)<<12|0)
       dut.io.instruction.poke(instruction.U)
       dut.io.valid.poke(true.B)
       dut.clock.step(1)
       while(!dut.io.dataValid.peek().litToBoolean){ // wait for data to be read out
         dut.clock.step(1)
       }
-      for(row <- 0 until(matrixRow)){
-        println(s"reading col ${col}, row ${row} ref=${randomWeightMatrix(row)(col)} get=${dut.io.dataOut(row).peek().litValue()}")
-        dut.io.dataOut(row).expect(randomWeightMatrix(row)(col).S)
+      for(col <- 0 until(matrixColum)){
+        println(s"reading row ${row}, col ${col} ref=${randomWeightMatrix(row)(col)} get=${dut.io.dataOut(col).peek().litValue()}")
+        dut.io.dataOut(col).expect(randomWeightMatrix(row)(col).S)
       }
     }
     dut.io.valid.poke(false.B)
-    dut.clock.step(500)
+    dut.clock.step(400)
 
     // ================================ Test Vector Memory ============================//
     println("*********************************************")
     println("finishing writing data to the matrix memory")
     println("test the input activation vector memory now")
 
-    var activation = Array.fill(nVectorElem){nextInt(1024)}
     for(col <- 0 until(nVectorElem)){
-      instruction = ((1.toLong<<30)|(3<<27)|col<<22|row<<12|activation(col))
+      instruction = ((1.toLong<<30)|(VLOAD<<27)|col<<22|row<<12|activation(col))
       while(!dut.io.ready.peek().litToBoolean){
         dut.clock.step(1)
       }
@@ -89,7 +99,7 @@ class ProcessingCoreTester extends FlatSpec with ChiselScalatestTester with Matc
     while(!dut.io.ready.peek().litToBoolean){
       dut.clock.step(1)
     }
-    instruction = ((1.toLong<<30)|(4<<27)|(nPEs - 1)<<22|row<<12|0)
+    instruction = ((1.toLong<<30)|(VREAD<<27)|(nPEs - 1)<<22|row<<12|0)
     dut.io.instruction.poke(instruction.U)
     dut.io.valid.poke(true.B)
     dut.clock.step(1)
@@ -102,9 +112,40 @@ class ProcessingCoreTester extends FlatSpec with ChiselScalatestTester with Matc
       dut.io.dataOut(col).expect(activation(col).S)
     }
     dut.clock.step(500)
+
+    // ================================ Test MMV Instruction ============================//
+    println("**********************************")
+    println("write configuration of the matrix into control registers")
+    instruction = (memoryInstruction<<30|MMVC<<27|vinSize<<13|voutSize)
+    dut.io.valid.poke(true.B)
+    dut.io.instruction.poke(instruction.U)
+    dut.clock.step(1)
+    while(!dut.io.ready.peek().litToBoolean){
+      dut.clock.step(1)
+    }
+
+    println(s"Perform the matrix multiplication vector and check for the results")
+    instruction = (dataProcessing<<30|MMV<<27|0<<12|row<<7|voutAddr)
+    dut.io.valid.poke(true.B)
+    dut.io.instruction.poke(instruction.U)
+    dut.clock.step(1)
+    dut.io.valid.poke(false.B)
+    while(!dut.io.weightedSumValid.peek().litToBoolean){
+      dut.clock.step(1)
+    }
+    val MMVRefVal = MMVRef(randomWeightMatrix, activation)
+    println("reference matrix multiply vector value")
+    MMVRefVal.foreach( a => println(a))
+
+    while(dut.io.weightedSumValid.peek().litToBoolean){
+      println(s"MMV result=${dut.io.weightedSum.peek().litValue()}")
+      dut.clock.step(1)
+    }
+    dut.clock.step(100)
+
   }
 
-  // ============ test main ================//
+
 //  it should " an PEArray of 32 PEs should pass" in {
 //    test(new ProcessingCore(32, 1024, 32, 16, 8))
 //    {dut => PEArrayTester(dut, 4, 1024,
@@ -112,8 +153,8 @@ class ProcessingCoreTester extends FlatSpec with ChiselScalatestTester with Matc
 //  }
 
   "ProcessingCoreWaveform" should "pass" in{
-    test(new ProcessingCore(32, 1024, 32, 16, 8)).withAnnotations(Seq(WriteVcdAnnotation)){
-      dut => PEArrayTester(dut,32, 1024, 32, 16, 8)
+    test(new ProcessingCore(32, 1024, 32, 16, 0)).withAnnotations(Seq(WriteVcdAnnotation)){
+      dut => PEArrayTester(dut,32, 1024, 32, 16, 0)
     }
   }
 }
