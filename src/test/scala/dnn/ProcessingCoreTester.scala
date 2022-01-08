@@ -134,12 +134,12 @@ class ProcessingCoreTester extends FlatSpec with ChiselScalatestTester with Matc
       dut.clock.step(1)
     }
     val MMVRefVal = MMVRef(randomWeightMatrix, activation)
-    println("reference matrix multiply vector value")
-    MMVRefVal.foreach( a => println(a))
-
+    var idx = 0
     while(dut.io.weightedSumValid.peek().litToBoolean){
-      println(s"MMV result=${dut.io.weightedSum.peek().litValue()}")
+      println(s"MMV result=${dut.io.weightedSum.peek().litValue()} ref=${MMVRefVal(idx)}")
+      dut.io.weightedSum.expect(MMVRefVal(idx).S)
       dut.clock.step(1)
+      idx = idx + 1
     }
     dut.clock.step(100)
 
