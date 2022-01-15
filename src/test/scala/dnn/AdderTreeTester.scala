@@ -3,7 +3,7 @@ import chisel3._
 import chisel3.util._
 import chiseltest._
 import org.scalatest._
-import utils._
+import utils.fixedPointUtils._
 import scala.util.Random._
 import chiseltest.experimental.TestOptionBuilder._
 import chiseltest.internal.WriteVcdAnnotation
@@ -22,19 +22,19 @@ class AdderTreeTester extends FlatSpec with ChiselScalatestTester with Matchers{
       var inputs = Array.fill(numberOfInputs)(nextFloat())
       dut.io.cal.poke(true.B)
       for(idx <- 0 until numberOfInputs){
-        dut.io.in(idx).poke(FPConverter.Float2SInt(inputs(idx), dut.io.sum.getWidth, binaryPoint).asSInt)
+        dut.io.in(idx).poke(Float2SInt(inputs(idx), dut.io.sum.getWidth, binaryPoint).asSInt)
       }
       dut.clock.step(1)
       refResult(test) = inputs.sum
       if(dut.io.sumValid.peek.litToBoolean){
-        result(idx) = FPConverter.SInt2Float(dut.io.sum.peek.litValue, binaryPoint)
+        result(idx) = SInt2Float(dut.io.sum.peek.litValue, binaryPoint)
         idx = idx + 1
       }
     }
     dut.io.cal.poke(false.B)
     while(dut.io.sumValid.peek.litToBoolean){
       dut.clock.step(1)
-      result(idx) = FPConverter.SInt2Float(dut.io.sum.peek.litValue, binaryPoint).toFloat
+      result(idx) = SInt2Float(dut.io.sum.peek.litValue, binaryPoint).toFloat
       idx = idx + 1
 
     }

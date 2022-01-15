@@ -1,20 +1,38 @@
 package dnn
 import chisel3._
-import chisel3.iotesters._
+import chiseltest._
 import org.scalatest._
+import scala.util.Random._
+import scala.math._
 
-class ActivationFuncTester(dut: ActivationFunc) extends PeekPokeTester(dut){
-  val binaryPoint = dut.io.in
-  for( activation <- 0 until(3)){
-    poke(dut.io.activationFunc, activation)
-    poke(dut.io.in, (15).S)
-    println("activation: "+activation + " value: " + peek(dut.io.activation).toString)
+class ActivationBlockTester extends FlatSpec with ChiselScalatestTester with Matchers {
+  behavior of "PE"
+  def ActivationBlock[T<: ActivationBlock](dut: T, nInputAct: Int): Unit = {
+    dut.io.ena.poke(false.B)
+    for(activationFunc <- 0 until(2)){
+      dut.io.activationFunc.poke(activationFunc.U)
+      for(n <- 0 until(nInputAct)){
+        dut.io.weightedSum(n).poke(3.S)
+      }
+      dut.clock.step(1)
+      for(n<- 0 until(nInputAct)){
+        println(s"activation=${activationFunc} get=${dut.io.activation(n).peek().litValue()}")
+      }
+    }
+    println("Enable the block")
+    dut.io.ena.poke(true.B)
+    for(activationFunc <- 0 until(2)){
+      dut.io.activationFunc.poke(activationFunc.U)
+      for(n <- 0 until(nInputAct)){
+        dut.io.weightedSum(n).poke(-3.S)
+      }
+      dut.clock.step(1)
+      for(n<- 0 until(nInputAct)){
+        println(s"activation=${activationFunc} get=${dut.io.activation(n).peek().litValue()}")
+      }
+    }
   }
-
-}
-
-object ActivationFuncTester extends App {
-  chisel3.iotesters.Driver (() => new ActivationFunc(16, 8)) { c =>
-    new ActivationFuncTester(c)
+  it should "pass the ActivationUnit" in {
+    test(new ActivationBlock(16,4)){dut => ActivationBlock(dut, 4)}
   }
 }
