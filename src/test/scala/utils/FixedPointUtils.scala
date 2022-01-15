@@ -3,7 +3,7 @@ package utils
 import scala.math._
 import scala.util.Random._
 
-object FPConverter{
+object fixedPointUtils{
 
   // def apply(number: Int, binaryPoint: Int): Double = SInt2FP(number, binaryPoint)
 
@@ -14,24 +14,24 @@ object FPConverter{
   // def apply(number: Float, width: Int, binaryPoint: Int) = Float2SInt(number, width, binaryPoint)
 
 
-  // convert Int to FP
+  // convert Int to FP, software Double dtype
   def SInt2Double(number: Int, binaryPoint: Int): Double ={
     val scalingFactor = 1/pow(2, binaryPoint) // 2^-BP
     return scalingFactor*(number.toDouble)
   }
 
-  // convert bigInt to FixedPoint
+  // convert bigInt to FixedPoint, software Double dtype
   def SInt2Double(number: BigInt, binaryPoint: Int): Double ={
     val scalingFactor = 1/pow(2, binaryPoint) // 2^-BP
     return scalingFactor*(number.toDouble)
   }
 
-    // convert Int to FP
+    // convert Int to FP, software float dtype
   def SInt2Float(number: Int, binaryPoint: Int): Float ={
     return SInt2Double(number, binaryPoint).toFloat
   }
 
-  // convert bigInt to FixedPoint
+  // convert bigInt to FP, software float dtype
   def SInt2Float(number: BigInt, binaryPoint: Int): Float ={
     return SInt2Double(number, binaryPoint).toFloat
   }
@@ -60,6 +60,21 @@ object FPConverter{
     }
   }
 
+    /** Convert a negative Int number (2s complement) into a UInt of length b.  The idea sounds like converting 
+    32 bit to b bit. Because (32, b) bits are 1. I want these value become 0 and keep (b, 0) unchanged, and
+    bit b is 1**/
+
+  def clipSignBits(number: Int): Int = {
+    val minBits = abs(number).toBinaryString.length + 1 // minimum bits for representing the number
+    val mask = scala.math.pow(2, minBits).toInt - 1
+    return (number&mask) // 
+  }
+
+  def clipSignBits(number: Int, width: Int): Int = {
+    val mask = scala.math.pow(2, width).toInt - 1
+    return (number&mask) // 
+  }
+
   /** convert Int to binary string**/
   def toBinary(digit: Int, binaryWidth: Int) =
     String.format("%" + binaryWidth + "s", digit.toInt.toBinaryString).replace(' ', '0')
@@ -81,36 +96,32 @@ object FPConverter{
     return binaryNumWithDot
   }
 }
-object MatrixTools{
-  def MMVRef(matrix: Array[Array[Int]], vector: Array[Int]): Array[Int] ={
-    val row = matrix.length
-    val col = matrix(0).length
-    var result = Array.fill(row){0}
-    var idx = 0
-    for(r <- 0 until(row)){
-      for(c <- 0 until(col)){
-        result(idx) = matrix(r)(c)*vector(c) + result(idx)
+
+object activationFunc{
+  def ReLU(vector: Array[Int]): Array[Int] = {
+    var relu = Array.fill(vector.length){0}
+    for(idx <- 0 until(vector.length)){
+      if(vector(idx) > 0){
+        relu(idx) = vector(idx)
       }
-      idx = idx + 1
+      else{
+        relu(idx) = 0
+      }
     }
-    return  result
+    return relu
   }
 }
 
 object Hello extends App{
-  import FPConverter._
-  val randomWeightMatrix = Array.ofDim[Int](2, 3) // create a ref random matrix
-  randomWeightMatrix(0)(0) = 1
-  randomWeightMatrix(0)(1) = 2
-  randomWeightMatrix(0)(2) = 3
-  randomWeightMatrix(1)(0) = 4
-  randomWeightMatrix(1)(1) = 5
-  randomWeightMatrix(1)(2) = 6
-  var activation = Array.fill(3){2}
-  val result = MatrixTools.MMVRef(randomWeightMatrix, activation)
-  for(a<- 0 until(2)){
-    println(s"result is ${result(a)}")
-  }
-
-
+  import activationFunc._
+  import fixedPointUtils._
+  val a = -4
+  val b = -9
+  println(a.toBinaryString)
+  println(clipSignBits(a).toBinaryString)
+  println(b.toBinaryString)
+  println(clipSignBits(b).toBinaryString)
+  println("-------")
+  println(clipSignBits(a, 5).toBinaryString)
+  println(clipSignBits(b, 5).toBinaryString)
 }
