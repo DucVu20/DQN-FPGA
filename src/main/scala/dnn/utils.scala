@@ -6,8 +6,8 @@ import scala.math.BigInt._
 // Pure combonational logic circuit, no registers are added
 class Adder(width: Int) extends Module{
   val io = IO(new Bundle{
-    val a = Input(SInt(width.W))
-    val b = Input(SInt(width.W))
+    val a   = Input(SInt(width.W))
+    val b   = Input(SInt(width.W))
     val out = Output(SInt(width.W))
 //    val overflow = Output(Bool())
   })
@@ -22,8 +22,8 @@ object Adder{
 
 class Multiplier(width: Int) extends Module{
   val io = IO(new Bundle{
-    val a = Input(SInt(width.W))
-    val b = Input(SInt(width.W))
+    val a   = Input(SInt(width.W))
+    val b   = Input(SInt(width.W))
     val out = Output(SInt((2*width).W))
 //    val overflow = Output(Bool())
   })
@@ -46,8 +46,8 @@ class EnableSignalDecoder(nPEs: Int) extends Module{
   val numberOfPE = nPEs
   val io = IO(new Bundle{
     val activatedSignals = Output(Vec(nPEs, Bool()))
-    val PEs = Input(UInt(log2Ceil(nPEs) .W)) //
-    val enable = Input(Bool())
+    val PEs              = Input(UInt(log2Ceil(nPEs) .W)) //
+    val enable           = Input(Bool())
   })
   val activatedSignals = WireInit(0.U(nPEs.W))
   for(pe <- 1 to(nPEs)){
@@ -77,8 +77,8 @@ object EnableSignalDecoder{
 
 class OneHotEncoder(nMemRows: Int) extends Module{
   val io = IO(new Bundle{
-    val memRow = Input(UInt(log2Ceil(nMemRows).W))
-    val enable = Input(Bool())
+    val memRow      = Input(UInt(log2Ceil(nMemRows).W))
+    val enable      = Input(Bool())
     val writeSignal = Output(Vec(nMemRows, Bool()))
   })
 
@@ -97,7 +97,7 @@ object OneHotEncoder{
 
 class DelayBoolNCycles(nCycles: Int) extends Module{
   val io = IO(new Bundle{
-    val signal2delay = Input(Bool())
+    val signal2delay  = Input(Bool())
     val delayedSignal = Output(Bool())
   })
   var temp = RegNext(io.signal2delay)

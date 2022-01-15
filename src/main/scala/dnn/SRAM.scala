@@ -22,19 +22,27 @@ class DualPortedMem[T <: Data](dataType: T, memDepth: Int
     mem.write(io.writeAddr, io.wrData)
   }
   io.rdData := mem.read(io.readAddr, io.rdEna)
+}
 
-//  when(io.rdEna){
-//    io.rdData := mem.read(io.readAddr).asTypeOf(dataType)
-//  }.otherwise{
-//    io.rdData := 0.U.asTypeOf(dataType)
-//  }
+class SinglePortedRam[T <: Data](dataType: T, memDepth: Int) extends Module {
+  val io = IO(new Bundle {
+    val addr    = Input(UInt(log2Ceil(memDepth).W))
+    val dataIn  = Input(dataType)
+    val dataOut = Output(dataType)
+    val wrEna   = Input(Bool())
+    val rdEna   = Input(Bool())
+  })
+  val mem = SyncReadMem(memDepth, dataType)
+  when(io.wrEna) {
+    mem.write(io.addr, io.dataIn)
+  }
+  io.dataOut := mem.read(io.addr, io.rdEna)
 }
 
 object DualPortedMem{
   def apply[T <: Data](dataType : T, memDepth: Int): DualPortedMem[T] = Module(new DualPortedMem(dataType, memDepth))
 }
 
-object DualPortedMemGenerator extends App{
-  new (ChiselStage).emitVerilog(new DualPortedMem(SInt(16.W), 2048), Array("--target-dir","generated"))
-  // new (ChiselStage).emitVerilog(new DualPortedMem(SInt(16.W), 240*320), Array("--target-dir","generated"))
+object SinglePortedRam{
+  def apply[T <: Data](dataType : T, memDepth: Int): SinglePortedRam[T] = Module(new SinglePortedRam(dataType, memDepth))
 }

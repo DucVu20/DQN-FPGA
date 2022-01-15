@@ -92,15 +92,15 @@ object ControllableLFSR16{
 }
 class LFSR16Demo extends Module{
   val io = IO(new Bundle{
-    val shift = Input(Bool())
+    val shift     = Input(Bool())
     val randShift = Output(UInt(16.W))
-    val rand = Output(UInt(16.W))
+    val rand      = Output(UInt(16.W))
   })
-  val LFSR16 = ControllableLFSR16()
+  val LFSR16  = ControllableLFSR16()
   val LFSRRef = LFSR(16)
 
   LFSR16.io.shift := io.shift
-  io.randShift := LFSR16.io.rand
-  io.rand := LFSRRef
+  io.randShift    := LFSR16.io.rand
+  io.rand         := LFSRRef
 
 }
