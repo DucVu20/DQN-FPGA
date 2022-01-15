@@ -14,8 +14,8 @@ class Agent extends Module{
     val terminate       = Output(Bool())
     val state           = Output(UInt(6.W))
   })
-  val x = Reg(UInt(3.W))
-  val y = Reg(UInt(3.W))
+  val x = RegInit(0.U(3.W))
+  val y = RegInit(0.U(3.W))
 
   when(io.loadInitalState){
     x := io.x_initial
