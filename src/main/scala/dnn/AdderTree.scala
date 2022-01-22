@@ -12,34 +12,12 @@ class AdderTree(nInputs: Int, width: Int) extends Module{
     val cal = Input(Bool())
   })
 
-  val numberOfLayer = log2Ceil(nInputs)
-//  val registerArray = Array.ofDim[](numberOfLayer, numberOfLayer)
-//  for(layer <- 0 until(numberOfLayer)){
-//    for(idx <- 0 until(nInputs/pow(2, layer + 1).toInt)){
-//      registerArray(layer)(idx) = Reg(dataType)
-//    }
-//  }
-//
-//  for(layer <- 0 until(numberOfLayer)){
-//    if (layer == 0){
-//      for(index <- 0 until(nInputs/pow(2, layer + 1).toInt)){
-//        registerArray(layer)(index) := (io.in(index) + io.in(index -1)).asTypeOf(dataType)
-//      }
-//    }
-//    else{
-//      for(index <- 0 until(nInputs/pow(2, layer + 1).toInt)){
-//        registerArray(layer)(index) := registerArray(layer - 1)(index)
-//      }
-//    }
-//  }
-//  io.sum := registerArray(numberOfLayer)(0)
 
-  // This code is used for an adder of 32 inputs
   val registerArray0 = Reg(Vec(16, SInt(width.W)))
   val registerArray1 = Reg(Vec(8, SInt(width.W)))
-  val registerArray2 = Reg(Vec(4, SInt(width.W)))
-  val registerArray3 = Reg(Vec(2, SInt(width.W)))
-  val sumRegister = Reg(SInt(16.W))
+  val registerArray2 = Wire(Vec(4, SInt(width.W)))
+  val registerArray3 = Wire(Vec(2, SInt(width.W)))
+  val sumRegister    = Wire(SInt(16.W))
 
   for(idx <- 0 until(nInputs) by 2){
     registerArray0(idx/2) := io.in(idx) + io.in(idx + 1)
@@ -56,8 +34,8 @@ class AdderTree(nInputs: Int, width: Int) extends Module{
   }
   sumRegister := registerArray3(0) + registerArray3(1)
 
-  io.sumValid := RegNext(RegNext(RegNext(RegNext(RegNext(io.cal)))))
-  io.sum := sumRegister
+  io.sumValid := RegNext(RegNext((io.cal)))
+  io.sum      := sumRegister
 }
 
 object AdderTree{

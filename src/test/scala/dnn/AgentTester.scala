@@ -14,10 +14,10 @@ class AgentTester extends FlatSpec with ChiselScalatestTester with Matchers{
     dut.io.loadInitalState.poke(true.B)
     dut.io.x_initial.poke(1.U)
     dut.io.y_initial.poke(1.U)
+    dut.io.mazeSize.poke(5.U)
     dut.clock.step(1)
     dut.io.loadInitalState.poke(false.B)
     dut.clock.step(1)
-    dut.io.mazeSize.poke(5.U)
 //    for(move <- 0 until(3)){
     for(action <- 0 until(4)){
       dut.io.action.poke(action.U)

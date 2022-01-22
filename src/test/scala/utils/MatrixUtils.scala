@@ -13,10 +13,10 @@ object matrixUtils{
     }
     return w
   }
-  def loadBiasFromTxt(filePath: String, dim: Int): Array[Double] = {
-    val b = Array.fill(dim){0.toDouble}
+  def loadBiasFromTxt(filePath: String): Array[Double] = {
     val b_source = Source.fromResource(filePath).getLines.toArray
-    for(idx <- 0 until(dim)){
+    val b = Array.fill(b_source.length){0.toDouble}
+    for(idx <- 0 until(b_source.length)){
       b(idx) = b_source(idx).toDouble
     }
     return b

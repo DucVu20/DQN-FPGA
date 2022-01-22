@@ -10,6 +10,7 @@ object playground extends App{
   w1.foreach(x => x.foreach(y => println(y)))
   val b1_source = "weights/bias_layer1_maze_5.txt"
   println("============================")
-  val b1 = loadBiasFromTxt(b1_source, 25)
+  val b1 = loadBiasFromTxt(b1_source)
   b1.foreach(x => println(x))
 }
+

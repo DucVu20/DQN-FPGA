@@ -49,6 +49,16 @@ class AdderTreeTester extends FlatSpec with ChiselScalatestTester with Matchers{
     }
   }
 
+//  it should "pass with w=22 BP=10" in {
+//    for(w<- 0 until 12){
+//      for(bp <- 2 until(8)){
+//        if(w > bp){
+//          test(new AdderTree(32, w)){dut => AdderTreeTester(dut, 32, bp, 8)}
+//        }
+//      }
+//    }
+//  }
+
   it should "pass with w=22 BP=10" in {
     test(new AdderTree(32, 22)){dut => AdderTreeTester(dut, 32, 10, 8)}
   }
