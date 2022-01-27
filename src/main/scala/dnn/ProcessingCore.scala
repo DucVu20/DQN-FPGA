@@ -25,13 +25,13 @@ class ProcessingCore(nWeightBanks: Int, sratchPadMemDepth: Int, activationMemDep
     val state            = Input(UInt(6.W))
     val terminate        = Input(Bool())
 
-    val action           = Output(UInt(2.W))
-    val actionValid      = Output(Bool())
     val ready            = Output(Bool()) // instruction done
     val jumpIP           = Output(Bool()) // jump instruction pointer
     val IPAddress        = Output(UInt(10.W))
     val increaseIP       = Output(Bool())
-    val enaReadIP        = Output(Bool())
+
+    val action           = Output(UInt(2.W))
+    val actionValid      = Output(Bool())
 
     val dataValid        = if(dev) Some(Output(Bool())) else None
     val dataOut          = if(dev) Some(Vec(nWeightBanks, Output(SInt(dataWidth.W)))) else None
@@ -65,6 +65,11 @@ class ProcessingCore(nWeightBanks: Int, sratchPadMemDepth: Int, activationMemDep
   val readSignalBus     = Array.fill(nWeightBanks){WireInit(false.B)}
   val rdWrEnaFlip       = RegInit(false.B)
 
+  val increaseIP        = WireInit(false.B)
+  val jumpIP            = WireInit(false.B)
+  val IPAddress         = WireInit(0.U(10.W))
+
+
   // define counter for the matrix memory
   val colBanksCounter  = RegInit(0.U(13.W)) // count which row of a matrix is read out
   val matrixRowCounter = RegInit(0.U(13.W)) // count which row of a matrix has been MACed
@@ -80,12 +85,10 @@ class ProcessingCore(nWeightBanks: Int, sratchPadMemDepth: Int, activationMemDep
   memReadDecoder.io.PEs             := 0.U
   activationBlock.io.ena            := false.B
   activationBlock.io.activationFunc := instructionRegister(26, 25).asUInt()
+
   // default connections
   adderTree.io.cal := RegNext(rdDataMatrixValid.io.delayedSignal) // delay by 1 cycle because
                                                                   // of 1 cycle delay in the multiplier
-  // for(idx <- 0 until(4)){
-  //   actionBlock.io.in(idx) := activationMemBank(idx).io.rdData
-  // }
   (actionBlock.io.in, activationMemBank).zipped.foreach((in, mem) => {in := mem.io.rdData})
 
   // Connect the memory bank interface with the memory bank
@@ -118,7 +121,6 @@ class ProcessingCore(nWeightBanks: Int, sratchPadMemDepth: Int, activationMemDep
       }
     }
   }
-
 
   // ******************** Extract fields from instruction register **********************//
 
@@ -162,27 +164,30 @@ class ProcessingCore(nWeightBanks: Int, sratchPadMemDepth: Int, activationMemDep
   // FMS control loop
   switch(Controller){
     is(idle){
-      instructionDone := true.B
+      instructionDone   := true.B
       when(io.instructionValid){
-        Controller := fetch
+        Controller      := fetch
       }
     }
     is(fetch){
-      Controller := decode
-      instructionDone := false.B
-      io.increaseIP := true.B
+      Controller        := decode
+      instructionDone   := false.B
     }
     is(decode){
-      Controller := executing
-      instructionDone := false.B
-      io.enaReadIP := true.B
+      Controller        := executing
+      instructionDone   := false.B
+      when(op === nop.U){
+        increaseIP      := false.B
+      }.otherwise{
+        increaseIP      := true.B
+      }
     }
     is(executing){
       when(instructionDone){
         when(io.instructionValid){
-          Controller := fetch
+          Controller    := fetch
         }.otherwise{
-          Controller := idle
+          Controller    := idle
         }
       }
     }
@@ -193,8 +198,8 @@ class ProcessingCore(nWeightBanks: Int, sratchPadMemDepth: Int, activationMemDep
   }
   when(Controller === decode){
     when(func === MMV.U){
-      colBanksCounter  := 0.U
-      matrixRowCounter := 0.U
+      colBanksCounter   := 0.U
+      matrixRowCounter  := 0.U
     }
   }
 
@@ -221,16 +226,6 @@ class ProcessingCore(nWeightBanks: Int, sratchPadMemDepth: Int, activationMemDep
           }
         }
         // ======================LOAD INPUT ACTIVATION INTO THE VECTOR =====================//
-        is(VLOAD.U){
-          oneHotDecoder.io.enable := true.B
-          oneHotDecoder.io.memRow := rowVector.asUInt()
-          instructionDone := true.B
-          for(col <- 0 until(nWeightBanks)){
-            activationMemBank(col).io.wrEna     := oneHotDecoder.io.writeSignal(col)
-            activationMemBank(col).io.writeAddr := colVector.asUInt()
-            activationMemBank(col).io.wrData    := activation.asSInt()
-          }
-        }
         is(SLOAD.U){
           // the onehotdecoder will be used as as a decoder to decode the current state of the agent
           // to one hot input for the neural network. Thus the I/O may not sound apparent.
@@ -241,12 +236,23 @@ class ProcessingCore(nWeightBanks: Int, sratchPadMemDepth: Int, activationMemDep
           for(idx <- 0 until(nWeightBanks)){
             activationMemBank(idx).io.wrEna     := memReadDecoder.io.activatedSignals(idx)
             activationMemBank(idx).io.writeAddr := instructionRegister(21, 12).asUInt()
-            activationMemBank(idx).io.wrData    := Cat(0.asUInt(), oneHotDecoder.io.writeSignal(idx)).asSInt()
+            activationMemBank(idx).io.wrData    := (Cat(0.U, oneHotDecoder.io.writeSignal(idx).asUInt())<<binaryPoint).asSInt()
           }
           instructionDone := true.B
         }
 
-        // ======================READ INPUT ACTIVATION INTO THE VECTOR =====================//
+        is(VLOAD.U){
+          oneHotDecoder.io.enable := true.B
+          oneHotDecoder.io.memRow := rowVector.asUInt()
+          instructionDone := true.B
+          for(col <- 0 until(nWeightBanks)){
+            activationMemBank(col).io.wrEna     := oneHotDecoder.io.writeSignal(col)
+            activationMemBank(col).io.writeAddr := colVector.asUInt()
+            activationMemBank(col).io.wrData    := activation.asSInt()
+          }
+        }
+
+        // ======================READ INPUT ACTIVATION FROM THE VECTOR MEMORY =====================//
         is( if(dev) Some(VREAD.U) else None){
           memReadDecoder.io.enable := true.B
           memReadDecoder.io.PEs    := rowVector.asUInt()
@@ -258,36 +264,15 @@ class ProcessingCore(nWeightBanks: Int, sratchPadMemDepth: Int, activationMemDep
           instructionDone                := true.B
         }
         is(if(dev) Some(MREAD.U) else None){
-          memReadDecoder.io.PEs    := matrixCol.asUInt()
-          weightRdAddrNode         := matrixRow.asUInt()
-          memReadDecoder.io.enable := true.B
-          instructionDone          := true.B
+          memReadDecoder.io.PEs             := matrixCol.asUInt()
+          weightRdAddrNode                  := matrixRow.asUInt()
+          memReadDecoder.io.enable          := true.B
+          instructionDone                   := true.B
           rdDataMatrixValid.io.signal2delay := true.B
           for(pe <- 0 until nWeightBanks){
             readSignalBus(pe) := memReadDecoder.io.activatedSignals(pe)
           }
         }
-
-//        is(VREAD.U){
-//          memReadDecoder.io.enable := true.B
-//          memReadDecoder.io.PEs    := rowVector.asUInt()
-//          for(col <- 0 until(nWeightBanks)){
-//            activationMemBank(col).io.rdEna    := memReadDecoder.io.activatedSignals(col)
-//            activationMemBank(col).io.readAddr := colVector.asUInt()
-//          }
-//          rdDataVecValid.io.signal2delay := true.B
-//          instructionDone                := true.B
-//        }
-//        is(MREAD.U){
-//          memReadDecoder.io.PEs    := matrixCol.asUInt()
-//          weightRdAddrNode         := matrixRow.asUInt()
-//          memReadDecoder.io.enable := true.B
-//          instructionDone          := true.B
-//          rdDataMatrixValid.io.signal2delay := true.B
-//          for(pe <- 0 until(nWeightBanks)){
-//            readSignalBus(pe) := memReadDecoder.io.activatedSignals(pe)
-//          }
-//        }
       }
       // ***** Data Processing Instruction ***** //
     }.elsewhen(op === dataProcessing.U){
@@ -297,8 +282,8 @@ class ProcessingCore(nWeightBanks: Int, sratchPadMemDepth: Int, activationMemDep
         // to the memReadDecoder to read multiple elements in a column of a matrix, or multiple
         // bank rows.
         is(MMV.U){
-          memReadDecoder.io.PEs   := VinSizeReg // the column size of a matrix
-          oneHotDecoder.io.memRow := matrixRowCounter
+          memReadDecoder.io.PEs     := VinSizeReg // the column size of a matrix
+          oneHotDecoder.io.memRow   := matrixRowCounter
           when(adderTree.io.sumValid){
             matrixRowCounter        := matrixRowCounter + 1.U
             oneHotDecoder.io.enable := true.B
@@ -324,9 +309,6 @@ class ProcessingCore(nWeightBanks: Int, sratchPadMemDepth: Int, activationMemDep
           }
         }
         is(ACT.U){
-          // val rdDataMatrixValid = DelayBoolNCycles(0)
-          // val rdDataVecValid    = DelayBoolNCycles(0)
-          // rdDataVecValid.io.signal2delay := true.B
           rdWrEnaFlip              := (~rdWrEnaFlip)
           activationBlock.io.ena   := rdWrEnaFlip
           memReadDecoder.io.enable := true.B
@@ -345,8 +327,8 @@ class ProcessingCore(nWeightBanks: Int, sratchPadMemDepth: Int, activationMemDep
           }
         }
         is(ACTION.U){
-          instructionDone := true.B
-          rdDataVecValid.io.signal2delay := true.B
+          instructionDone                := ~rdWrEnaFlip // 2 cycles
+          rdDataVecValid.io.signal2delay := ~rdWrEnaFlip
           memReadDecoder.io.enable       := true.B
           memReadDecoder.io.PEs          := instructionRegister(16, 14).asUInt() // number of actions
           for(idx <- 0 until nWeightBanks){
@@ -355,11 +337,11 @@ class ProcessingCore(nWeightBanks: Int, sratchPadMemDepth: Int, activationMemDep
           }
         }
         is(INFER.U){
-          io.jumpIP := true.B
+          jumpIP := true.B
           when(io.terminate){
-            io.IPAddress := instructionRegister(26, 17).asUInt()
+            IPAddress := instructionRegister(26, 17).asUInt()
           }.otherwise{
-            io.IPAddress := instructionRegister(16, 7).asUInt()
+            IPAddress := instructionRegister(16, 7).asUInt()
           }
           instructionDone := true.B
         }
@@ -370,10 +352,9 @@ class ProcessingCore(nWeightBanks: Int, sratchPadMemDepth: Int, activationMemDep
   }
 
   // ============================= Connect IO ===============================//
-  io.jumpIP      := false.B
-  io.enaReadIP   := false.B
-  io.increaseIP  := false.B
-  io.IPAddress   := 0.U
+  io.jumpIP      := jumpIP
+  io.increaseIP  := increaseIP
+  io.IPAddress   := IPAddress
   io.action      := actionBlock.io.index
   io.actionValid := rdDataVecValid.io.delayedSignal
   io.ready       := instructionDone
@@ -387,6 +368,6 @@ class ProcessingCore(nWeightBanks: Int, sratchPadMemDepth: Int, activationMemDep
 
 object ProcessingCoreGenerator extends App{
   new (ChiselStage).emitVerilog(new ProcessingCore(32, 128, 16,
-    12, 6, false), Array("--target-dir","generated"))
+    10, 7, false), Array("--target-dir","generated"))
 }
 // sbt "runMain dnn.processingCoreGenerator"
