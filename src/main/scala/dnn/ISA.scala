@@ -18,8 +18,8 @@ object dfunc{
 object mfunc {
   val MMVC =  0 // matrix multiply vector configuration
   val MLOAD = 1 // load matrix
-  val VLOAD = 2
-  val SLOAD = 3 // load state to the mem bank in paralell
+  val SLOAD = 2 // load state to the mem bank in paralell
+  val VLOAD = 3
   val VREAD = 4 // used in dev
   val MREAD = 5 // used in dev
 }
