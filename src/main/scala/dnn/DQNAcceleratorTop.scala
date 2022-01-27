@@ -19,11 +19,11 @@ case class DQNAcceleratorParams(
   address             : BigInt  = 0x10020000,
   useAXI4             : Boolean = false,
   dataWidth           : Int     = 8,
-  binaryPoint         : Int     = 4,
+  binaryPoint         : Int     = 3,
   nWeightBanks        : Int     = 32,
   activationMemDepth  : Int     = 8,   // must be <= 32
-  scratchPadMemDepth  : Int     = 128, // <= 1024
-  instructionMemDepth : Int     = 1024,
+  scratchPadMemDepth  : Int     = 64, // <= 1024
+  instructionMemDepth : Int     = 1024, // 4 kb
   maxMazeSize         : Int     = 25,
   dev                 : Boolean = true
 )
@@ -34,20 +34,25 @@ class DQNAccelertorTop(val p: DQNAcceleratorParams) extends Module{
     val wrEna           = Input(Bool())
     val instructionAddr = Input(UInt(log2Ceil(p.instructionMemDepth).W))
     val pointIR         = Input(Bool()) // use software to point IR to a particular addr
-                                        //    val runProgram      = Input(Bool())
+    val runProgram      = Input(Bool())
     val doneInference   = Output(Bool())
 
-    val rewardIn        = Input(UInt(2.W))
+    // for on chip environment maze
+    val rewardIn        = Input(SInt(3.W))
     val state           = Input(UInt(log2Ceil(p.maxMazeSize).W))
     val wrEnaEnv        = Input(Bool())
 
-    // for on chip environment maze
     val x_initial       = Input(UInt(3.W))
     val y_initial       = Input(UInt(3.W))
     val loadInitalState = Input(Bool())
     val mazeSize        = Input(UInt(3.W))
     val newStateFound   = Output(Bool())
-    val nextState       = Output(Bool())
+    val nextState       = Output(UInt(log2Ceil(p.maxMazeSize).W))
+
+
+
+    // optional IO used in the development process for check values in the sratchpad memory
+    // These signals will be ommitted when run synthesis when "dev" in DQNAccelertorParams is false
 
     val dataValid        = if(p.dev) Some(Output(Bool())) else None
     val dataOut          = if(p.dev) Some(Vec(p.nWeightBanks, Output(SInt(p.dataWidth.W)))) else None
@@ -63,7 +68,7 @@ class DQNAccelertorTop(val p: DQNAcceleratorParams) extends Module{
   val environment        = Module(new Environment(p.maxMazeSize))
   val instructionPointer = RegInit(0.U(log2Ceil(p.instructionMemDepth).W))
   val instructionValid   = RegInit(false.B)
-  val instructionDone    = WireInit(false.B)
+  val rdEna              = WireInit(false.B)
 
   // ========================= Instruction Pointer =====================//
 
@@ -71,31 +76,46 @@ class DQNAccelertorTop(val p: DQNAcceleratorParams) extends Module{
     instructionPointer := io.instructionAddr
   }.elsewhen(DQNCore.io.jumpIP){
     instructionPointer := DQNCore.io.IPAddress
+    rdEna              := true.B
+    instructionValid   := true.B
   }.elsewhen(DQNCore.io.increaseIP){
     instructionPointer := instructionPointer + 1.U
+    rdEna              := true.B
+    instructionValid   := true.B
+  }.elsewhen(io.runProgram){
+    instructionPointer := instructionPointer + 1.U
+    rdEna              := true.B
+    instructionValid   := true.B
+  }.elsewhen(DQNCore.io.ready){
+    instructionValid := false.B
   }
 
-  when(DQNCore.io.enaReadIP){
-    instructionMemory.io.addr := instructionPointer
-  }.otherwise{
+  when(io.wrEna){
     instructionMemory.io.addr := io.instructionAddr
+  }.otherwise{
+    instructionMemory.io.addr := instructionPointer
   }
 
-  instructionMemory.io.rdEna := DQNCore.io.enaReadIP
-  instructionMemory.io.wrEna := io.wrEna
 
-
+  instructionMemory.io.wrEna  := io.wrEna
+  instructionMemory.io.dataIn := io.instruction
+  instructionMemory.io.rdEna  := rdEna
   // ========================= Connect modules together =====================//
-  environment.io.wrEna    := io.wrEnaEnv
-  environment.io.rewardIn := io.rewardIn
-  environment.io.state    := io.state
-  environment.io.rewardIn := io.rewardIn
+  environment.io.wrEna        := io.wrEnaEnv
+  environment.io.rewardIn     := io.rewardIn
+
+  when(io.wrEnaEnv){
+    environment.io.state := io.state
+  }.otherwise{
+    environment.io.state := agent.io.state
+  }
 
   agent.io.reward          := environment.io.reward
   agent.io.x_initial       := io.x_initial
   agent.io.y_initial       := io.y_initial
   agent.io.loadInitalState := io.loadInitalState
   agent.io.mazeSize        := io.mazeSize
+  environment.io.rdEna     := agent.io.observe
 
   agent.io.actionValid        := DQNCore.io.actionValid
   agent.io.action             := DQNCore.io.action
@@ -103,11 +123,12 @@ class DQNAccelertorTop(val p: DQNAcceleratorParams) extends Module{
   DQNCore.io.state            := agent.io.state
   DQNCore.io.instruction      := instructionMemory.io.dataOut
   DQNCore.io.instructionValid := instructionValid
-  instructionDone             := DQNCore.io.ready
-
-
 
   // ==============IO Connections =================== //
+  io.doneInference := agent.io.terminate
+  io.nextState     := agent.io.state
+  io.newStateFound := agent.io.newStateFound
+
   if(p.dev){
     io.weightedSumValid.get := DQNCore.io.weightedSumValid.get
     io.weightedSum.get      := DQNCore.io.weightedSum.get
