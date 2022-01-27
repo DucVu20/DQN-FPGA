@@ -3,6 +3,7 @@ import chisel3._
 import chisel3.util._
 import opcode._
 import dfunc._
+import chisel3.stage.ChiselStage
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // This file incorporates all components in the design, including the DNNProcessingCore, the matrix memory, //
@@ -25,7 +26,7 @@ case class DQNAcceleratorParams(
   scratchPadMemDepth  : Int     = 64, // <= 1024
   instructionMemDepth : Int     = 1024, // 4 kb
   maxMazeSize         : Int     = 25,
-  dev                 : Boolean = true
+  dev                 : Boolean = false
 )
 
 class DQNAccelertorTop(val p: DQNAcceleratorParams) extends Module{
@@ -136,3 +137,9 @@ class DQNAccelertorTop(val p: DQNAcceleratorParams) extends Module{
     io.dataOut.get          := DQNCore.io.dataOut.get
   }
 }
+
+object DQNAcceleratorTopGenerator extends App{
+  new (ChiselStage).emitVerilog(new DQNAccelertorTop(DQNAcceleratorParams.apply()),
+    Array("--target-dir","generatedVerilog"))
+}
+// sbt "runMain dnn.DQNAcceleratorTopGenerator"
