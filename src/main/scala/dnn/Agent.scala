@@ -10,24 +10,25 @@ class Agent extends Module{
     val mazeSize        = Input(UInt(3.W))
     val action          = Input(UInt(2.W))
     val actionValid     = Input(Bool())
-    val reward          = Input(UInt(2.W))
-    val terminate       = Output(Bool())
+    val reward          = Input(SInt(3.W))
     val state           = Output(UInt(6.W))
+    val observe         = Output(Bool())
+    val terminate       = Output(Bool())
     val newStateFound   = Output(Bool())
   })
-  val terminate = RegInit(false.B)
   val mazeSize  = RegInit(0.U(3.W))
   val x         = RegInit(0.U(3.W))
   val y         = RegInit(0.U(3.W))
+  val observe   = Wire(Bool())
 
   when(io.loadInitalState){
     x         := io.x_initial
     y         := io.y_initial
-    terminate := false.B
     mazeSize  := io.mazeSize
   }
 
   when(io.actionValid){
+    observe := true.B
     when(io.action === 0.U){ // right
       x := x + 1.U
     }.elsewhen(io.action === 1.U){ // up
@@ -37,15 +38,16 @@ class Agent extends Module{
     }.otherwise{ // down
       y := y + 1.U
     }
-    io.newStateFound := true.B
   }.otherwise{
-    io.newStateFound := false.B
+    observe := false.B
   }
 
-  when(io.reward === 2.U){
-    terminate := true.B
+  when(io.reward === 2.S){
+    io.terminate := true.B
+  }.otherwise{
+    io.terminate := false.B
   }
-
+  io.observe := RegNext(observe)
   io.state     := x + y*mazeSize
-  io.terminate := terminate
+  io.newStateFound := RegNext(io.actionValid)
 }
