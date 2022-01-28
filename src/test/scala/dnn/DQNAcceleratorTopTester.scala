@@ -299,6 +299,7 @@ class DQNAcceleratorTopTester extends FlatSpec with ChiselScalatestTester with M
     dut.io.wrEna.poke(false.B)
     dut.clock.step(100)
     println("******************************************************************************************")
+    println(s"hardware information: weight dataWidth=${p.dataWidth} binaryPoint=${p.binaryPoint}")
     println("starting inference")
     dut.io.runProgram.poke(true.B)
     dut.clock.step(1)
