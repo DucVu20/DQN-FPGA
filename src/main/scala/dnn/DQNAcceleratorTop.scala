@@ -19,8 +19,8 @@ import chisel3.stage.ChiselStage
 case class DQNAcceleratorParams(
   address             : BigInt  = 0x10020000,
   useAXI4             : Boolean = false,
-  dataWidth           : Int     = 8,
-  binaryPoint         : Int     = 3,
+  dataWidth           : Int     = 12,
+  binaryPoint         : Int     = 6,
   nWeightBanks        : Int     = 32,
   activationMemDepth  : Int     = 8,   // must be <= 32
   scratchPadMemDepth  : Int     = 64, // <= 1024
@@ -101,6 +101,7 @@ class DQNAccelertorTop(val p: DQNAcceleratorParams) extends Module{
   instructionMemory.io.wrEna  := io.wrEna
   instructionMemory.io.dataIn := io.instruction
   instructionMemory.io.rdEna  := rdEna
+
   // ========================= Connect modules together =====================//
   environment.io.wrEna        := io.wrEnaEnv
   environment.io.rewardIn     := io.rewardIn

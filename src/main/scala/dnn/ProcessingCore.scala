@@ -53,7 +53,6 @@ class ProcessingCore(nWeightBanks: Int, sratchPadMemDepth: Int, activationMemDep
   val quantizedSum    = adderTree.io.sum(dataWidth + binaryPoint, binaryPoint).asSInt()
   val actionBlock     = Module(new Max4(dataWidth)) // return the best action and its max Q value
 
-//  val VAVResult      = Array.fill(32){WireInit(0.U(8.W))} // vector vector result
 
   //  define the interface for the weight banks
   val rdDataMatrixValid = DelayBoolNCycles(0)
