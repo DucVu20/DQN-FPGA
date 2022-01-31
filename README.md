@@ -29,3 +29,7 @@ python3 np_weights2txt.py
 cd ../../../..
 sbt "test:testOnly dnn.DQNAcceleratorTopTester"
 ```
+### Synthesis result
+![image](https://user-images.githubusercontent.com/63137043/151771660-caf5802b-190d-460c-8f31-28db32f40ee8.png)
+![image](https://user-images.githubusercontent.com/63137043/151771733-05b7654b-f7bc-4aa1-8536-c3c6a14b3dd3.png)
+![image](https://user-images.githubusercontent.com/63137043/151771769-f64b49ae-e21f-42e8-aaf0-4866d1d048b5.png)
