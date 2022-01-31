@@ -1,0 +1,821 @@
+#-----------------------------------------------------------
+# Vivado v2019.1 (64-bit)
+# SW Build 2552052 on Fri May 24 14:47:09 MDT 2019
+# IP Build 2548770 on Fri May 24 18:01:18 MDT 2019
+# Start of session at: Fri Jan 28 17:19:17 2022
+# Process ID: 16044
+# Current directory: /home/userdata/k63D/vuld_63m/cloned_repo/DQN-FPGA/synthesis/LSIDesignContestSyn/LSIDesignContestSyn.runs/synth_1
+# Command line: vivado -log DQNAccelertorTop.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source DQNAccelertorTop.tcl
+# Log file: /home/userdata/k63D/vuld_63m/cloned_repo/DQN-FPGA/synthesis/LSIDesignContestSyn/LSIDesignContestSyn.runs/synth_1/DQNAccelertorTop.vds
+# Journal file: /home/userdata/k63D/vuld_63m/cloned_repo/DQN-FPGA/synthesis/LSIDesignContestSyn/LSIDesignContestSyn.runs/synth_1/vivado.jou
+#-----------------------------------------------------------
+source DQNAccelertorTop.tcl -notrace
+Command: synth_design -top DQNAccelertorTop -part xc7a35ticsg324-1L
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a35ti'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a35ti'
+INFO: Launching helper process for spawning children vivado processes
+INFO: Helper process launched with PID 16159 
+---------------------------------------------------------------------------------
+Starting Synthesize : Time (s): cpu = 00:00:04 ; elapsed = 00:00:07 . Memory (MB): peak = 1681.660 ; gain = 166.555 ; free physical = 2087 ; free virtual = 65559
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'DQNAccelertorTop' [/home/userdata/k63D/vuld_63m/cloned_repo/DQN-FPGA/generatedVerilog/DQNAccelertorTop.v:5119]
+INFO: [Synth 8-6157] synthesizing module 'ProcessingCore' [/home/userdata/k63D/vuld_63m/cloned_repo/DQN-FPGA/generatedVerilog/DQNAccelertorTop.v:787]
+INFO: [Synth 8-6157] synthesizing module 'DualPortedMem' [/home/userdata/k63D/vuld_63m/cloned_repo/DQN-FPGA/generatedVerilog/DQNAccelertorTop.v:1]
+WARNING: [Synth 8-6014] Unused sequential element mem_io_rdData_MPORT_en_pipe_0_reg was removed.  [/home/userdata/k63D/vuld_63m/cloned_repo/DQN-FPGA/generatedVerilog/DQNAccelertorTop.v:38]
+INFO: [Synth 8-6155] done synthesizing module 'DualPortedMem' (1#1) [/home/userdata/k63D/vuld_63m/cloned_repo/DQN-FPGA/generatedVerilog/DQNAccelertorTop.v:1]
+INFO: [Synth 8-6157] synthesizing module 'DualPortedMem_32' [/home/userdata/k63D/vuld_63m/cloned_repo/DQN-FPGA/generatedVerilog/DQNAccelertorTop.v:120]
+WARNING: [Synth 8-6014] Unused sequential element mem_io_rdData_MPORT_en_pipe_0_reg was removed.  [/home/userdata/k63D/vuld_63m/cloned_repo/DQN-FPGA/generatedVerilog/DQNAccelertorTop.v:157]
+INFO: [Synth 8-6155] done synthesizing module 'DualPortedMem_32' (2#1) [/home/userdata/k63D/vuld_63m/cloned_repo/DQN-FPGA/generatedVerilog/DQNAccelertorTop.v:120]
+INFO: [Synth 8-6157] synthesizing module 'ActivationBlock' [/home/userdata/k63D/vuld_63m/cloned_repo/DQN-FPGA/generatedVerilog/DQNAccelertorTop.v:239]
+INFO: [Synth 8-6155] done synthesizing module 'ActivationBlock' (3#1) [/home/userdata/k63D/vuld_63m/cloned_repo/DQN-FPGA/generatedVerilog/DQNAccelertorTop.v:239]
+INFO: [Synth 8-6157] synthesizing module 'OneHotEncoder' [/home/userdata/k63D/vuld_63m/cloned_repo/DQN-FPGA/generatedVerilog/DQNAccelertorTop.v:404]
+INFO: [Synth 8-6155] done synthesizing module 'OneHotEncoder' (4#1) [/home/userdata/k63D/vuld_63m/cloned_repo/DQN-FPGA/generatedVerilog/DQNAccelertorTop.v:404]
+INFO: [Synth 8-6157] synthesizing module 'EnableSignalDecoder' [/home/userdata/k63D/vuld_63m/cloned_repo/DQN-FPGA/generatedVerilog/DQNAccelertorTop.v:474]
+INFO: [Synth 8-6155] done synthesizing module 'EnableSignalDecoder' (5#1) [/home/userdata/k63D/vuld_63m/cloned_repo/DQN-FPGA/generatedVerilog/DQNAccelertorTop.v:474]
+INFO: [Synth 8-6157] synthesizing module 'AdderTree' [/home/userdata/k63D/vuld_63m/cloned_repo/DQN-FPGA/generatedVerilog/DQNAccelertorTop.v:575]
+INFO: [Synth 8-6155] done synthesizing module 'AdderTree' (6#1) [/home/userdata/k63D/vuld_63m/cloned_repo/DQN-FPGA/generatedVerilog/DQNAccelertorTop.v:575]
+INFO: [Synth 8-6157] synthesizing module 'Max4' [/home/userdata/k63D/vuld_63m/cloned_repo/DQN-FPGA/generatedVerilog/DQNAccelertorTop.v:714]
+INFO: [Synth 8-6155] done synthesizing module 'Max4' (7#1) [/home/userdata/k63D/vuld_63m/cloned_repo/DQN-FPGA/generatedVerilog/DQNAccelertorTop.v:714]
+INFO: [Synth 8-6157] synthesizing module 'DelayBoolNCycles' [/home/userdata/k63D/vuld_63m/cloned_repo/DQN-FPGA/generatedVerilog/DQNAccelertorTop.v:728]
+INFO: [Synth 8-6155] done synthesizing module 'DelayBoolNCycles' (8#1) [/home/userdata/k63D/vuld_63m/cloned_repo/DQN-FPGA/generatedVerilog/DQNAccelertorTop.v:728]
+INFO: [Synth 8-6155] done synthesizing module 'ProcessingCore' (9#1) [/home/userdata/k63D/vuld_63m/cloned_repo/DQN-FPGA/generatedVerilog/DQNAccelertorTop.v:787]
+INFO: [Synth 8-6157] synthesizing module 'SinglePortedRam' [/home/userdata/k63D/vuld_63m/cloned_repo/DQN-FPGA/generatedVerilog/DQNAccelertorTop.v:4792]
+WARNING: [Synth 8-6014] Unused sequential element mem_io_dataOut_MPORT_en_pipe_0_reg was removed.  [/home/userdata/k63D/vuld_63m/cloned_repo/DQN-FPGA/generatedVerilog/DQNAccelertorTop.v:4827]
+INFO: [Synth 8-6155] done synthesizing module 'SinglePortedRam' (10#1) [/home/userdata/k63D/vuld_63m/cloned_repo/DQN-FPGA/generatedVerilog/DQNAccelertorTop.v:4792]
+INFO: [Synth 8-6157] synthesizing module 'Agent' [/home/userdata/k63D/vuld_63m/cloned_repo/DQN-FPGA/generatedVerilog/DQNAccelertorTop.v:4885]
+INFO: [Synth 8-4471] merging register 'io_newStateFound_REG_reg' into 'io_observe_REG_reg' [/home/userdata/k63D/vuld_63m/cloned_repo/DQN-FPGA/generatedVerilog/DQNAccelertorTop.v:4925]
+WARNING: [Synth 8-6014] Unused sequential element io_newStateFound_REG_reg was removed.  [/home/userdata/k63D/vuld_63m/cloned_repo/DQN-FPGA/generatedVerilog/DQNAccelertorTop.v:4925]
+INFO: [Synth 8-6155] done synthesizing module 'Agent' (11#1) [/home/userdata/k63D/vuld_63m/cloned_repo/DQN-FPGA/generatedVerilog/DQNAccelertorTop.v:4885]
+INFO: [Synth 8-6157] synthesizing module 'Environment' [/home/userdata/k63D/vuld_63m/cloned_repo/DQN-FPGA/generatedVerilog/DQNAccelertorTop.v:5015]
+WARNING: [Synth 8-6014] Unused sequential element environment_io_reward_MPORT_en_pipe_0_reg was removed.  [/home/userdata/k63D/vuld_63m/cloned_repo/DQN-FPGA/generatedVerilog/DQNAccelertorTop.v:5058]
+INFO: [Synth 8-6155] done synthesizing module 'Environment' (12#1) [/home/userdata/k63D/vuld_63m/cloned_repo/DQN-FPGA/generatedVerilog/DQNAccelertorTop.v:5015]
+INFO: [Synth 8-6155] done synthesizing module 'DQNAccelertorTop' (13#1) [/home/userdata/k63D/vuld_63m/cloned_repo/DQN-FPGA/generatedVerilog/DQNAccelertorTop.v:5119]
+WARNING: [Synth 8-3331] design DualPortedMem_32 has unconnected port reset
+WARNING: [Synth 8-3331] design DualPortedMem has unconnected port reset
+WARNING: [Synth 8-3331] design ProcessingCore has unconnected port io_state[5]
+---------------------------------------------------------------------------------
+Finished Synthesize : Time (s): cpu = 00:00:07 ; elapsed = 00:00:12 . Memory (MB): peak = 1754.383 ; gain = 239.277 ; free physical = 2089 ; free virtual = 65563
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:08 ; elapsed = 00:00:12 . Memory (MB): peak = 1772.191 ; gain = 257.086 ; free physical = 2097 ; free virtual = 65571
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7a35ticsg324-1L
+INFO: [Device 21-403] Loading part xc7a35ticsg324-1L
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:08 ; elapsed = 00:00:13 . Memory (MB): peak = 1780.199 ; gain = 265.094 ; free physical = 2089 ; free virtual = 65563
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6430] The Block RAM "SinglePortedRam:/mem_reg" may get memory collision error if read and write address collide. Use attribute (* rw_addr_collision= "yes" *) to avoid collision 
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:13 ; elapsed = 00:00:16 . Memory (MB): peak = 1794.141 ; gain = 279.035 ; free physical = 1979 ; free virtual = 65454
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+No constraint files found.
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   8 Input     24 Bit       Adders := 4     
+	   4 Input     24 Bit       Adders := 1     
+	   2 Input     13 Bit       Adders := 2     
+	   2 Input     10 Bit       Adders := 1     
+	   2 Input      6 Bit       Adders := 1     
+	   2 Input      3 Bit       Adders := 4     
++---Registers : 
+	               32 Bit    Registers := 1     
+	               24 Bit    Registers := 4     
+	               14 Bit    Registers := 1     
+	               13 Bit    Registers := 3     
+	               10 Bit    Registers := 2     
+	                6 Bit    Registers := 32    
+	                5 Bit    Registers := 1     
+	                3 Bit    Registers := 35    
+	                2 Bit    Registers := 1     
+	                1 Bit    Registers := 7     
++---RAMs : 
+	              32K Bit         RAMs := 1     
+	              768 Bit         RAMs := 32    
+	               96 Bit         RAMs := 32    
+	               75 Bit         RAMs := 1     
++---Muxes : 
+	   2 Input     32 Bit        Muxes := 2     
+	  31 Input     30 Bit        Muxes := 1     
+	   2 Input     13 Bit        Muxes := 10    
+	   2 Input     12 Bit        Muxes := 327   
+	   4 Input     12 Bit        Muxes := 32    
+	   2 Input     10 Bit        Muxes := 8     
+	   4 Input     10 Bit        Muxes := 1     
+	   2 Input      6 Bit        Muxes := 7     
+	   4 Input      6 Bit        Muxes := 1     
+	   6 Input      6 Bit        Muxes := 1     
+	   2 Input      5 Bit        Muxes := 10    
+	   4 Input      5 Bit        Muxes := 2     
+	   7 Input      5 Bit        Muxes := 1     
+	   2 Input      3 Bit        Muxes := 16    
+	   6 Input      3 Bit        Muxes := 1     
+	   4 Input      3 Bit        Muxes := 3     
+	   4 Input      2 Bit        Muxes := 1     
+	   6 Input      2 Bit        Muxes := 1     
+	   5 Input      1 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 348   
+	   3 Input      1 Bit        Muxes := 1     
+	   4 Input      1 Bit        Muxes := 3     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Hierarchical Component Statistics 
+---------------------------------------------------------------------------------
+Hierarchical RTL Component report 
+Module DQNAccelertorTop 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     10 Bit       Adders := 1     
++---Registers : 
+	               10 Bit    Registers := 1     
+	                1 Bit    Registers := 1     
++---Muxes : 
+	   2 Input     10 Bit        Muxes := 3     
+	   2 Input      5 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 3     
+Module DualPortedMem 
+Detailed RTL Component Info : 
++---Registers : 
+	                6 Bit    Registers := 1     
++---RAMs : 
+	              768 Bit         RAMs := 1     
+Module DualPortedMem_32 
+Detailed RTL Component Info : 
++---Registers : 
+	                3 Bit    Registers := 1     
++---RAMs : 
+	               96 Bit         RAMs := 1     
+Module ActivationBlock 
+Detailed RTL Component Info : 
++---Muxes : 
+	   2 Input     12 Bit        Muxes := 96    
+Module EnableSignalDecoder 
+Detailed RTL Component Info : 
++---Muxes : 
+	   2 Input     32 Bit        Muxes := 2     
+	  31 Input     30 Bit        Muxes := 1     
+Module AdderTree 
+Detailed RTL Component Info : 
++---Adders : 
+	   8 Input     24 Bit       Adders := 4     
+	   4 Input     24 Bit       Adders := 1     
++---Registers : 
+	               24 Bit    Registers := 4     
+	                1 Bit    Registers := 1     
+Module Max4 
+Detailed RTL Component Info : 
++---Muxes : 
+	   2 Input     12 Bit        Muxes := 3     
+	   4 Input      2 Bit        Muxes := 1     
+Module DelayBoolNCycles 
+Detailed RTL Component Info : 
++---Registers : 
+	                1 Bit    Registers := 1     
+Module ProcessingCore 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     13 Bit       Adders := 2     
+	   2 Input      6 Bit       Adders := 1     
++---Registers : 
+	               32 Bit    Registers := 1     
+	               14 Bit    Registers := 1     
+	               13 Bit    Registers := 3     
+	                2 Bit    Registers := 1     
+	                1 Bit    Registers := 2     
++---Muxes : 
+	   2 Input     13 Bit        Muxes := 10    
+	   2 Input     12 Bit        Muxes := 228   
+	   4 Input     12 Bit        Muxes := 32    
+	   2 Input     10 Bit        Muxes := 5     
+	   4 Input     10 Bit        Muxes := 1     
+	   2 Input      6 Bit        Muxes := 7     
+	   4 Input      6 Bit        Muxes := 1     
+	   6 Input      6 Bit        Muxes := 1     
+	   2 Input      5 Bit        Muxes := 9     
+	   4 Input      5 Bit        Muxes := 2     
+	   7 Input      5 Bit        Muxes := 1     
+	   2 Input      3 Bit        Muxes := 14    
+	   6 Input      3 Bit        Muxes := 1     
+	   4 Input      3 Bit        Muxes := 1     
+	   6 Input      2 Bit        Muxes := 1     
+	   5 Input      1 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 343   
+	   3 Input      1 Bit        Muxes := 1     
+	   4 Input      1 Bit        Muxes := 1     
+Module SinglePortedRam 
+Detailed RTL Component Info : 
++---Registers : 
+	               10 Bit    Registers := 1     
++---RAMs : 
+	              32K Bit         RAMs := 1     
+Module Agent 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      3 Bit       Adders := 4     
++---Registers : 
+	                3 Bit    Registers := 3     
+	                1 Bit    Registers := 1     
++---Muxes : 
+	   4 Input      3 Bit        Muxes := 2     
+	   2 Input      3 Bit        Muxes := 2     
+	   2 Input      1 Bit        Muxes := 2     
+	   4 Input      1 Bit        Muxes := 2     
+Module Environment 
+Detailed RTL Component Info : 
++---Registers : 
+	                5 Bit    Registers := 1     
++---RAMs : 
+	               75 Bit         RAMs := 1     
+---------------------------------------------------------------------------------
+Finished RTL Hierarchical Component Statistics
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 90 (col length:60)
+BRAMs: 100 (col length: RAMB18 60 RAMB36 30)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+Warning: Parallel synthesis criteria is not met 
+DSP Report: Generating DSP mulResults_0_reg, operation Mode is: (A*B)'.
+DSP Report: register mulResults_0_reg is absorbed into DSP mulResults_0_reg.
+DSP Report: operator mulResults_00 is absorbed into DSP mulResults_0_reg.
+DSP Report: Generating DSP mulResults_1_reg, operation Mode is: (A*B)'.
+DSP Report: register mulResults_1_reg is absorbed into DSP mulResults_1_reg.
+DSP Report: operator mulResults_10 is absorbed into DSP mulResults_1_reg.
+DSP Report: Generating DSP mulResults_2_reg, operation Mode is: (A*B)'.
+DSP Report: register mulResults_2_reg is absorbed into DSP mulResults_2_reg.
+DSP Report: operator mulResults_20 is absorbed into DSP mulResults_2_reg.
+DSP Report: Generating DSP mulResults_3_reg, operation Mode is: (A*B)'.
+DSP Report: register mulResults_3_reg is absorbed into DSP mulResults_3_reg.
+DSP Report: operator mulResults_30 is absorbed into DSP mulResults_3_reg.
+DSP Report: Generating DSP mulResults_4_reg, operation Mode is: (A*B)'.
+DSP Report: register mulResults_4_reg is absorbed into DSP mulResults_4_reg.
+DSP Report: operator mulResults_40 is absorbed into DSP mulResults_4_reg.
+DSP Report: Generating DSP mulResults_5_reg, operation Mode is: (A*B)'.
+DSP Report: register mulResults_5_reg is absorbed into DSP mulResults_5_reg.
+DSP Report: operator mulResults_50 is absorbed into DSP mulResults_5_reg.
+DSP Report: Generating DSP mulResults_6_reg, operation Mode is: (A*B)'.
+DSP Report: register mulResults_6_reg is absorbed into DSP mulResults_6_reg.
+DSP Report: operator mulResults_60 is absorbed into DSP mulResults_6_reg.
+DSP Report: Generating DSP mulResults_7_reg, operation Mode is: (A*B)'.
+DSP Report: register mulResults_7_reg is absorbed into DSP mulResults_7_reg.
+DSP Report: operator mulResults_70 is absorbed into DSP mulResults_7_reg.
+DSP Report: Generating DSP mulResults_8_reg, operation Mode is: (A*B)'.
+DSP Report: register mulResults_8_reg is absorbed into DSP mulResults_8_reg.
+DSP Report: operator mulResults_80 is absorbed into DSP mulResults_8_reg.
+DSP Report: Generating DSP mulResults_9_reg, operation Mode is: (A*B)'.
+DSP Report: register mulResults_9_reg is absorbed into DSP mulResults_9_reg.
+DSP Report: operator mulResults_90 is absorbed into DSP mulResults_9_reg.
+DSP Report: Generating DSP mulResults_10_reg, operation Mode is: (A*B)'.
+DSP Report: register mulResults_10_reg is absorbed into DSP mulResults_10_reg.
+DSP Report: operator mulResults_100 is absorbed into DSP mulResults_10_reg.
+DSP Report: Generating DSP mulResults_11_reg, operation Mode is: (A*B)'.
+DSP Report: register mulResults_11_reg is absorbed into DSP mulResults_11_reg.
+DSP Report: operator mulResults_110 is absorbed into DSP mulResults_11_reg.
+DSP Report: Generating DSP mulResults_12_reg, operation Mode is: (A*B)'.
+DSP Report: register mulResults_12_reg is absorbed into DSP mulResults_12_reg.
+DSP Report: operator mulResults_120 is absorbed into DSP mulResults_12_reg.
+DSP Report: Generating DSP mulResults_13_reg, operation Mode is: (A*B)'.
+DSP Report: register mulResults_13_reg is absorbed into DSP mulResults_13_reg.
+DSP Report: operator mulResults_130 is absorbed into DSP mulResults_13_reg.
+DSP Report: Generating DSP mulResults_14_reg, operation Mode is: (A*B)'.
+DSP Report: register mulResults_14_reg is absorbed into DSP mulResults_14_reg.
+DSP Report: operator mulResults_140 is absorbed into DSP mulResults_14_reg.
+DSP Report: Generating DSP mulResults_15_reg, operation Mode is: (A*B)'.
+DSP Report: register mulResults_15_reg is absorbed into DSP mulResults_15_reg.
+DSP Report: operator mulResults_150 is absorbed into DSP mulResults_15_reg.
+DSP Report: Generating DSP mulResults_16_reg, operation Mode is: (A*B)'.
+DSP Report: register mulResults_16_reg is absorbed into DSP mulResults_16_reg.
+DSP Report: operator mulResults_160 is absorbed into DSP mulResults_16_reg.
+DSP Report: Generating DSP mulResults_17_reg, operation Mode is: (A*B)'.
+DSP Report: register mulResults_17_reg is absorbed into DSP mulResults_17_reg.
+DSP Report: operator mulResults_170 is absorbed into DSP mulResults_17_reg.
+DSP Report: Generating DSP mulResults_18_reg, operation Mode is: (A*B)'.
+DSP Report: register mulResults_18_reg is absorbed into DSP mulResults_18_reg.
+DSP Report: operator mulResults_180 is absorbed into DSP mulResults_18_reg.
+DSP Report: Generating DSP mulResults_19_reg, operation Mode is: (A*B)'.
+DSP Report: register mulResults_19_reg is absorbed into DSP mulResults_19_reg.
+DSP Report: operator mulResults_190 is absorbed into DSP mulResults_19_reg.
+DSP Report: Generating DSP mulResults_20_reg, operation Mode is: (A*B)'.
+DSP Report: register mulResults_20_reg is absorbed into DSP mulResults_20_reg.
+DSP Report: operator mulResults_200 is absorbed into DSP mulResults_20_reg.
+DSP Report: Generating DSP mulResults_21_reg, operation Mode is: (A*B)'.
+DSP Report: register mulResults_21_reg is absorbed into DSP mulResults_21_reg.
+DSP Report: operator mulResults_210 is absorbed into DSP mulResults_21_reg.
+DSP Report: Generating DSP mulResults_22_reg, operation Mode is: (A*B)'.
+DSP Report: register mulResults_22_reg is absorbed into DSP mulResults_22_reg.
+DSP Report: operator mulResults_220 is absorbed into DSP mulResults_22_reg.
+DSP Report: Generating DSP mulResults_23_reg, operation Mode is: (A*B)'.
+DSP Report: register mulResults_23_reg is absorbed into DSP mulResults_23_reg.
+DSP Report: operator mulResults_230 is absorbed into DSP mulResults_23_reg.
+DSP Report: Generating DSP mulResults_24_reg, operation Mode is: (A*B)'.
+DSP Report: register mulResults_24_reg is absorbed into DSP mulResults_24_reg.
+DSP Report: operator mulResults_240 is absorbed into DSP mulResults_24_reg.
+DSP Report: Generating DSP mulResults_25_reg, operation Mode is: (A*B)'.
+DSP Report: register mulResults_25_reg is absorbed into DSP mulResults_25_reg.
+DSP Report: operator mulResults_250 is absorbed into DSP mulResults_25_reg.
+DSP Report: Generating DSP mulResults_26_reg, operation Mode is: (A*B)'.
+DSP Report: register mulResults_26_reg is absorbed into DSP mulResults_26_reg.
+DSP Report: operator mulResults_260 is absorbed into DSP mulResults_26_reg.
+DSP Report: Generating DSP mulResults_27_reg, operation Mode is: (A*B)'.
+DSP Report: register mulResults_27_reg is absorbed into DSP mulResults_27_reg.
+DSP Report: operator mulResults_270 is absorbed into DSP mulResults_27_reg.
+DSP Report: Generating DSP mulResults_28_reg, operation Mode is: (A*B)'.
+DSP Report: register mulResults_28_reg is absorbed into DSP mulResults_28_reg.
+DSP Report: operator mulResults_280 is absorbed into DSP mulResults_28_reg.
+DSP Report: Generating DSP mulResults_29_reg, operation Mode is: (A*B)'.
+DSP Report: register mulResults_29_reg is absorbed into DSP mulResults_29_reg.
+DSP Report: operator mulResults_290 is absorbed into DSP mulResults_29_reg.
+DSP Report: Generating DSP mulResults_30_reg, operation Mode is: (A*B)'.
+DSP Report: register mulResults_30_reg is absorbed into DSP mulResults_30_reg.
+DSP Report: operator mulResults_300 is absorbed into DSP mulResults_30_reg.
+DSP Report: Generating DSP mulResults_31_reg, operation Mode is: (A*B)'.
+DSP Report: register mulResults_31_reg is absorbed into DSP mulResults_31_reg.
+DSP Report: operator mulResults_310 is absorbed into DSP mulResults_31_reg.
+INFO: [Synth 8-4471] merging register 'agent/y_reg[2:0]' into 'agent/y_reg[2:0]' [/home/userdata/k63D/vuld_63m/cloned_repo/DQN-FPGA/generatedVerilog/DQNAccelertorTop.v:4911]
+INFO: [Synth 8-4471] merging register 'agent/x_reg[2:0]' into 'agent/x_reg[2:0]' [/home/userdata/k63D/vuld_63m/cloned_repo/DQN-FPGA/generatedVerilog/DQNAccelertorTop.v:4910]
+WARNING: [Synth 8-3331] design ProcessingCore has unconnected port io_state[5]
+RAM Pipeline Warning: Read Address Register Found For RAM instructionMemory/mem_reg. We will not be able to pipeline it. This may degrade performance. 
+RAM Pipeline Warning: Read Address Register Found For RAM instructionMemory/mem_reg. We will not be able to pipeline it. This may degrade performance. 
+INFO: [Synth 8-6430] The Block RAM "DQNAccelertorTop/instructionMemory/mem_reg" may get memory collision error if read and write address collide. Use attribute (* rw_addr_collision= "yes" *) to avoid collision 
+INFO: [Synth 8-4652] Swapped enable and write-enable on 1 RAM instances of RAM instructionMemory/mem_reg to conserve power
+RAM Pipeline Warning: Read Address Register Found For RAM instructionMemory/mem_reg. We will not be able to pipeline it. This may degrade performance. 
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:27 ; elapsed = 00:00:31 . Memory (MB): peak = 1926.832 ; gain = 411.727 ; free physical = 1876 ; free virtual = 65358
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+
+Block RAM: Preliminary Mapping  Report (see note below)
++-----------------+------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|Module Name      | RTL Object | PORT A (Depth x Width) | W | R | PORT B (Depth x Width) | W | R | Ports driving FF | RAMB18 | RAMB36 | 
++-----------------+------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|SinglePortedRam: | mem_reg    | 1 K x 32(READ_FIRST)   | W |   | 1 K x 32(WRITE_FIRST)  |   | R | Port A and B     | 0      | 1      | 
++-----------------+------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+
+Note: The table above is a preliminary report that shows the Block RAMs at the current stage of the synthesis flow. Some Block RAMs may be reimplemented as non Block RAM primitives later in the synthesis flow. Multiple instantiated Block RAMs are reported only once. 
+
+Distributed RAM: Preliminary Mapping  Report (see note below)
++-----------------+-----------------------------+-----------+----------------------+--------------+
+|Module Name      | RTL Object                  | Inference | Size (Depth x Width) | Primitives   | 
++-----------------+-----------------------------+-----------+----------------------+--------------+
+|DQNCore          | DualPortedMem_32/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_33/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_34/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_35/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_36/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_37/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_38/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_39/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_40/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_41/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_42/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_43/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_44/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_45/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_46/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_47/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_48/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_49/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_50/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_51/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_52/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_53/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_54/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_55/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_56/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_57/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_58/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_59/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_60/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_61/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_62/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_63/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem/mem_reg       | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_1/mem_reg     | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_2/mem_reg     | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_3/mem_reg     | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_4/mem_reg     | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_5/mem_reg     | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_6/mem_reg     | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_7/mem_reg     | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_8/mem_reg     | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_9/mem_reg     | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_10/mem_reg    | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_11/mem_reg    | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_12/mem_reg    | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_13/mem_reg    | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_14/mem_reg    | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_15/mem_reg    | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_16/mem_reg    | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_17/mem_reg    | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_18/mem_reg    | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_19/mem_reg    | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_20/mem_reg    | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_21/mem_reg    | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_22/mem_reg    | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_23/mem_reg    | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_24/mem_reg    | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_25/mem_reg    | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_26/mem_reg    | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_27/mem_reg    | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_28/mem_reg    | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_29/mem_reg    | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_30/mem_reg    | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_31/mem_reg    | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNAccelertorTop | environment/environment_reg | Implied   | 32 x 3               | RAM32M x 1   | 
++-----------------+-----------------------------+-----------+----------------------+--------------+
+
+Note: The table above is a preliminary report that shows the Distributed RAMs at the current stage of the synthesis flow. Some Distributed RAMs may be reimplemented as non Distributed RAM primitives later in the synthesis flow. Multiple instantiated RAMs are reported only once.
+
+DSP: Preliminary Mapping  Report (see note below)
++---------------+-------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|Module Name    | DSP Mapping | A Size | B Size | C Size | D Size | P Size | AREG | BREG | CREG | DREG | ADREG | MREG | PREG | 
++---------------+-------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|ProcessingCore | (A*B)'      | 12     | 12     | -      | -      | 24     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|ProcessingCore | (A*B)'      | 12     | 12     | -      | -      | 24     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|ProcessingCore | (A*B)'      | 12     | 12     | -      | -      | 24     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|ProcessingCore | (A*B)'      | 12     | 12     | -      | -      | 24     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|ProcessingCore | (A*B)'      | 12     | 12     | -      | -      | 24     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|ProcessingCore | (A*B)'      | 12     | 12     | -      | -      | 24     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|ProcessingCore | (A*B)'      | 12     | 12     | -      | -      | 24     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|ProcessingCore | (A*B)'      | 12     | 12     | -      | -      | 24     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|ProcessingCore | (A*B)'      | 12     | 12     | -      | -      | 24     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|ProcessingCore | (A*B)'      | 12     | 12     | -      | -      | 24     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|ProcessingCore | (A*B)'      | 12     | 12     | -      | -      | 24     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|ProcessingCore | (A*B)'      | 12     | 12     | -      | -      | 24     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|ProcessingCore | (A*B)'      | 12     | 12     | -      | -      | 24     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|ProcessingCore | (A*B)'      | 12     | 12     | -      | -      | 24     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|ProcessingCore | (A*B)'      | 12     | 12     | -      | -      | 24     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|ProcessingCore | (A*B)'      | 12     | 12     | -      | -      | 24     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|ProcessingCore | (A*B)'      | 12     | 12     | -      | -      | 24     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|ProcessingCore | (A*B)'      | 12     | 12     | -      | -      | 24     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|ProcessingCore | (A*B)'      | 12     | 12     | -      | -      | 24     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|ProcessingCore | (A*B)'      | 12     | 12     | -      | -      | 24     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|ProcessingCore | (A*B)'      | 12     | 12     | -      | -      | 24     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|ProcessingCore | (A*B)'      | 12     | 12     | -      | -      | 24     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|ProcessingCore | (A*B)'      | 12     | 12     | -      | -      | 24     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|ProcessingCore | (A*B)'      | 12     | 12     | -      | -      | 24     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|ProcessingCore | (A*B)'      | 12     | 12     | -      | -      | 24     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|ProcessingCore | (A*B)'      | 12     | 12     | -      | -      | 24     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|ProcessingCore | (A*B)'      | 12     | 12     | -      | -      | 24     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|ProcessingCore | (A*B)'      | 12     | 12     | -      | -      | 24     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|ProcessingCore | (A*B)'      | 12     | 12     | -      | -      | 24     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|ProcessingCore | (A*B)'      | 12     | 12     | -      | -      | 24     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|ProcessingCore | (A*B)'      | 12     | 12     | -      | -      | 24     | 0    | 0    | -    | -    | -     | 1    | 0    | 
+|ProcessingCore | (A*B)'      | 12     | 12     | -      | -      | 24     | 0    | 0    | -    | -    | -     | 1    | 0    | 
++---------------+-------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+
+Note: The table above is a preliminary report that shows the DSPs inferred at the current stage of the synthesis flow. Some DSP may be reimplemented as non DSP primitives later in the synthesis flow. Multiple instantiated DSPs are reported only once.
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6837] The timing for the instance i_0/instructionMemory/mem_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the block ram. Providing additional output register may help in improving timing.
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+No constraint files found.
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:28 ; elapsed = 00:00:32 . Memory (MB): peak = 1926.836 ; gain = 411.730 ; free physical = 1877 ; free virtual = 65359
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+
+Block RAM: Final Mapping  Report
++-----------------+------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|Module Name      | RTL Object | PORT A (Depth x Width) | W | R | PORT B (Depth x Width) | W | R | Ports driving FF | RAMB18 | RAMB36 | 
++-----------------+------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|SinglePortedRam: | mem_reg    | 1 K x 32(READ_FIRST)   | W |   | 1 K x 32(WRITE_FIRST)  |   | R | Port A and B     | 0      | 1      | 
++-----------------+------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+
+
+Distributed RAM: Final Mapping  Report
++-----------------+-----------------------------+-----------+----------------------+--------------+
+|Module Name      | RTL Object                  | Inference | Size (Depth x Width) | Primitives   | 
++-----------------+-----------------------------+-----------+----------------------+--------------+
+|DQNCore          | DualPortedMem_32/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_33/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_34/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_35/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_36/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_37/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_38/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_39/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_40/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_41/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_42/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_43/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_44/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_45/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_46/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_47/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_48/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_49/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_50/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_51/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_52/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_53/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_54/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_55/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_56/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_57/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_58/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_59/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_60/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_61/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_62/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem_63/mem_reg    | Implied   | 8 x 12               | RAM32M x 2   | 
+|DQNCore          | DualPortedMem/mem_reg       | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_1/mem_reg     | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_2/mem_reg     | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_3/mem_reg     | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_4/mem_reg     | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_5/mem_reg     | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_6/mem_reg     | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_7/mem_reg     | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_8/mem_reg     | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_9/mem_reg     | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_10/mem_reg    | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_11/mem_reg    | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_12/mem_reg    | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_13/mem_reg    | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_14/mem_reg    | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_15/mem_reg    | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_16/mem_reg    | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_17/mem_reg    | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_18/mem_reg    | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_19/mem_reg    | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_20/mem_reg    | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_21/mem_reg    | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_22/mem_reg    | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_23/mem_reg    | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_24/mem_reg    | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_25/mem_reg    | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_26/mem_reg    | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_27/mem_reg    | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_28/mem_reg    | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_29/mem_reg    | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_30/mem_reg    | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNCore          | DualPortedMem_31/mem_reg    | Implied   | 64 x 12              | RAM64M x 4   | 
+|DQNAccelertorTop | environment/environment_reg | Implied   | 32 x 3               | RAM32M x 1   | 
++-----------------+-----------------------------+-----------+----------------------+--------------+
+
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:29 ; elapsed = 00:00:34 . Memory (MB): peak = 1926.836 ; gain = 411.730 ; free physical = 1871 ; free virtual = 65353
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:31 ; elapsed = 00:00:36 . Memory (MB): peak = 1929.805 ; gain = 414.699 ; free physical = 1870 ; free virtual = 65352
+---------------------------------------------------------------------------------
+
+Report Check Netlist: 
++------+------------------+-------+---------+-------+------------------+
+|      |Item              |Errors |Warnings |Status |Description       |
++------+------------------+-------+---------+-------+------------------+
+|1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
++------+------------------+-------+---------+-------+------------------+
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:31 ; elapsed = 00:00:36 . Memory (MB): peak = 1929.805 ; gain = 414.699 ; free physical = 1869 ; free virtual = 65351
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:32 ; elapsed = 00:00:36 . Memory (MB): peak = 1929.805 ; gain = 414.699 ; free physical = 1859 ; free virtual = 65340
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:32 ; elapsed = 00:00:36 . Memory (MB): peak = 1929.805 ; gain = 414.699 ; free physical = 1872 ; free virtual = 65353
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:32 ; elapsed = 00:00:36 . Memory (MB): peak = 1929.805 ; gain = 414.699 ; free physical = 1867 ; free virtual = 65349
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:32 ; elapsed = 00:00:36 . Memory (MB): peak = 1929.805 ; gain = 414.699 ; free physical = 1866 ; free virtual = 65347
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+
+Static Shift Register Report:
++-----------------+---------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+|Module Name      | RTL Name                              | Length | Width | Reset Signal | Pull out first Reg | Pull out last Reg | SRL16E | SRLC32E | 
++-----------------+---------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+|DQNAccelertorTop | DQNCore/adderTree/io_sumValid_REG_reg | 3      | 1     | NO           | NO                 | YES               | 1      | 0       | 
++-----------------+---------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+---------+------+
+|      |Cell     |Count |
++------+---------+------+
+|1     |BUFG     |     1|
+|2     |CARRY4   |    86|
+|3     |DSP48E1  |    32|
+|4     |LUT2     |    67|
+|5     |LUT3     |   304|
+|6     |LUT4     |   324|
+|7     |LUT5     |   140|
+|8     |LUT6     |   672|
+|9     |RAM32M   |    65|
+|10    |RAM64M   |   128|
+|11    |RAMB36E1 |     1|
+|12    |SRL16E   |     1|
+|13    |FDRE     |   445|
+|14    |IBUF     |    66|
+|15    |OBUF     |     7|
++------+---------+------+
+
+Report Instance Areas: 
++------+---------------------+--------------------+------+
+|      |Instance             |Module              |Cells |
++------+---------------------+--------------------+------+
+|1     |top                  |                    |  2339|
+|2     |  DQNCore            |ProcessingCore      |  1381|
+|3     |    DualPortedMem    |DualPortedMem       |    10|
+|4     |    DualPortedMem_1  |DualPortedMem_0     |    10|
+|5     |    DualPortedMem_10 |DualPortedMem_1     |    10|
+|6     |    DualPortedMem_11 |DualPortedMem_2     |    10|
+|7     |    DualPortedMem_12 |DualPortedMem_3     |    10|
+|8     |    DualPortedMem_13 |DualPortedMem_4     |    10|
+|9     |    DualPortedMem_14 |DualPortedMem_5     |    10|
+|10    |    DualPortedMem_15 |DualPortedMem_6     |    10|
+|11    |    DualPortedMem_16 |DualPortedMem_7     |    10|
+|12    |    DualPortedMem_17 |DualPortedMem_8     |    10|
+|13    |    DualPortedMem_18 |DualPortedMem_9     |    10|
+|14    |    DualPortedMem_19 |DualPortedMem_10    |    10|
+|15    |    DualPortedMem_2  |DualPortedMem_11    |    10|
+|16    |    DualPortedMem_20 |DualPortedMem_12    |    10|
+|17    |    DualPortedMem_21 |DualPortedMem_13    |    10|
+|18    |    DualPortedMem_22 |DualPortedMem_14    |    10|
+|19    |    DualPortedMem_23 |DualPortedMem_15    |    10|
+|20    |    DualPortedMem_24 |DualPortedMem_16    |    10|
+|21    |    DualPortedMem_25 |DualPortedMem_17    |    10|
+|22    |    DualPortedMem_26 |DualPortedMem_18    |    10|
+|23    |    DualPortedMem_27 |DualPortedMem_19    |    10|
+|24    |    DualPortedMem_28 |DualPortedMem_20    |    10|
+|25    |    DualPortedMem_29 |DualPortedMem_21    |    10|
+|26    |    DualPortedMem_3  |DualPortedMem_22    |    10|
+|27    |    DualPortedMem_30 |DualPortedMem_23    |    10|
+|28    |    DualPortedMem_31 |DualPortedMem_24    |    10|
+|29    |    DualPortedMem_32 |DualPortedMem_32    |    95|
+|30    |    DualPortedMem_33 |DualPortedMem_32_25 |    11|
+|31    |    DualPortedMem_34 |DualPortedMem_32_26 |    12|
+|32    |    DualPortedMem_35 |DualPortedMem_32_27 |     5|
+|33    |    DualPortedMem_36 |DualPortedMem_32_28 |     5|
+|34    |    DualPortedMem_37 |DualPortedMem_32_29 |     5|
+|35    |    DualPortedMem_38 |DualPortedMem_32_30 |     5|
+|36    |    DualPortedMem_39 |DualPortedMem_32_31 |     5|
+|37    |    DualPortedMem_4  |DualPortedMem_33    |    10|
+|38    |    DualPortedMem_40 |DualPortedMem_32_34 |     5|
+|39    |    DualPortedMem_41 |DualPortedMem_32_35 |     5|
+|40    |    DualPortedMem_42 |DualPortedMem_32_36 |     5|
+|41    |    DualPortedMem_43 |DualPortedMem_32_37 |     5|
+|42    |    DualPortedMem_44 |DualPortedMem_32_38 |     5|
+|43    |    DualPortedMem_45 |DualPortedMem_32_39 |     5|
+|44    |    DualPortedMem_46 |DualPortedMem_32_40 |     5|
+|45    |    DualPortedMem_47 |DualPortedMem_32_41 |     5|
+|46    |    DualPortedMem_48 |DualPortedMem_32_42 |     5|
+|47    |    DualPortedMem_49 |DualPortedMem_32_43 |     5|
+|48    |    DualPortedMem_5  |DualPortedMem_44    |    10|
+|49    |    DualPortedMem_50 |DualPortedMem_32_45 |     5|
+|50    |    DualPortedMem_51 |DualPortedMem_32_46 |     5|
+|51    |    DualPortedMem_52 |DualPortedMem_32_47 |     5|
+|52    |    DualPortedMem_53 |DualPortedMem_32_48 |     5|
+|53    |    DualPortedMem_54 |DualPortedMem_32_49 |     5|
+|54    |    DualPortedMem_55 |DualPortedMem_32_50 |     5|
+|55    |    DualPortedMem_56 |DualPortedMem_32_51 |     5|
+|56    |    DualPortedMem_57 |DualPortedMem_32_52 |     5|
+|57    |    DualPortedMem_58 |DualPortedMem_32_53 |     5|
+|58    |    DualPortedMem_59 |DualPortedMem_32_54 |     5|
+|59    |    DualPortedMem_6  |DualPortedMem_55    |    10|
+|60    |    DualPortedMem_60 |DualPortedMem_32_56 |     5|
+|61    |    DualPortedMem_61 |DualPortedMem_32_57 |     5|
+|62    |    DualPortedMem_62 |DualPortedMem_32_58 |     5|
+|63    |    DualPortedMem_63 |DualPortedMem_32_59 |     5|
+|64    |    DualPortedMem_7  |DualPortedMem_60    |    10|
+|65    |    DualPortedMem_8  |DualPortedMem_61    |    10|
+|66    |    DualPortedMem_9  |DualPortedMem_62    |    10|
+|67    |    adderTree        |AdderTree           |   680|
+|68    |    rdDataVecValid   |DelayBoolNCycles    |     1|
+|69    |  agent              |Agent               |    32|
+|70    |  environment        |Environment         |     7|
+|71    |  instructionMemory  |SinglePortedRam     |   816|
++------+---------------------+--------------------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:32 ; elapsed = 00:00:36 . Memory (MB): peak = 1929.805 ; gain = 414.699 ; free physical = 1866 ; free virtual = 65347
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 9 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:32 ; elapsed = 00:00:36 . Memory (MB): peak = 1929.805 ; gain = 414.699 ; free physical = 1865 ; free virtual = 65346
+Synthesis Optimization Complete : Time (s): cpu = 00:00:32 ; elapsed = 00:00:36 . Memory (MB): peak = 1929.809 ; gain = 414.699 ; free physical = 1865 ; free virtual = 65346
+INFO: [Project 1-571] Translating synthesized netlist
+INFO: [Netlist 29-17] Analyzing 312 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2041.457 ; gain = 0.000 ; free physical = 1811 ; free virtual = 65293
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 193 instances were transformed.
+  RAM32M => RAM32M (RAMD32, RAMD32, RAMD32, RAMD32, RAMD32, RAMD32, RAMS32, RAMS32): 65 instances
+  RAM64M => RAM64M (RAMD64E, RAMD64E, RAMD64E, RAMD64E): 128 instances
+
+INFO: [Common 17-83] Releasing license: Synthesis
+42 Infos, 9 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:36 ; elapsed = 00:00:40 . Memory (MB): peak = 2041.457 ; gain = 550.266 ; free physical = 1910 ; free virtual = 65391
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2041.457 ; gain = 0.000 ; free physical = 1910 ; free virtual = 65391
+WARNING: [Constraints 18-5210] No constraints selected for write.
+Resolution: This message can indicate that there are no constraints for the design, or it can indicate that the used_in flags are set such that the constraints are ignored. This later case is used when running synth_design to not write synthesis constraints to the resulting checkpoint. Instead, project constraints are read when the synthesized design is opened.
+INFO: [Common 17-1381] The checkpoint '/home/userdata/k63D/vuld_63m/cloned_repo/DQN-FPGA/synthesis/LSIDesignContestSyn/LSIDesignContestSyn.runs/synth_1/DQNAccelertorTop.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file DQNAccelertorTop_utilization_synth.rpt -pb DQNAccelertorTop_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Fri Jan 28 17:20:12 2022...

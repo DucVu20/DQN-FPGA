@@ -1,0 +1,315 @@
+Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version     : Vivado v.2019.1 (lin64) Build 2552052 Fri May 24 14:47:09 MDT 2019
+| Date             : Fri Jan 28 17:22:03 2022
+| Host             : vnu-compute-3 running 64-bit CentOS Linux release 7.9.2009 (Core)
+| Command          : report_power -file DQNAccelertorTop_power_routed.rpt -pb DQNAccelertorTop_power_summary_routed.pb -rpx DQNAccelertorTop_power_routed.rpx
+| Design           : DQNAccelertorTop
+| Device           : xc7a35ticsg324-1L
+| Design State     : routed
+| Grade            : industrial
+| Process          : typical
+| Characterization : Production
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Power Report
+
+Table of Contents
+-----------------
+1. Summary
+1.1 On-Chip Components
+1.2 Power Supply Summary
+1.3 Confidence Level
+2. Settings
+2.1 Environment
+2.2 Clock Constraints
+3. Detailed Reports
+3.1 By Hierarchy
+
+1. Summary
+----------
+
++--------------------------+--------------+
+| Total On-Chip Power (W)  | 7.855        |
+| Design Power Budget (W)  | Unspecified* |
+| Power Budget Margin (W)  | NA           |
+| Dynamic (W)              | 7.771        |
+| Device Static (W)        | 0.084        |
+| Effective TJA (C/W)      | 4.8          |
+| Max Ambient (C)          | 62.5         |
+| Junction Temperature (C) | 62.5         |
+| Confidence Level         | Low          |
+| Setting File             | ---          |
+| Simulation Activity File | ---          |
+| Design Nets Matched      | NA           |
++--------------------------+--------------+
+* Specify Design Power Budget using, set_operating_conditions -design_power_budget <value in Watts>
+
+
+1.1 On-Chip Components
+----------------------
+
++--------------------------+-----------+----------+-----------+-----------------+
+| On-Chip                  | Power (W) | Used     | Available | Utilization (%) |
++--------------------------+-----------+----------+-----------+-----------------+
+| Slice Logic              |     1.420 |     3184 |       --- |             --- |
+|   LUT as Logic           |     1.301 |     1267 |     20800 |            6.09 |
+|   LUT as Distributed RAM |     0.092 |      772 |      9600 |            8.04 |
+|   Register               |     0.011 |      446 |     41600 |            1.07 |
+|   CARRY4                 |     0.010 |       86 |      8150 |            1.06 |
+|   BUFG                   |     0.005 |        1 |        32 |            3.13 |
+|   LUT as Shift Register  |    <0.001 |        1 |      9600 |            0.01 |
+|   Others                 |     0.000 |      111 |       --- |             --- |
+| Signals                  |     2.469 |     3227 |       --- |             --- |
+| Block RAM                |     0.208 |        1 |        50 |            2.00 |
+| DSPs                     |     0.025 |       32 |        90 |           35.56 |
+| I/O                      |     3.648 |       73 |       210 |           34.76 |
+| Static Power             |     0.084 |          |           |                 |
+| Total                    |     7.855 |          |           |                 |
++--------------------------+-----------+----------+-----------+-----------------+
+
+
+1.2 Power Supply Summary
+------------------------
+
++-----------+-------------+-----------+-------------+------------+
+| Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) |
++-----------+-------------+-----------+-------------+------------+
+| Vccint    |       0.950 |     4.602 |       4.577 |      0.025 |
+| Vccaux    |       1.800 |     0.293 |       0.279 |      0.014 |
+| Vcco33    |       3.300 |     0.000 |       0.000 |      0.000 |
+| Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |
+| Vcco18    |       1.800 |     1.616 |       1.615 |      0.001 |
+| Vcco15    |       1.500 |     0.000 |       0.000 |      0.000 |
+| Vcco135   |       1.350 |     0.000 |       0.000 |      0.000 |
+| Vcco12    |       1.200 |     0.000 |       0.000 |      0.000 |
+| Vccaux_io |       1.800 |     0.000 |       0.000 |      0.000 |
+| Vccbram   |       0.950 |     0.016 |       0.015 |      0.001 |
+| MGTAVcc   |       1.000 |     0.000 |       0.000 |      0.000 |
+| MGTAVtt   |       1.200 |     0.000 |       0.000 |      0.000 |
+| Vccadc    |       1.800 |     0.018 |       0.000 |      0.018 |
++-----------+-------------+-----------+-------------+------------+
+
+
+1.3 Confidence Level
+--------------------
+
++-----------------------------+------------+--------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------+
+| User Input Data             | Confidence | Details                                                | Action                                                                                                             |
++-----------------------------+------------+--------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------+
+| Design implementation state | High       | Design is routed                                       |                                                                                                                    |
+| Clock nodes activity        | Low        | User specified less than 75% of clocks                 | Provide missing clock activity with a constraint file, simulation results or by editing the "By Clock Domain" view |
+| I/O nodes activity          | Low        | More than 75% of inputs are missing user specification | Provide missing input activity with simulation results or by editing the "By Resource Type -> I/Os" view           |
+| Internal nodes activity     | Medium     | User specified less than 25% of internal nodes         | Provide missing internal nodes activity with simulation results or by editing the "By Resource Type" views         |
+| Device models               | High       | Device models are Production                           |                                                                                                                    |
+|                             |            |                                                        |                                                                                                                    |
+| Overall confidence level    | Low        |                                                        |                                                                                                                    |
++-----------------------------+------------+--------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------+
+
+
+2. Settings
+-----------
+
+2.1 Environment
+---------------
+
++-----------------------+--------------------------+
+| Ambient Temp (C)      | 25.0                     |
+| ThetaJA (C/W)         | 4.8                      |
+| Airflow (LFM)         | 250                      |
+| Heat Sink             | medium (Medium Profile)  |
+| ThetaSA (C/W)         | 4.6                      |
+| Board Selection       | medium (10"x10")         |
+| # of Board Layers     | 12to15 (12 to 15 Layers) |
+| Board Temperature (C) | 25.0                     |
++-----------------------+--------------------------+
+
+
+2.2 Clock Constraints
+---------------------
+
++-------+--------+-----------------+
+| Clock | Domain | Constraint (ns) |
++-------+--------+-----------------+
+
+
+3. Detailed Reports
+-------------------
+
+3.1 By Hierarchy
+----------------
+
++------------------------------+-----------+
+| Name                         | Power (W) |
++------------------------------+-----------+
+| DQNAccelertorTop             |     7.771 |
+|   DQNCore                    |     0.697 |
+|     DualPortedMem            |     0.003 |
+|       mem_reg_0_63_9_11      |     0.001 |
+|     DualPortedMem_1          |     0.003 |
+|       mem_reg_0_63_9_11      |     0.001 |
+|     DualPortedMem_10         |     0.003 |
+|       mem_reg_0_63_9_11      |     0.001 |
+|     DualPortedMem_11         |     0.003 |
+|       mem_reg_0_63_9_11      |     0.001 |
+|     DualPortedMem_12         |     0.003 |
+|       mem_reg_0_63_9_11      |     0.001 |
+|     DualPortedMem_13         |     0.003 |
+|       mem_reg_0_63_9_11      |     0.001 |
+|     DualPortedMem_14         |     0.003 |
+|       mem_reg_0_63_9_11      |     0.001 |
+|     DualPortedMem_15         |     0.003 |
+|       mem_reg_0_63_9_11      |     0.001 |
+|     DualPortedMem_16         |     0.003 |
+|       mem_reg_0_63_9_11      |     0.001 |
+|     DualPortedMem_17         |     0.003 |
+|       mem_reg_0_63_9_11      |     0.001 |
+|     DualPortedMem_18         |     0.003 |
+|       mem_reg_0_63_9_11      |     0.001 |
+|     DualPortedMem_19         |     0.003 |
+|       mem_reg_0_63_9_11      |     0.001 |
+|     DualPortedMem_2          |     0.003 |
+|       mem_reg_0_63_9_11      |     0.001 |
+|     DualPortedMem_20         |     0.003 |
+|       mem_reg_0_63_9_11      |     0.001 |
+|     DualPortedMem_21         |     0.004 |
+|       mem_reg_0_63_9_11      |     0.002 |
+|     DualPortedMem_22         |     0.004 |
+|       mem_reg_0_63_9_11      |     0.001 |
+|     DualPortedMem_23         |     0.003 |
+|       mem_reg_0_63_9_11      |     0.001 |
+|     DualPortedMem_24         |     0.003 |
+|       mem_reg_0_63_9_11      |     0.001 |
+|     DualPortedMem_25         |     0.003 |
+|       mem_reg_0_63_9_11      |     0.001 |
+|     DualPortedMem_26         |     0.003 |
+|       mem_reg_0_63_9_11      |     0.001 |
+|     DualPortedMem_27         |     0.003 |
+|       mem_reg_0_63_9_11      |     0.001 |
+|     DualPortedMem_28         |     0.003 |
+|       mem_reg_0_63_9_11      |     0.001 |
+|     DualPortedMem_29         |     0.003 |
+|       mem_reg_0_63_9_11      |     0.001 |
+|     DualPortedMem_3          |     0.003 |
+|       mem_reg_0_63_9_11      |     0.001 |
+|     DualPortedMem_30         |     0.003 |
+|       mem_reg_0_63_9_11      |     0.001 |
+|     DualPortedMem_31         |     0.003 |
+|       mem_reg_0_63_9_11      |     0.001 |
+|     DualPortedMem_32         |     0.145 |
+|       mem_reg_0_7_0_5        |     0.003 |
+|       mem_reg_0_7_6_11       |     0.003 |
+|     DualPortedMem_33         |     0.016 |
+|       mem_reg_0_7_0_5        |     0.003 |
+|       mem_reg_0_7_6_11       |     0.003 |
+|     DualPortedMem_34         |     0.024 |
+|       mem_reg_0_7_0_5        |     0.003 |
+|       mem_reg_0_7_6_11       |     0.003 |
+|     DualPortedMem_35         |     0.006 |
+|       mem_reg_0_7_0_5        |     0.003 |
+|       mem_reg_0_7_6_11       |     0.003 |
+|     DualPortedMem_36         |     0.004 |
+|       mem_reg_0_7_0_5        |     0.001 |
+|       mem_reg_0_7_6_11       |     0.002 |
+|     DualPortedMem_37         |     0.004 |
+|       mem_reg_0_7_0_5        |     0.001 |
+|       mem_reg_0_7_6_11       |     0.002 |
+|     DualPortedMem_38         |     0.004 |
+|       mem_reg_0_7_0_5        |     0.002 |
+|       mem_reg_0_7_6_11       |     0.002 |
+|     DualPortedMem_39         |     0.004 |
+|       mem_reg_0_7_0_5        |     0.001 |
+|       mem_reg_0_7_6_11       |     0.002 |
+|     DualPortedMem_4          |     0.003 |
+|       mem_reg_0_63_9_11      |     0.001 |
+|     DualPortedMem_40         |     0.004 |
+|       mem_reg_0_7_0_5        |     0.001 |
+|       mem_reg_0_7_6_11       |     0.002 |
+|     DualPortedMem_41         |     0.004 |
+|       mem_reg_0_7_0_5        |     0.001 |
+|       mem_reg_0_7_6_11       |     0.002 |
+|     DualPortedMem_42         |     0.004 |
+|       mem_reg_0_7_0_5        |     0.001 |
+|       mem_reg_0_7_6_11       |     0.002 |
+|     DualPortedMem_43         |     0.004 |
+|       mem_reg_0_7_0_5        |     0.001 |
+|       mem_reg_0_7_6_11       |     0.002 |
+|     DualPortedMem_44         |     0.004 |
+|       mem_reg_0_7_0_5        |     0.002 |
+|       mem_reg_0_7_6_11       |     0.002 |
+|     DualPortedMem_45         |     0.004 |
+|       mem_reg_0_7_0_5        |     0.002 |
+|       mem_reg_0_7_6_11       |     0.002 |
+|     DualPortedMem_46         |     0.004 |
+|       mem_reg_0_7_0_5        |     0.001 |
+|       mem_reg_0_7_6_11       |     0.002 |
+|     DualPortedMem_47         |     0.004 |
+|       mem_reg_0_7_0_5        |     0.002 |
+|       mem_reg_0_7_6_11       |     0.002 |
+|     DualPortedMem_48         |     0.004 |
+|       mem_reg_0_7_0_5        |     0.001 |
+|       mem_reg_0_7_6_11       |     0.002 |
+|     DualPortedMem_49         |     0.004 |
+|       mem_reg_0_7_0_5        |     0.001 |
+|       mem_reg_0_7_6_11       |     0.002 |
+|     DualPortedMem_5          |     0.003 |
+|       mem_reg_0_63_9_11      |     0.001 |
+|     DualPortedMem_50         |     0.004 |
+|       mem_reg_0_7_0_5        |     0.001 |
+|       mem_reg_0_7_6_11       |     0.002 |
+|     DualPortedMem_51         |     0.005 |
+|       mem_reg_0_7_0_5        |     0.002 |
+|       mem_reg_0_7_6_11       |     0.002 |
+|     DualPortedMem_52         |     0.004 |
+|       mem_reg_0_7_0_5        |     0.002 |
+|       mem_reg_0_7_6_11       |     0.002 |
+|     DualPortedMem_53         |     0.005 |
+|       mem_reg_0_7_0_5        |     0.002 |
+|       mem_reg_0_7_6_11       |     0.002 |
+|     DualPortedMem_54         |     0.005 |
+|       mem_reg_0_7_0_5        |     0.002 |
+|       mem_reg_0_7_6_11       |     0.002 |
+|     DualPortedMem_55         |     0.004 |
+|       mem_reg_0_7_0_5        |     0.001 |
+|       mem_reg_0_7_6_11       |     0.002 |
+|     DualPortedMem_56         |     0.004 |
+|       mem_reg_0_7_0_5        |     0.002 |
+|       mem_reg_0_7_6_11       |     0.002 |
+|     DualPortedMem_57         |     0.004 |
+|       mem_reg_0_7_0_5        |     0.001 |
+|       mem_reg_0_7_6_11       |     0.002 |
+|     DualPortedMem_58         |     0.004 |
+|       mem_reg_0_7_0_5        |     0.001 |
+|       mem_reg_0_7_6_11       |     0.002 |
+|     DualPortedMem_59         |     0.005 |
+|       mem_reg_0_7_0_5        |     0.001 |
+|       mem_reg_0_7_6_11       |     0.002 |
+|     DualPortedMem_6          |     0.003 |
+|       mem_reg_0_63_9_11      |     0.001 |
+|     DualPortedMem_60         |     0.005 |
+|       mem_reg_0_7_0_5        |     0.002 |
+|       mem_reg_0_7_6_11       |     0.002 |
+|     DualPortedMem_61         |     0.004 |
+|       mem_reg_0_7_0_5        |     0.002 |
+|       mem_reg_0_7_6_11       |     0.002 |
+|     DualPortedMem_62         |     0.003 |
+|       mem_reg_0_7_0_5        |     0.002 |
+|       mem_reg_0_7_6_11       |     0.002 |
+|     DualPortedMem_63         |     0.003 |
+|       mem_reg_0_7_0_5        |     0.002 |
+|       mem_reg_0_7_6_11       |     0.002 |
+|     DualPortedMem_7          |     0.003 |
+|       mem_reg_0_63_9_11      |     0.001 |
+|     DualPortedMem_8          |     0.003 |
+|       mem_reg_0_63_9_11      |     0.001 |
+|     DualPortedMem_9          |     0.003 |
+|       mem_reg_0_63_9_11      |     0.001 |
+|     adderTree                |     0.092 |
+|     rdDataVecValid           |     0.001 |
+|   agent                      |     0.322 |
+|   environment                |     0.018 |
+|     environment_reg_0_31_0_2 |     0.011 |
+|   instructionMemory          |     2.656 |
++------------------------------+-----------+
+
+
