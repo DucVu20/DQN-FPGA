@@ -7,10 +7,10 @@ import scala.math._
 import chiseltest.experimental.TestOptionBuilder._
 import chiseltest.internal.WriteVcdAnnotation
 
-class PEDecoderTester extends FlatSpec with ChiselScalatestTester with Matchers{
-  behavior of "PE_Decoder"
+class MemReadDecoderTester extends FlatSpec with ChiselScalatestTester with Matchers{
+  behavior of "MemReadDecoder"
 
-  def EnableSignalDecoderTester(dut: EnableSignalDecoder): Unit = {
+  def MemReadDecoderTester(dut: EnableSignalDecoder): Unit = {
 //    println("Disable the decoder")
 //    dut.io.enable.poke(false.B)
 //    for(nPE <- 0 to (dut.numberOfPE + 3).toInt){
@@ -39,11 +39,11 @@ class PEDecoderTester extends FlatSpec with ChiselScalatestTester with Matchers{
 
   "PEDecoder Waveform" should "pass" in{
     test(new EnableSignalDecoder(32)).withAnnotations(Seq(WriteVcdAnnotation)){
-      dut => EnableSignalDecoderTester(dut)
+      dut => MemReadDecoderTester(dut)
     }
   }
 
   it should "test PEDecoder" in {
-    test(new EnableSignalDecoder(32)){dut => EnableSignalDecoderTester(dut)}
+    test(new EnableSignalDecoder(32)){dut => MemReadDecoderTester(dut)}
   }
 }

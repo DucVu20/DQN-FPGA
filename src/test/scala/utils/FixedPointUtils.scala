@@ -115,13 +115,14 @@ object activationFunc{
 object Hello extends App{
   import activationFunc._
   import fixedPointUtils._
-  val a = -4
-  val b = -9
-  println(a.toBinaryString)
-  println(clipSignBits(a).toBinaryString)
-  println(b.toBinaryString)
-  println(clipSignBits(b).toBinaryString)
-  println("-------")
-  println(clipSignBits(a, 5).toBinaryString)
-  println(clipSignBits(b, 5).toBinaryString)
+  val number1 = -53
+  val number2 = 1
+  val number3 = 70
+  val number4 = -207
+  val bp      = 7
+  println(s"change value ${number1} to fixed point ${SInt2Double(number1, bp)}")
+  println(s"change value ${number2} to fixed point ${SInt2Double(number2, bp)}")
+  println(s"change value ${number3} to fixed point ${SInt2Double(number3, bp)}")
+  println(s"change value ${number4} to fixed point ${SInt2Double(number4, bp)}")
+
 }

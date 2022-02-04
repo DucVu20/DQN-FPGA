@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2019.1 (64-bit)
+# SW Build 2552052 on Fri May 24 14:47:09 MDT 2019
+# IP Build 2548770 on Fri May 24 18:01:18 MDT 2019
+# Start of session at: Fri Jan 28 17:20:14 2022
+# Process ID: 16688
+# Current directory: /home/userdata/k63D/vuld_63m/cloned_repo/DQN-FPGA/synthesis/LSIDesignContestSyn/LSIDesignContestSyn.runs/impl_1
+# Command line: vivado -log DQNAccelertorTop.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source DQNAccelertorTop.tcl -notrace
+# Log file: /home/userdata/k63D/vuld_63m/cloned_repo/DQN-FPGA/synthesis/LSIDesignContestSyn/LSIDesignContestSyn.runs/impl_1/DQNAccelertorTop.vdi
+# Journal file: /home/userdata/k63D/vuld_63m/cloned_repo/DQN-FPGA/synthesis/LSIDesignContestSyn/LSIDesignContestSyn.runs/impl_1/vivado.jou
+#-----------------------------------------------------------
+source DQNAccelertorTop.tcl -notrace

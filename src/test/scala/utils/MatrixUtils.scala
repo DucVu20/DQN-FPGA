@@ -6,17 +6,19 @@ object matrixUtils{
   def loadWeightsFromTxt(filePath: String, dim: Array[Int]): Array[Array[Double]] = {
     val w = Array.ofDim[Double](dim(0), dim(1))
     val w_source = Source.fromResource(filePath).getLines.toArray
+    var idx = 0
     for(row <- 0 until(dim(0))){
       for(col <- 0 until(dim(1))){
-        w(row)(col) = w_source(dim(0)*row + col).toDouble
+        w(row)(col) = w_source(idx).toDouble
+        idx = idx + 1
       }
     }
     return w
   }
-  def loadBiasFromTxt(filePath: String, dim: Int): Array[Double] = {
-    val b = Array.fill(dim){0.toDouble}
+  def loadBiasFromTxt(filePath: String): Array[Double] = {
     val b_source = Source.fromResource(filePath).getLines.toArray
-    for(idx <- 0 until(dim)){
+    val b = Array.fill(b_source.length){0.toDouble}
+    for(idx <- 0 until(b_source.length)){
       b(idx) = b_source(idx).toDouble
     }
     return b
@@ -36,10 +38,10 @@ object matrixUtils{
     return  result
   }
 
-  def matrixMultiplyVector(matrix: Array[Array[Float]], vector: Array[Float]): Array[Float] = {
+  def matrixMultiplyVector(matrix: Array[Array[Double]], vector: Array[Double]): Array[Double] = {
     val row = matrix.length
     val col = matrix(0).length
-    var result = Array.fill(row){0.toFloat}
+    var result = Array.fill(row){0.toDouble}
     var idx = 0
     for(r <- 0 until(row)){
       for(c <- 0 until(col)){

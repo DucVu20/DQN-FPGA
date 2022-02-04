@@ -39,27 +39,27 @@ class ActivationBlock(dataWidth: Int, nInputAct: Int) extends Module{
     val valid          = Output(Bool())
     val ena = Input(Bool())
   })
-  val activationBlocks = Array.fill(nInputAct){Module(new ActivationFunc(dataWidth))}
-  for(i <- 0 until(nInputAct)){
-    activationBlocks(i).io.activationFunc := io.activationFunc
-    activationBlocks(i).io.weightedSum := io.weightedSum(i)
-    activationBlocks(i).io.ena := io.ena
-    io.activation(i) := activationBlocks(i).io.activation
-  }
-  io.valid := io.ena
-
+  // val activationBlocks = Array.fill(nInputAct){Module(new ActivationFunc(dataWidth))}
   // for(i <- 0 until(nInputAct)){
-  //   when(io.ena){
-  //     when(io.activationFunc === LINEAR.U){
-  //       io.activation(i) := io.weightedSum(i)
-  //     }.otherwise{
-  //       io.activation(i) := Mux(io.weightedSum(i)(io.weightedSum(i).getWidth-1).asBool(), 0.S, io.weightedSum(i))
-  //     }
-  //   }.otherwise{
-  //     io.activation(i) := 0.S
-  //   }
+  //   activationBlocks(i).io.activationFunc := io.activationFunc
+  //   activationBlocks(i).io.weightedSum := io.weightedSum(i)
+  //   activationBlocks(i).io.ena := io.ena
+  //   io.activation(i) := activationBlocks(i).io.activation
   // }
   // io.valid := io.ena
+
+  for(i <- 0 until(nInputAct)){
+    when(io.ena){
+      when(io.activationFunc === LINEAR.U){
+        io.activation(i) := io.weightedSum(i)
+      }.otherwise{
+        io.activation(i) := Mux(io.weightedSum(i)(io.weightedSum(i).getWidth-1).asBool(), 0.S, io.weightedSum(i))
+      }
+    }.otherwise{
+      io.activation(i) := 0.S
+    }
+  }
+  io.valid := io.ena
 }
 
 object ActivationBlock{

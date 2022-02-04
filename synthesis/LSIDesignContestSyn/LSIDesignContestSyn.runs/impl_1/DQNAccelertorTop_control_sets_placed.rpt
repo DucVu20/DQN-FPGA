@@ -1,0 +1,184 @@
+Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2019.1 (lin64) Build 2552052 Fri May 24 14:47:09 MDT 2019
+| Date         : Fri Jan 28 17:21:21 2022
+| Host         : vnu-compute-3 running 64-bit CentOS Linux release 7.9.2009 (Core)
+| Command      : report_control_sets -verbose -file DQNAccelertorTop_control_sets_placed.rpt
+| Design       : DQNAccelertorTop
+| Device       : xc7a35ti
+---------------------------------------------------------------------------------------------
+
+Control Set Information
+
+Table of Contents
+-----------------
+1. Summary
+2. Histogram
+3. Flip-Flop Distribution
+4. Detailed Control Set Information
+
+1. Summary
+----------
+
++----------------------------------------------------------+-------+
+|                          Status                          | Count |
++----------------------------------------------------------+-------+
+| Total control sets                                       |   106 |
+|    Minimum number of control sets                        |   106 |
+|    Addition due to synthesis replication                 |     0 |
+|    Addition due to physical synthesis replication        |     0 |
+| Unused register locations in slices containing registers |    98 |
++----------------------------------------------------------+-------+
+* Control sets can be merged at opt_design using control_set_merge or merge_equivalent_drivers
+** Run report_qor_suggestions for automated merging and remapping suggestions
+
+
+2. Histogram
+------------
+
++--------------------+-------+
+|       Fanout       | Count |
++--------------------+-------+
+| Total control sets |   106 |
+| >= 0 to < 4        |     1 |
+| >= 4 to < 6        |     1 |
+| >= 6 to < 8        |    33 |
+| >= 8 to < 10       |     1 |
+| >= 10 to < 12      |     2 |
+| >= 12 to < 14      |     2 |
+| >= 14 to < 16      |     0 |
+| >= 16              |    66 |
++--------------------+-------+
+* Control sets can be remapped at either synth_design or opt_design
+
+
+3. Flip-Flop Distribution
+-------------------------
+
++--------------+-----------------------+------------------------+-----------------+--------------+
+| Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
++--------------+-----------------------+------------------------+-----------------+--------------+
+| No           | No                    | No                     |             176 |           79 |
+| No           | No                    | Yes                    |               0 |            0 |
+| No           | Yes                   | No                     |               6 |            4 |
+| Yes          | No                    | No                     |             207 |           52 |
+| Yes          | No                    | Yes                    |               0 |            0 |
+| Yes          | Yes                   | No                     |              57 |           20 |
++--------------+-----------------------+------------------------+-----------------+--------------+
+
+
+4. Detailed Control Set Information
+-----------------------------------
+
++------------------+---------------------------------------------+------------------+------------------+----------------+
+|   Clock Signal   |                Enable Signal                | Set/Reset Signal | Slice Load Count | Bel Load Count |
++------------------+---------------------------------------------+------------------+------------------+----------------+
+|  clock_IBUF_BUFG | io_loadInitalState_IBUF                     | reset_IBUF       |                2 |              3 |
+|  clock_IBUF_BUFG | agent/E[0]                                  |                  |                1 |              5 |
+|  clock_IBUF_BUFG | instructionMemory/mem_reg_37[0]             |                  |                1 |              6 |
+|  clock_IBUF_BUFG | instructionMemory/mem_reg_46[0]             |                  |                1 |              6 |
+|  clock_IBUF_BUFG | instructionMemory/mem_reg_45[0]             |                  |                2 |              6 |
+|  clock_IBUF_BUFG | instructionMemory/mem_reg_44[0]             |                  |                1 |              6 |
+|  clock_IBUF_BUFG | instructionMemory/mem_reg_43[0]             |                  |                1 |              6 |
+|  clock_IBUF_BUFG | instructionMemory/mem_reg_42[0]             |                  |                1 |              6 |
+|  clock_IBUF_BUFG | instructionMemory/mem_reg_41[0]             |                  |                1 |              6 |
+|  clock_IBUF_BUFG | instructionMemory/mem_reg_40[0]             |                  |                2 |              6 |
+|  clock_IBUF_BUFG | instructionMemory/mem_reg_39[0]             |                  |                2 |              6 |
+|  clock_IBUF_BUFG | instructionMemory/mem_reg_38[0]             |                  |                3 |              6 |
+|  clock_IBUF_BUFG | instructionMemory/mem_reg_48[0]             |                  |                1 |              6 |
+|  clock_IBUF_BUFG | instructionMemory/mem_reg_36[0]             |                  |                1 |              6 |
+|  clock_IBUF_BUFG | instructionMemory/mem_reg_35[0]             |                  |                1 |              6 |
+|  clock_IBUF_BUFG | instructionMemory/mem_reg_34[0]             |                  |                1 |              6 |
+|  clock_IBUF_BUFG | instructionMemory/mem_reg_33[0]             |                  |                1 |              6 |
+|  clock_IBUF_BUFG | instructionMemory/mem_reg_32[0]             |                  |                2 |              6 |
+|  clock_IBUF_BUFG | instructionMemory/mem_reg_31[0]             |                  |                1 |              6 |
+|  clock_IBUF_BUFG | instructionMemory/mem_reg_55[0]             |                  |                2 |              6 |
+|  clock_IBUF_BUFG |                                             | reset_IBUF       |                4 |              6 |
+|  clock_IBUF_BUFG | instructionMemory/mem_reg_70[0]             |                  |                1 |              6 |
+|  clock_IBUF_BUFG | instructionMemory/mem_reg_61[0]             |                  |                2 |              6 |
+|  clock_IBUF_BUFG | instructionMemory/mem_reg_60[0]             |                  |                1 |              6 |
+|  clock_IBUF_BUFG | instructionMemory/mem_reg_59[0]             |                  |                1 |              6 |
+|  clock_IBUF_BUFG | instructionMemory/mem_reg_58[0]             |                  |                2 |              6 |
+|  clock_IBUF_BUFG | instructionMemory/mem_reg_57[0]             |                  |                1 |              6 |
+|  clock_IBUF_BUFG | instructionMemory/mem_reg_56[0]             |                  |                3 |              6 |
+|  clock_IBUF_BUFG | instructionMemory/mem_reg_47[0]             |                  |                1 |              6 |
+|  clock_IBUF_BUFG | instructionMemory/mem_reg_54[0]             |                  |                1 |              6 |
+|  clock_IBUF_BUFG | instructionMemory/mem_reg_53[0]             |                  |                2 |              6 |
+|  clock_IBUF_BUFG | instructionMemory/mem_reg_52[0]             |                  |                1 |              6 |
+|  clock_IBUF_BUFG | instructionMemory/mem_reg_51[0]             |                  |                2 |              6 |
+|  clock_IBUF_BUFG | instructionMemory/mem_reg_50[0]             |                  |                2 |              6 |
+|  clock_IBUF_BUFG | instructionMemory/mem_reg_49[0]             |                  |                1 |              6 |
+|  clock_IBUF_BUFG | io_wrEnaEnv_IBUF                            |                  |                1 |              8 |
+|  clock_IBUF_BUFG | DQNCore/E[0]                                | reset_IBUF       |                5 |             10 |
+|  clock_IBUF_BUFG | instructionMemory/Controller_reg[1]         |                  |                5 |             10 |
+|  clock_IBUF_BUFG | DQNCore/adderTree/E[0]                      | reset_IBUF       |                3 |             13 |
+|  clock_IBUF_BUFG | DQNCore/colBanksCounter[12]_i_1_n_0         | reset_IBUF       |                3 |             13 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_24_io_wrEna |                  |                4 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_37_io_wrEna |                  |                2 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_25_io_wrEna |                  |                4 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_26_io_wrEna |                  |                4 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_27_io_wrEna |                  |                4 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_28_io_wrEna |                  |                4 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_29_io_wrEna |                  |                4 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_2_io_wrEna  |                  |                4 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_30_io_wrEna |                  |                4 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_31_io_wrEna |                  |                4 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_32_io_wrEna |                  |                2 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_33_io_wrEna |                  |                2 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_34_io_wrEna |                  |                2 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_35_io_wrEna |                  |                2 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_36_io_wrEna |                  |                2 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_io_wrEna    |                  |                4 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_23_io_wrEna |                  |                4 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_22_io_wrEna |                  |                4 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_21_io_wrEna |                  |                4 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_20_io_wrEna |                  |                4 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_1_io_wrEna  |                  |                4 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_19_io_wrEna |                  |                4 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_18_io_wrEna |                  |                4 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_17_io_wrEna |                  |                4 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_16_io_wrEna |                  |                4 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_15_io_wrEna |                  |                4 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_14_io_wrEna |                  |                4 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_13_io_wrEna |                  |                4 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_12_io_wrEna |                  |                4 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_11_io_wrEna |                  |                4 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_10_io_wrEna |                  |                4 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_44_io_wrEna |                  |                2 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_51_io_wrEna |                  |                2 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_50_io_wrEna |                  |                2 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_4_io_wrEna  |                  |                4 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_49_io_wrEna |                  |                2 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_48_io_wrEna |                  |                2 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_47_io_wrEna |                  |                2 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_46_io_wrEna |                  |                2 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_45_io_wrEna |                  |                2 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_52_io_wrEna |                  |                2 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_43_io_wrEna |                  |                2 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_42_io_wrEna |                  |                2 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_41_io_wrEna |                  |                2 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_40_io_wrEna |                  |                2 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_3_io_wrEna  |                  |                4 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_39_io_wrEna |                  |                2 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_38_io_wrEna |                  |                2 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_5_io_wrEna  |                  |                4 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_9_io_wrEna  |                  |                4 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_8_io_wrEna  |                  |                4 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_7_io_wrEna  |                  |                4 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_6_io_wrEna  |                  |                4 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_63_io_wrEna |                  |                2 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_62_io_wrEna |                  |                2 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_61_io_wrEna |                  |                2 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_60_io_wrEna |                  |                2 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_59_io_wrEna |                  |                2 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_58_io_wrEna |                  |                2 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_57_io_wrEna |                  |                2 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_56_io_wrEna |                  |                2 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_55_io_wrEna |                  |                2 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_54_io_wrEna |                  |                2 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/DualPortedMem_53_io_wrEna |                  |                2 |             16 |
+|  clock_IBUF_BUFG | instructionMemory/Controller_reg[0][0]      | reset_IBUF       |                7 |             18 |
+|  clock_IBUF_BUFG |                                             |                  |               79 |            177 |
++------------------+---------------------------------------------+------------------+------------------+----------------+
+
+
